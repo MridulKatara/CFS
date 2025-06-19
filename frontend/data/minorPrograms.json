@@ -1,0 +1,86 @@
+[
+    {
+      "programId": "cse",
+      "programName": "Minor in CSE",
+      "collegeName": "IIT Mandi",
+      "detail": "A comprehensive program introducing students to computer science fundamentals, including programming, data structures, and software engineering principles.",
+      "duration": "3 semesters",
+      "fee": "₹45,000",
+      "faculty": [
+        {
+          "name": "Dr. Anand Kumar",
+          "designation": "Associate Professor",
+          "specialization": "Software Engineering"
+        },
+        {
+          "name": "Dr. Sushma Jain",
+          "designation": "Assistant Professor",
+          "specialization": "Computer Networks"
+        }
+      ],
+      "eligibility": "Open to students from all engineering disciplines with a minimum CGPA of 8.0"
+    },
+    {
+      "programId": "ai",
+      "programName": "Minor in AI",
+      "collegeName": "IIT Mandi",
+      "detail": "This program covers artificial intelligence concepts, machine learning algorithms, neural networks, and practical applications of AI in solving real-world problems.",
+      "duration": "3 semesters",
+      "fee": "₹45,000",
+      "faculty": [
+        {
+          "name": "Dr. Rahul Sharma",
+          "designation": "Professor",
+          "specialization": "Machine Learning"
+        },
+        {
+          "name": "Dr. Neha Singh",
+          "designation": "Associate Professor",
+          "specialization": "Neural Networks"
+        }
+      ],
+      "eligibility": "Open to students from CSE, ECE, and Mathematics with a minimum CGPA of 7.5"
+    },
+    {
+      "programId": "dsml",
+      "programName": "Minor in DS&ML",
+      "collegeName": "IIT Mandi",
+      "detail": "Learn about data science methodologies, statistical analysis, machine learning models, and big data processing for data-driven decision making.",
+      "duration": "3 semesters",
+      "fee": "₹45,000",
+      "faculty": [
+        {
+          "name": "Dr. Vikram Agarwal",
+          "designation": "Professor",
+          "specialization": "Data Science"
+        },
+        {
+          "name": "Dr. Sunita Patel",
+          "designation": "Associate Professor",
+          "specialization": "Statistical Learning"
+        }
+      ],
+      "eligibility": "Open to students from CSE, ECE, and Mathematics with a minimum CGPA of 7.0"
+    },
+    {
+      "programId": "ba",
+      "programName": "Minor in BA",
+      "collegeName": "IIT Mandi",
+      "detail": "A program focused on business analytics, combining data analysis, statistical methods, and business knowledge to drive strategic decision-making in organizations.",
+      "duration": "3 semesters",
+      "fee": "₹45,000",
+      "faculty": [
+        {
+          "name": "Dr. Priya Mehta",
+          "designation": "Associate Professor",
+          "specialization": "Business Analytics"
+        },
+        {
+          "name": "Dr. Rajesh Kumar",
+          "designation": "Assistant Professor",
+          "specialization": "Statistical Methods"
+        }
+      ],
+      "eligibility": "Open to students from all disciplines with a minimum CGPA of 7.5"
+    }
+]
