@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import usersData from '../../data/users.json';
+import usersData from '../../../data/users.json';
 
 interface User {
   id: string;
