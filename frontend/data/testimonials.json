@@ -1,0 +1,40 @@
+{
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Palak",
+      "content": "IIT professors bring unmatched clarity and purpose, their teaching isn't just better, it's built for real understanding.",
+      "imageUrl": "https://coding-platform.s3.amazonaws.com/dev/lms/tickets/ec7afab8-47b6-4536-b251-a0d4ed7ebb52/rCDmoc0VwzUsAjBZ.png"
+    },
+    {
+      "id": 2,
+      "name": "Yashasvi Mahavir",
+      "content": "Engineering is common, this minor degree challenged me to think differently, engage deeply, and truly grow beyond the usual.",
+      "imageUrl": "https://coding-platform.s3.amazonaws.com/dev/lms/tickets/fba89ffd-b472-41e2-931e-64890220a0d2/zbTutEMPqSdvKvqo.png"
+    },
+    {
+      "id": 3,
+      "name": "Kaushik",
+      "content": "As a BCA graduate, I wanted to stand out this program gives me more than a certificate; it offers real interaction with IIT professors and hands-on IIT experience that sets me apart.",
+      "imageUrl": "https://coding-platform.s3.amazonaws.com/dev/lms/tickets/fc86779b-d6fe-4dbf-a0d9-cfdfbd33e73a/gKKGBQIzOzyvMrZQ.png"
+    },
+    {
+      "id": 4,
+      "name": "Mohammed Syed",
+      "content": "Every engineer dreams of IIT, and with Al, DS and ML shaping the future, this opportunity felt like the perfect path to grow and build what's next.",
+      "imageUrl": "https://coding-platform.s3.amazonaws.com/dev/lms/tickets/d29b38a2-db45-4198-9364-bb8650d25ed9/QZD2QZYzeauhaMcX.png"
+    },
+    {
+      "id": 5,
+      "name": "Bhavana Kumawat",
+      "content": "It was always my dream to study at lIT, A place where learning feels like a privilege and every moment is an opportunity.",
+      "imageUrl": "https://coding-platform.s3.amazonaws.com/dev/lms/tickets/9df97b30-7d08-4504-8e22-954186b580b4/PCWzDkMmoZASvKuf.png"
+    },
+    {
+      "id": 6,
+      "name": "Samantha Julin",
+      "content": "For most Indians, studying at an IIT isn't just a goal, it's a dream shaped by generations.",
+      "imageUrl": "https://coding-platform.s3.amazonaws.com/dev/lms/tickets/6b1a6bff-b7a4-4595-9dfd-5c65283b789d/LRJrWNxilhG1sRjr.png"
+    }
+  ]
+}
