@@ -1,0 +1,104 @@
+{
+  "forms": [
+    {
+      "id": "1",
+      "title": "Student Feedback Form",
+      "description": "Please provide your feedback about the minor program courses.",
+      "deadline": "2024-05-16T05:29:00Z",
+      "totalQuestions": 3,
+      "status": "completed",
+      "submittedOn": "2024-05-03T08:00:00Z",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "multiple_choice",
+          "required": true,
+          "question": "How satisfied are you with the course content?",
+          "options": [
+            "Very Satisfied",
+            "Satisfied",
+            "Neutral",
+            "Dissatisfied",
+            "Very Dissatisfied"
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "checkbox",
+          "required": false,
+          "question": "What topics would you like to see more of?",
+          "options": [
+            "Practical Examples",
+            "Theoretical Concepts",
+            "Industry Case Studies",
+            "Group Projects",
+            "Individual Assignments"
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "paragraph",
+          "required": false,
+          "question": "Any additional comments or suggestions?"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Course Registration Form",
+      "description": "Register for upcoming minor program courses.",
+      "deadline": "2024-06-01T23:59:00Z",
+      "totalQuestions": 4,
+      "status": "pending",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "dropdown",
+          "required": true,
+          "question": "Select your preferred course",
+          "options": [
+            "Machine Learning",
+            "Data Structures",
+            "Web Development",
+            "Cloud Computing"
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "short_text",
+          "required": true,
+          "question": "Student ID"
+        },
+        {
+          "id": "q3",
+          "type": "multiple_choice",
+          "required": true,
+          "question": "Preferred batch timing",
+          "options": [
+            "Morning (9 AM - 12 PM)",
+            "Afternoon (2 PM - 5 PM)",
+            "Evening (6 PM - 9 PM)"
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "paragraph",
+          "required": false,
+          "question": "Any specific requirements or accommodations needed?"
+        }
+      ]
+    }
+  ],
+  "responses": {
+    "1": {
+      "userId": "1",
+      "formId": "1",
+      "submittedOn": "2024-05-03T08:00:00Z",
+      "answers": {
+        "q1": "Satisfied",
+        "q2": ["Practical Examples", "Industry Case Studies"],
+        "q3": "I would like more industry-relevant projects."
+      }
+    }
+  }
+}
