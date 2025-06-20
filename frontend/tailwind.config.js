@@ -1,32 +1,36 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-    "content": [
-      "./src/**/*.{js,jsx,ts,tsx}"
-    ],
-    "theme": {
-      "extend": {
-        "colors": {
-          "lavender": "#eee0fe",
-          "gray": {
-            "100": "#222",
-            "200": "#1d1b20",
-            "300": "rgba(255, 255, 255, 0.8)"
-          },
-          "darkslategray": "#454545",
-          "dimgray": "#555",
-          "white": "#fff",
-          "gainsboro": "#d9d9d9",
-          "darkgray": "#b3b3b3",
-          "blueviolet": "#6d4ae7"
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        white: "#fff",
+        gray: {
+          100: "#757575",
+          200: "#202124",
+          300: "#1d1b20",
         },
-        "fontFamily": {
-          "roboto": "Roboto",
-          "inter": "Inter",
-          "poppins": "Poppins"
-        }
-      }
+        black: "#000",
+        lavender: "#eee0fe",
+        mediumslateblue: "#704ee7",
+        darkslategray: "#454545",
+        gainsboro: "rgba(217, 217, 217, 0.6)",
+        whitesmoke: {
+          100: "#f7f7f7",
+          200: "#f5f5f5",
+          300: "#edeef0",
+        },
+        green: "#008000",
+        blueviolet: "#5f39e4",
+        dimgray: "#544d4f",
+      },
+      fontFamily: {
+        roboto: "Roboto",
+        poppins: "Poppins",
+      },
     },
-    "corePlugins": {
-      "preflight": false
-    }
-  }
+  },
+  plugins: [],
+}; 
