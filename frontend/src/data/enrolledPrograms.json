@@ -1,0 +1,59 @@
+[
+  {
+    "id": "ba",
+    "programName": "Minor in BA",
+    "collegeName": "IIT Mandi",
+    "faculty": [
+      {
+        "name": "Dr. Priya Mehta",
+        "designation": "Associate Professor"
+      },
+      {
+        "name": "Dr. Rajesh Kumar",
+        "designation": "Assistant Professor"
+      }
+    ],
+    "duration": "2 semesters",
+    "startDate": "2025-05-27",
+    "progress": 64,
+    "currentSemester": 1
+  },
+  {
+    "id": "cse",
+    "programName": "Minor in CSE",
+    "collegeName": "IIT Mandi",
+    "faculty": [
+      {
+        "name": "Dr. Anand Kumar",
+        "designation": "Associate Professor"
+      },
+      {
+        "name": "Dr. Sushma Jain",
+        "designation": "Assistant Professor"
+      }
+    ],
+    "duration": "2 semesters",
+    "startDate": "2025-05-27",
+    "progress": 18,
+    "currentSemester": 1
+  },
+  {
+    "id": "ai",
+    "programName": "Minor in AI",
+    "collegeName": "IIT Mandi",
+    "faculty": [
+      {
+        "name": "Dr. Rahul Sharma",
+        "designation": "Professor"
+      },
+      {
+        "name": "Dr. Neha Singh",
+        "designation": "Associate Professor"
+      }
+    ],
+    "duration": "2 semesters",
+    "startDate": "2025-05-27",
+    "progress": 86,
+    "currentSemester": 1
+  }
+]

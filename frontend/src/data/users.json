@@ -1,0 +1,58 @@
+[
+  {
+    "id": "1",
+    "fullName": "John Smith",
+    "personalEmail": "john.smith@gmail.com",
+    "collegeEmail": "john@iitmandi.ac.in",
+    "universityName": "IIT Mandi",
+    "enrollmentId": "S12345",
+    "program": "Computer Science",
+    "currentSemester": 3,
+    "branch": "CSE",
+    "paymentStatus": "Pending",
+    "role": "admin",
+    "password": "masai@000"
+  },
+  {
+    "id": "2",
+    "fullName": "Sarah Wilson",
+    "personalEmail": "sarah.wilson@gmail.com",
+    "collegeEmail": "sarah@iitmandi.ac.in",
+    "universityName": "IIT Mandi",
+    "enrollmentId": "S12346",
+    "program": "Electrical Engineering",
+    "currentSemester": 4,
+    "branch": "EE",
+    "paymentStatus": "Completed",
+    "role": "student",
+    "password": "masai@000"
+  },
+  {
+    "id": "3",
+    "fullName": "Raj Patel",
+    "personalEmail": "raj.patel@gmail.com",
+    "collegeEmail": "raj@iitmandi.ac.in",
+    "universityName": "IIT Mandi",
+    "enrollmentId": "S12347",
+    "program": "Mechanical Engineering",
+    "currentSemester": 2,
+    "branch": "ME",
+    "paymentStatus": "Pending",
+    "role": "student",
+    "password": "masai@000"
+  },
+  {
+    "id": "4",
+    "fullName": "Priya Sharma",
+    "personalEmail": "priya.sharma@gmail.com",
+    "collegeEmail": "priya@iitmandi.ac.in",
+    "universityName": "IIT Mandi",
+    "enrollmentId": "S12348",
+    "program": "Civil Engineering",
+    "currentSemester": 5,
+    "branch": "CE",
+    "paymentStatus": "Completed",
+    "role": "student",
+    "password": "masai@000"
+  }
+]

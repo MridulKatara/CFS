@@ -1,0 +1,54 @@
+{
+  "cse": {
+    "currentSemester": {
+      "number": 3,
+      "amount": 45000,
+      "dueDate": "2024-05-30",
+      "breakdown": {
+        "tuitionFee": 40000,
+        "laboratoryFee": 3000,
+        "developmentFee": 2000
+      }
+    },
+    "paymentHistory": []
+  },
+  "ai": {
+    "currentSemester": {
+      "number": 2,
+      "amount": 45000,
+      "dueDate": "2024-05-30",
+      "breakdown": {
+        "tuitionFee": 40000,
+        "laboratoryFee": 3000,
+        "developmentFee": 2000
+      }
+    },
+    "paymentHistory": []
+  },
+  "dsml": {
+    "currentSemester": {
+      "number": 3,
+      "amount": 45000,
+      "dueDate": "2024-05-30",
+      "breakdown": {
+        "tuitionFee": 40000,
+        "laboratoryFee": 3000,
+        "developmentFee": 2000
+      }
+    },
+    "paymentHistory": []
+  },
+  "ba": {
+    "currentSemester": {
+      "number": 2,
+      "amount": 45000,
+      "dueDate": "2024-05-30",
+      "breakdown": {
+        "tuitionFee": 40000,
+        "laboratoryFee": 3000,
+        "developmentFee": 2000
+      }
+    },
+    "paymentHistory": []
+  }
+}
