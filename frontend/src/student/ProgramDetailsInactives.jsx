@@ -1,5 +1,5 @@
 import React from "react";
-import Instructor from '../assets/Instructor.png';
+import Instructor from '../assets/instructor.png';
 import ChatGPT from '../assets/t1.png';
 import Plotly from '../assets/t2.png';
 import NumPy from '../assets/t3.png';
