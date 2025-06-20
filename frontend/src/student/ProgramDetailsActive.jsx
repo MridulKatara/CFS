@@ -10,12 +10,13 @@ import NumPy from '../assets/t3.png';
 import Spacy from '../assets/t4.jpg';
 import Matplotlib from '../assets/t5.png';
 import OpenCV from '../assets/t6.png';
+import BottomNavBar from './ButtomNavItem';
 
 const ProgramDetailsActive = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full min-h-screen bg-white overflow-y-auto font-roboto">
+    <div className="w-full min-h-screen bg-white overflow-y-auto font-roboto pb-20">
      
       <div className="flex items-center justify-between px-4 mt-4 mb-6">
         <div className="w-8 h-8 cursor-pointer" onClick={() => navigate(-1)}>
@@ -135,10 +136,10 @@ const ProgramDetailsActive = () => {
           </button>
         </div>
       </div>
-     
+      
+      <BottomNavBar />
     </div>
   )
 }
-
 
 export default ProgramDetailsActive

@@ -1,14 +1,15 @@
 import React from 'react';
 import { FiX } from 'react-icons/fi';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../auth';
 
 const LogoutModal = ({ onClose }) => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    // const handleLogout = () => {
-    //     localStorage.clear();
-    //     navigate('/login');
-    // };
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
 
     return (
         <div className="fixed inset-0 bg-[#000]/50 flex items-center justify-center z-50">
@@ -25,7 +26,7 @@ const LogoutModal = ({ onClose }) => {
                         Cancel
                     </button>
                     <button
-                        // onClick={handleLogout}
+                        onClick={handleLogout}
                         className="flex-1 rounded-lg text-[#ea1105] py-2.5 px-5 font-semibold"
                     >
                         Logout

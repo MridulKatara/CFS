@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import userData from '../../data/users.json';
 
 const EditProfile = () => {
+    const navigate = useNavigate();
     const firstUser = userData[0];
     const [formData, setFormData] = useState({
         name: firstUser.fullName,
@@ -32,13 +34,19 @@ const EditProfile = () => {
             return;
         }
         console.log('Saving profile:', formData);
+        // After saving, navigate back to profile
+        navigate('/profile');
+    };
+
+    const handleBackClick = () => {
+        navigate(-1);
     };
 
     return (
         <div className="w-full min-h-screen bg-[#f5f5f5] p-4">
             {/* Header */}
             <div className="flex items-center mb-6">
-                <FiArrowLeft className="w-6 h-6 mr-4" />
+                <FiArrowLeft className="w-6 h-6 mr-4 cursor-pointer" onClick={handleBackClick} />
                 <h1 className="text-xl font-semibold flex-1 text-center mr-6">Edit Profile</h1>
             </div>
 

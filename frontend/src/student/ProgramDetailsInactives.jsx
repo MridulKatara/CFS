@@ -7,13 +7,19 @@ import Spacy from '../assets/t4.jpg';
 import Matplotlib from '../assets/t5.png';
 import OpenCV from '../assets/t6.png';
 import Faculty from '../assets/Faculty.png';
+import BottomNavBar from './ButtomNavItem';
+import { useNavigate } from "react-router-dom";
 
 const ProgramDetailsInactives = () => {
+	const navigate = useNavigate();
+
+	const handleRegisterClick = () => {
+		navigate('/payment', { state: { registration: true } });
+	};
 
 	return (
-		<div className="min-h-screen bg-white">
-			<div className="max-w-[375px] mx-auto min-h-screen bg-white flex flex-col">
-			
+		<div className="min-h-screen bg-white pb-20 flex flex-col">
+			<div className="max-w-[375px] mx-auto min-h-screen bg-white flex flex-col flex-1 overflow-y-auto">
 				<div className="flex items-center justify-between px-4 mt-4 mb-6">
 					<h1 className="text-2xl font-semibold text-black font-poppins">Program Details</h1>
 					<div className="w-8 h-8 invisible">
@@ -114,12 +120,16 @@ const ProgramDetailsInactives = () => {
 					</div>
 					{/* Bottom Action Bar */}
 					<div className="mb-6">
-						<button className="w-full rounded-lg bg-gradient-to-r from-mediumslateblue to-[#5f39e4] py-2.5 px-5 text-white font-poppins font-semibold">
+						<button
+							className="w-full rounded-lg bg-gradient-to-r from-mediumslateblue to-[#5f39e4] py-2.5 px-5 text-white font-poppins font-semibold"
+							onClick={handleRegisterClick}
+						>
 							Pay ₹1000 & Register Now
 						</button>
 					</div>
 				</div>
 			</div>
+			<BottomNavBar />
 		</div>
 	);
 };
