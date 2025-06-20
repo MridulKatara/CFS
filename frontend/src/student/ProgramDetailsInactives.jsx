@@ -6,7 +6,7 @@ import NumPy from '../assets/t3.png';
 import Spacy from '../assets/t4.jpg';
 import Matplotlib from '../assets/t5.png';
 import OpenCV from '../assets/t6.png';
-import Faculty from '../assets/Faculty.png';
+import Faculty from '../assets/faculty.png';
 import BottomNavBar from './ButtomNavItem';
 import { useNavigate } from "react-router-dom";
 
