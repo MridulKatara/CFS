@@ -10,10 +10,11 @@ import Placements         from "./Placements";
 import Testimonials       from "./Testimonials";
 import SupportCards       from "./SupportCards";
 import FAQ                from "./FAQ";
+import BottomNavBar       from '../../student/ButtomNavItem';
 
 export default function LandingPage() {
   return (
-    <main className="min-h-screen bg-[#f5f5f5] font-inter">
+    <main className="min-h-screen bg-[#f5f5f5] font-inter pb-20">
       <div className="max-w-7xl mx-auto bg-white">
         <HeroSection />
         <AboutIIT />
@@ -27,6 +28,7 @@ export default function LandingPage() {
         <SupportCards />
         <FAQ />
       </div>
+      <BottomNavBar />
     </main>
   );
 }

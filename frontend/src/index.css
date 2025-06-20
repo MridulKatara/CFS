@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import "tailwindcss";
 
 @keyframes scroll {
@@ -52,4 +48,23 @@
 /* Pause animation on hover */
 .animate-scroll-fast:hover {
   animation-play-state: paused;
+}
+
+/* Global cursor pointer for all buttons and clickable elements */
+button, 
+[role="button"], 
+input[type="submit"], 
+input[type="button"], 
+input[type="reset"],
+a,
+.clickable {
+  cursor: pointer !important;
+}
+
+/* Disable cursor pointer for disabled buttons */
+button:disabled,
+input[type="submit"]:disabled,
+input[type="button"]:disabled,
+input[type="reset"]:disabled {
+  cursor: not-allowed !important;
 }

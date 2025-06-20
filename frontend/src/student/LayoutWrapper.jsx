@@ -1,5 +1,5 @@
 import React from "react"
-import BottomNavigation from "./buttomNavItem"
+import BottomNavigation from "./ButtomNavItem"
 
 
 export default function LayoutWrapper({ children }) {

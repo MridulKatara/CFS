@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FiEdit, FiArrowLeft, FiChevronRight, FiLogOut, FiUser } from 'react-icons/fi';
 import LogoutModal from './LogoutModal';
+import BottomNavBar from '../../student/ButtomNavItem';
 
 const Profile = () => {
     const [showLogoutModal, setShowLogoutModal] = useState(false);
+    const navigate = useNavigate();
     const [userData] = useState({
         name: "John Smith",
         email: "john@iitmandi.ac.in",
@@ -23,17 +26,28 @@ const Profile = () => {
         ]
     });
 
+    const handleBackClick = () => {
+        navigate(-1);
+    };
+
+    const handleEditClick = () => {
+        navigate('/edit-profile');
+    };
+
+    const handlePaymentHistoryClick = () => {
+        navigate('/payment');
+    };
+
     return (
-        <div className="w-full relative bg-[#f5f5f5] min-h-screen overflow-hidden">
-            {/* Main Card */}
-            <div className="mx-auto max-w-[375px] bg-white rounded-[32px] shadow-lg p-6 mt-4">
+        <div className="w-full relative bg-[#f5f5f5] min-h-screen overflow-hidden pb-20 flex flex-col">
+            <div className="mx-auto max-w-[375px] bg-white rounded-[32px] shadow-lg p-6 mt-4 flex-1 overflow-y-auto">
                 {/* Header */}
                 <div className="flex justify-between items-center mb-8">
-                    <FiArrowLeft className="w-6 h-6 cursor-pointer" />
+                    <FiArrowLeft className="w-6 h-6 cursor-pointer" onClick={handleBackClick} />
                     <div className="text-xl font-semibold flex-1 text-center">Profile</div>
                 </div>
                 <div className="flex justify-between items-center mb-8">
-                    <FiEdit className="w-6 h-6 cursor-pointer" />
+                    <FiEdit className="w-6 h-6 cursor-pointer" onClick={handleEditClick} />
                     <FiUser className="w-6 h-6" />
                     <FiLogOut className="w-6 h-6 cursor-pointer" onClick={() => setShowLogoutModal(true)} />
                 </div>
@@ -84,14 +98,16 @@ const Profile = () => {
                 ))}
 
                 {/* Payment History */}
-                <div className="flex justify-between items-center mt-6 px-2">
+                <div className="flex justify-between items-center mt-6 px-2 cursor-pointer" onClick={handlePaymentHistoryClick}>
                     <span className="text-base font-medium">Payment History</span>
-                    <FiChevronRight className="w-6 h-6 cursor-pointer" />
+                    <FiChevronRight className="w-6 h-6" />
                 </div>
             </div>
 
             {/* Logout Modal */}
             {showLogoutModal && <LogoutModal onClose={() => setShowLogoutModal(false)} />}
+            
+            <BottomNavBar />
         </div>
     );
 };
