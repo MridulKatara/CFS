@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import usersData from '../../../data/users.json';
-
-interface User {
-  id: string;
-  fullName: string;
-  personalEmail: string;
-  collegeEmail: string;
-  universityName: string;
-  enrollmentId: string;
-  program: string;
-  currentSemester: number;
-  branch: string;
-  paymentStatus: string;
-  role: string;
-  password: string;
-}
+import usersData from '../../data/users.json';
+import '../../index.css';
+import masaiLogo from '/src/assets/masai.svg';
+import nsdcLogo from '/src/assets/nsdc.svg';
+import iitmandiLogo from '/src/assets/iitmandi.svg'
+import cceLogo from '/src/assets/cce.svg'
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -24,7 +14,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
@@ -34,7 +24,7 @@ const Login = () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       const user = usersData.find(
-        (user: User) => user.collegeEmail === email && user.password === password
+        (user) => user.collegeEmail === email && user.password === password
       );
 
       if (user) {
@@ -60,6 +50,7 @@ const Login = () => {
         setError('Invalid email or password');
       }
     } catch (err) {
+      console.log(err);
       setError('An error occurred during login');
     } finally {
       setIsLoading(false);
@@ -71,26 +62,17 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full relative bg-lavender h-[812px] overflow-hidden text-left text-sm text-gray-200 font-roboto">
-      {/* Status Bar */}
-      <div className="absolute top-[0px] left-[calc(50%_-_187.5px)] w-[375px] h-11 flex flex-row items-center justify-between py-2.5 px-6 box-border gap-0">
-        <div className="relative tracking-[0.01em] leading-5 font-medium">9:30</div>
-        <img className="w-[46px] relative h-[17px]" alt="" src="right icons.svg" />
-      </div>
-
+    <>
+    <div className="w-full relative bg-[#eee0fe] h-[100vh] overflow-hidden text-left text-sm text-[#1d1b20] font-roboto">
       {/* Login Card */}
-      <div className="absolute top-[calc(50%_-_250px)] left-[calc(50%_-_171.5px)] [backdrop-filter:blur(34px)] rounded-3xl [background:linear-gradient(180deg,_#fff_15.87%,_rgba(255,_255,_255,_0)_65.87%),_rgba(255,_255,_255,_0.2)] border-gray-300 border-solid border-[1px] box-border w-[343px] flex flex-col items-center justify-start py-6 px-4 gap-8 text-[28px] text-gray-100 font-poppins">
+      <div className="absolute top-[calc(50%_-_250px)] left-[calc(50%_-_171.5px)] backdrop-filter-blur-[34px] rounded-3xl bg-[linear-gradient(180deg,#fff_15.87%,rgba(255,255,255,0)_65.87%),rgba(255,255,255,0.2)] border-solid border-[1px] box-border w-[343px] flex flex-col items-center justify-start py-6 px-4 gap-8 text-[28px] text-[#222222] font-poppins border-[rgba(255,255,255,0.8)]">
         
         {/* Logo Section */}
         <div className="h-[44.8px] flex flex-row items-center justify-center gap-4">
-          <img className="w-[53.3px] relative max-h-full object-cover" alt="" src="cce, IIT mandi (1) 1.png" />
-          <img className="w-[56.2px] relative max-h-full object-cover" alt="" src="image 161.png" />
-          <img className="w-[45.5px] relative h-[44.8px] object-cover" alt="" src="image 54.png" />
-          <div className="w-[53.4px] relative h-6">
-            <div className="absolute h-full w-[128.09%] top-[0%] right-[-14.61%] bottom-[0%] left-[-13.48%]" />
-            <img className="absolute h-[56.67%] w-[92.13%] top-[12.5%] right-[7.54%] bottom-[30.83%] left-[0.32%] max-w-full overflow-hidden max-h-full" alt="" src="Group.svg" />
-            <img className="absolute h-[10%] w-[4.49%] top-[57.5%] right-[0.45%] bottom-[32.5%] left-[95.06%] max-w-full overflow-hidden max-h-full" alt="" src="®.svg" />
-          </div>
+          <img src={cceLogo} alt="CCE" />
+          <img src={iitmandiLogo} alt="IIT Mandi" />
+          <img src={nsdcLogo} alt="NSDC" />
+          <img src={masaiLogo} alt="Masai" />  
         </div>
 
         {/* Login Form */}
@@ -100,7 +82,7 @@ const Login = () => {
             {/* Header */}
             <div className="self-stretch flex flex-col items-center justify-start gap-3 font-inter">
               <div className="relative leading-[150%] font-semibold">Login</div>
-              <div className="w-[287px] relative text-xs leading-[140%] text-darkslategray text-center inline-block font-poppins">
+              <div className="w-[287px] relative text-xs leading-[140%] text-[#454545] text-center inline-block font-poppins">
                 <span>{`Access your `}</span>
                 <span className="font-medium">{`CCE, `}</span>
                 <span>IIT Mandi Minor Programs</span>
@@ -108,13 +90,13 @@ const Login = () => {
             </div>
 
             {/* Form Fields */}
-            <div className="self-stretch flex flex-col items-end justify-start gap-4 text-xs text-dimgray">
+            <div className="self-stretch flex flex-col items-end justify-start gap-4 text-xs text-[#555555]">
               
               {/* Email Field */}
               <div className="self-stretch flex flex-col items-start justify-start gap-1.5">
                 <div className="relative leading-[120%]">Email</div>
-                <div className="self-stretch flex flex-col items-start justify-start text-darkgray">
-                  <div className="self-stretch rounded-lg bg-white border-gainsboro border-solid border-[1px] box-border overflow-hidden flex flex-row items-center justify-start py-3 px-4 min-w-[240px]">
+                <div className="self-stretch flex flex-col items-start justify-start text-[#b3b3b3]">
+                  <div className="self-stretch rounded-lg bg-[#ffffff] border-[#d9d9d9] border-solid border-[1px] box-border overflow-hidden flex flex-row items-center justify-start py-3 px-4 min-w-[240px]">
                     <input
                       type="email"
                       value={email}
@@ -130,9 +112,9 @@ const Login = () => {
               {/* Password Field */}
               <div className="self-stretch flex flex-col items-start justify-start gap-1">
                 <div className="relative leading-[120%]">Password</div>
-                <div className="self-stretch flex flex-col items-end justify-start text-darkgray">
+                <div className="self-stretch flex flex-col items-end justify-start text-[#b3b3b3]">
                   <div className="self-stretch flex flex-col items-start justify-start">
-                    <div className="self-stretch rounded-lg bg-white border-gainsboro border-solid border-[1px] box-border overflow-hidden flex flex-row items-center justify-start py-3 px-4 min-w-[240px]">
+                    <div className="self-stretch rounded-lg bg-[#ffffff] border-[#d9d9d9] border-solid border-[1px] box-border overflow-hidden flex flex-row items-center justify-start py-3 px-4 min-w-[240px]">
                       <input
                         type={showPassword ? "text" : "password"}
                         value={password}
@@ -154,7 +136,7 @@ const Login = () => {
               </div>
 
               {/* Forgot Password Link */}
-              <div className="relative [text-decoration:underline] leading-[120%] font-medium font-inter text-blueviolet cursor-pointer hover:text-purple-600 transition-colors">
+              <div className="relative [text-decoration:underline] leading-[120%] font-medium font-inter text-[#6d4ae7] cursor-pointer hover:text-purple-600 transition-colors">
                 Forgot Password?
               </div>
             </div>
@@ -170,7 +152,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="self-stretch rounded-lg [background:linear-gradient(95.11deg,_#704ee7,_#5f39e4)] overflow-hidden flex flex-row items-center justify-center py-2.5 px-5 text-sm text-white hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+              className="self-stretch rounded-lg [background:linear-gradient(95.11deg,_#704ee7,_#5f39e4)] overflow-hidden flex flex-row items-center justify-center py-2.5 px-5 text-sm text-[#ffffff] hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <div className="relative tracking-[0.01em] leading-[150%] font-semibold">
                 {isLoading ? 'Logging in...' : 'Login'}
@@ -179,18 +161,19 @@ const Login = () => {
           </div>
 
           {/* Sign Up Link */}
-          <div className="relative text-xs leading-[120%] text-darkslategray">
+          <div className="relative text-xs leading-[120%] text-[#454545]">
             <span>
               <span>Don't have an account?</span>
-              <span className="text-white">{` `}</span>
+              <span className="text-[#ffffff]">{` `}</span>
             </span>
-            <span className="[text-decoration:underline] font-medium font-inter text-blueviolet cursor-pointer hover:text-purple-600 transition-colors">
+            <span className="[text-decoration:underline] font-medium font-inter text-[#6d4ae7] cursor-pointer hover:text-purple-600 transition-colors">
               Sign Up
             </span>
           </div>
         </form>
       </div>
     </div>
+    </>
   );
 };
 
