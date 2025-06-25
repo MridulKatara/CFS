@@ -10,12 +10,7 @@ connectDB()
 
 const app = new Elysia()
 .use(cors({
-  origin: [
-    'http://localhost:5173', // Vite dev server
-    'http://localhost:3000', // Alternative dev port
-    'https://cfs-virid.vercel.app', // Your Vercel frontend
-    'https://cfs-frontend.vercel.app', // Alternative Vercel domain if you have one
-  ],
+  origin: '*',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
