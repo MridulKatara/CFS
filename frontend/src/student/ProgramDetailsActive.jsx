@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Back from '../assets/Icons.svg';
 import Clock from '../assets/Clock.svg';
 import VideoCamera from '../assets/VideoCamera.svg';
-import Instructor from '../assets/Instructor.png';
+import Instructor from '../assets/instructor.png';
 import ChatGPT from '../assets/t1.png';
 import Plotly from '../assets/t2.png';
 import NumPy from '../assets/t3.png';
