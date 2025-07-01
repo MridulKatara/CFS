@@ -1,14 +1,14 @@
 import React from "react";
 
 const faculty = [
-    { name: "Dr. Indu Joshi",     role: "Associate Professor", img: "/assets/indu.jpg" },
+    { name: "Dr. Indu Joshi",     role: "Associate Professor", img: "/assets/instructor.jpg" },
     { name: "Dr. Adarsh Patel",   role: "Associate Professor", img: "/assets/adarsh.jpg" },
     { name: "Dr. Sneha Singh",    role: "Associate Professor", img: "/assets/sneha.jpg" }
   ];
   
   export default function FacultySection() {
     return (
-      <section className="px-4 pt-10">
+      <section className="px-4 pt-10 bg-[#fcf7d0]">
         {faculty.map(({ name, role, img }) => (
           <div
             key={name}

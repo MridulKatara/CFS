@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://cfs-backend.onrender.com';
+const API_BASE_URL = 'http://localhost:7001';
 
 class ApiService {
   constructor() {
@@ -13,6 +13,7 @@ class ApiService {
         "Content-Type": "application/json",
         ...options.headers,
       },
+      credentials: 'include',
       ...options,
     };
 
@@ -24,6 +25,11 @@ class ApiService {
     console.log(config);
     try {
       const response = await fetch(url, config);
+      
+      // For 204 No Content responses
+      if (response.status === 204) {
+        return { success: true };
+      }
       
       // Handle non-JSON responses
       const contentType = response.headers.get('content-type');
@@ -120,6 +126,29 @@ class ApiService {
 
   async getHealth() {
     return this.request('/health');
+  }
+
+  async getProgramDetails(programId) {
+    try {
+      console.log(`Fetching program details for ID: ${programId}`);
+      const response = await this.request(`/programs/${programId}`);
+      
+      if (!response || !response.success) {
+        const errorMsg = response?.message || "Program not found";
+        console.error(`API response error: ${errorMsg}`);
+        throw new Error(errorMsg);
+      }
+      
+      console.log("Program data received:", response.data);
+      return response;
+    } catch (error) {
+      console.error("Error fetching program:", error);
+      throw error;
+    }
+  }
+
+  async getEnrolledProgramDetails(programId) {
+    return this.request(`/user/programs/${programId}`);
   }
 }
 

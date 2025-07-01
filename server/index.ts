@@ -10,9 +10,13 @@ connectDB()
 
 const app = new Elysia()
 .use(cors({
-  origin: '*',
+  origin: (request) => {
+    const origin = request.headers.get('origin');
+    return origin ? true : false;
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  credentials: true,
   exposeHeaders: ['Content-Type', 'Authorization'],
 }))
   .use(authRoutes)

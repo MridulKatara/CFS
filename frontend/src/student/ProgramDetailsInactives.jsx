@@ -1,5 +1,5 @@
-import React from "react";
-import Instructor from '../assets/instructor.png';
+import React, { useState, useEffect } from "react";
+import Instructor from '../assets/instructor.jpg';
 import ChatGPT from '../assets/t1.png';
 import Plotly from '../assets/t2.png';
 import NumPy from '../assets/t3.png';
@@ -8,10 +8,40 @@ import Matplotlib from '../assets/t5.png';
 import OpenCV from '../assets/t6.png';
 import Faculty from '../assets/faculty.png';
 import BottomNavBar from './ButtomNavItem';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import apiService from '../services/api';
 
 const ProgramDetailsInactives = () => {
 	const navigate = useNavigate();
+	const { programId } = useParams();
+	const [program, setProgram] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
+	const [error, setError] = useState(null);
+
+	useEffect(() => {
+		const fetchProgram = async () => {
+			try {
+				setIsLoading(true);
+				const response = await apiService.getProgramDetails(programId);
+				setProgram(response.data);
+			} catch (err) {
+				setError(err.message || 'Failed to load program details');
+				console.error('Error fetching program details:', err);
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
+		fetchProgram();
+	}, [programId]);
+
+	if (isLoading) {
+		return <div className="w-full min-h-screen flex items-center justify-center">Loading program details...</div>;
+	}
+
+	if (error || !program) {
+		return <div className="w-full min-h-screen flex items-center justify-center text-red-500">{error || 'Program not found'}</div>;
+	}
 
 	const handleRegisterClick = () => {
 		navigate('/payment', { state: { registration: true } });
@@ -90,18 +120,18 @@ const ProgramDetailsInactives = () => {
 					</div>
 					{/* Tools Section */}
 					<div className="mb-6">
-          <h3 className="text-sm font-medium text-black mb-4">Tools You Will Learn:</h3>
-          <div className="grid grid-cols-3 gap-4 mb-2">
-            <img className="w-16 h-16 object-contain" alt="ChatGPT" src={ChatGPT} />
-            <img className="w-16 h-16 object-contain" alt="Plotly" src={Plotly} />
-            <img className="w-16 h-16 object-contain" alt="NumPy" src={NumPy} />
-          </div>
-          <div className="grid grid-cols-3 gap-4">
-            <img className="w-16 h-16 object-contain" alt="Spacy" src={Spacy} />
-            <img className="w-16 h-16 object-contain" alt="Matplotlib" src={Matplotlib} />
-            <img className="w-16 h-16 object-contain" alt="OpenCV" src={OpenCV} />
-          </div>
-        </div>
+						<h3 className="text-sm font-medium text-black mb-4">Tools You Will Learn:</h3>
+						<div className="grid grid-cols-3 gap-4 mb-2">
+							<img className="w-16 h-16 object-contain" alt="ChatGPT" src={ChatGPT} />
+							<img className="w-16 h-16 object-contain" alt="Plotly" src={Plotly} />
+							<img className="w-16 h-16 object-contain" alt="NumPy" src={NumPy} />
+						</div>
+						<div className="grid grid-cols-3 gap-4">
+							<img className="w-16 h-16 object-contain" alt="Spacy" src={Spacy} />
+							<img className="w-16 h-16 object-contain" alt="Matplotlib" src={Matplotlib} />
+							<img className="w-16 h-16 object-contain" alt="OpenCV" src={OpenCV} />
+						</div>
+					</div>
 					{/* Faculty Section */}
 					<div className="mb-6">
 						<h3 className="text-sm font-medium mb-4">Faculty</h3>
