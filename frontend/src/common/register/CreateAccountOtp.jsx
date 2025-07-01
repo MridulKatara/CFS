@@ -110,13 +110,19 @@ const CreateAccountOtp = ({ form, onChange, onNext, onBack, editField, setEditFi
 
   return (
     <>
-      <div className="w-full relative bg-[#eee0fe] h-[100vh] overflow-hidden text-left text-sm text-[#1d1b20] font-roboto">
-        <div className="absolute top-[calc(50%_-_235px)] left-[calc(50%_-_171.5px)] backdrop-filter-blur-[34px] rounded-3xl bg-[linear-gradient(180deg,#fff_15.87%,rgba(255,255,255,0)_65.87%),rgba(255,255,255,0.2)] border-solid border-[1px] box-border w-[343px] flex flex-col items-center justify-start py-6 px-4 gap-8 text-[28px] text-[#222] font-poppins border-[rgba(255,255,255,0.8)]">
+      <div className="w-full min-h-screen flex items-center justify-center bg-[#eee0fe]">
+        <div
+          className="w-[343px] rounded-3xl bg-white bg-opacity-90 border border-gray-200 shadow-lg flex flex-col items-center py-6 px-4 gap-8"
+          style={{
+            backdropFilter: "blur(34px)",
+            background: "linear-gradient(180deg, #fff 15.87%, rgba(255,255,255,0) 65.87%), rgba(255,255,255,0.2)"
+          }}
+        >
           <div className="h-[44.8px] flex flex-row items-center justify-center gap-4">
-            <img src={cceLogo} alt="CCE" />
-            <img src={iitmandiLogo} alt="IIT Mandi" />
-            <img src={nsdcLogo} alt="NSDC" />
-            <img src={masaiLogo} alt="Masai" />
+            <img src={cceLogo} alt="CCE" className="w-[53px] h-[44px] object-contain" />
+            <img src={iitmandiLogo} alt="IIT Mandi" className="w-[56px] h-[44px] object-contain" />
+            <img src={nsdcLogo} alt="NSDC" className="w-[45px] h-[44px] object-contain" />
+            <img src={masaiLogo} alt="Masai" className="w-[53px] h-[24px] object-contain" />
           </div>
           <form
             className="self-stretch flex flex-col items-center justify-start gap-8"

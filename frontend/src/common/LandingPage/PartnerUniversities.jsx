@@ -2,10 +2,6 @@ import React from 'react';
 
 const universities = [
   {
-    name: "KL University",
-    logo: "http://masai-website-images.s3.ap-south-1.amazonaws.com/KL_University_logo_c1af84ec04.svg"
-  },
-  {
     name: "DAV",
     logo: "https://s3.ap-south-1.amazonaws.com/static.masaischool.com/future_skills/college_icons/dav.png"
   },
@@ -32,32 +28,75 @@ const universities = [
 ];
 
 const PartnerUniversities = () => {
-  // Triple the universities array to ensure smooth infinite scroll
-  const tripleUniversities = [...universities, ...universities, ...universities];
+  // Duplicate the universities array for continuous animation
+  const duplicatedUniversities = [...universities, ...universities];
 
   return (
-    <section className="pt-14">
-      <h2 className="text-center font-bold text-lg text-[#202124] mb-6">
+    <section className="pt-8 bg-white overflow-hidden">
+      <h2 className="text-center font-bold text-xl text-[#202124] mb-6">
         Our Partner Universities
       </h2>
       
-      <div className="relative overflow-hidden">
-        <div className="flex animate-scroll-fast">
-          {tripleUniversities.map((university, index) => (
+      <div className="marquee-container">
+        <div className="marquee-content">
+          {duplicatedUniversities.map((university, index) => (
             <div 
               key={index} 
-              className="flex-shrink-0 mx-6 flex items-center justify-center"
-              style={{ minWidth: '140px' }}
+              className="marquee-item"
             >
               <img 
                 src={university.logo} 
                 alt={university.name}
-                className="h-12 w-auto object-contain hover:scale-110 transition-all duration-300"
+                className="h-12 object-contain"
               />
             </div>
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        .marquee-container {
+          width: 100%;
+          overflow: hidden;
+          position: relative;
+          padding: 10px 0;
+        }
+        
+        .marquee-content {
+          display: flex;
+          animation: marquee 20s linear infinite;
+          width: fit-content;
+        }
+        
+        .marquee-item {
+          flex-shrink: 0;
+          width: 120px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0 15px;
+        }
+        
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .marquee-content {
+            animation: marquee 15s linear infinite;
+          }
+          
+          .marquee-item {
+            width: 90px;
+            padding: 0 10px;
+          }
+        }
+      `}</style>
     </section>
   );
 };

@@ -43,8 +43,8 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/payment" element={<Payment />} />
-        <Route path="/program-details-active" element={<ProgramDetailsActive />} />
-        <Route path="/program-details-inactive" element={<ProgramDetailsInactives />} />
+        <Route path="/program-details-active/:programId" element={<ProgramDetailsActive />} />
+        <Route path="/program-details-inactives/:programId" element={<ProgramDetailsInactives />} />
       </Route>
 
       {/* Admin routes */}
