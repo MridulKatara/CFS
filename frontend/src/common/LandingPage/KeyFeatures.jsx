@@ -21,21 +21,21 @@ const featureData = [
   
   export default function KeyFeatures() {
     return (
-      <section className="mt-10 pb-8 bg-gradient-to-b from-[#eee0fe] via-white to-[#ebf6ff]">
-        <h2 className="text-center text-lg sm:text-xl lg:text-2xl font-bold pt-8 mb-6 text-[#202124]">
+      <section className="pt-8 pb-6 bg-[#f7f2ff]">
+        <h2 className="text-center text-xl font-bold mb-5 text-black">
           Key Features
         </h2>
   
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div className="px-4 grid grid-cols-2 gap-3">
           {featureData.map(({ title, text }) => (
             <div
               key={title}
-              className="bg-[#704ee7]/90 rounded-xl text-white p-4 sm:p-5 flex flex-col"
+              className="bg-[#704ee7] rounded-xl text-white p-4 "
             >
-              <h3 className="font-semibold text-sm sm:text-base leading-tight mb-1">
+              <h3 className="font-semibold text-base mb-1 text-white">
                 {title}
               </h3>
-              <p className="text-[10px] sm:text-xs leading-snug">{text}</p>
+              <p className="text-sm leading-tight opacity-90 text-white">{text}</p>
             </div>
           ))}
         </div>

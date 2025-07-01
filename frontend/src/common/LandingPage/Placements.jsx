@@ -96,32 +96,74 @@ const hiringPartners = [
 ];
 
 const Placements = () => {
-  const doubledPartners = [...hiringPartners, ...hiringPartners];
+  // Duplicate the partners array for continuous animation
+  const duplicatedPartners = [...hiringPartners, ...hiringPartners];
 
   return (
-    <section className="py-4 bg-[#f5f5f5]">
-      <div className="text-center mb-4 px-2">
-        <h2 className="text-2xl font-bold mb-2 text-[#202124]">Placements</h2>
+    <section className="py-6 bg-[#fcf7d0]">
+      <div className="text-center mb-5 px-2">
+        <h2 className="text-xl font-bold mb-2 text-[#202124]">Placements</h2>
         <p className="text-sm text-[#6d6d6d]">Meet Some Of Our 4000+ Hiring Partners</p>
       </div>
       
-      <div className="relative overflow-hidden">
-        <div className="flex animate-scroll-fast">
-          {doubledPartners.map((partner, index) => (
-            <div 
-              key={index} 
-              className="flex-shrink-0 flex items-center justify-center"
-              style={{ minWidth: '120px' }}
-            >
-              <img 
-                src={partner.logo} 
-                alt={partner.name}
-                className="h-20 sm:h-24 w-auto object-contain hover:scale-110 transition-all duration-300"
-              />
+      <div className="logo-carousel ">
+        <div className="logo-carousel-inner">
+          {duplicatedPartners.map((partner, index) => (
+            <div key={index} className="logo-container">
+              <div className="h-[40px] relative rounded-[234px] bg-white w-full flex flex-col items-start justify-center py-0 px-3 box-border ">
+                <img 
+                  src={partner.logo} 
+                  alt={partner.name}
+                  className="w-[90.5px] relative max-h-full object-cover"
+                />
+              </div>
             </div>
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        .logo-carousel {
+          width: 100%;
+          overflow: hidden;
+          position: relative;
+          padding: 1px 0;
+          background: #fcf7d0;
+        }
+        
+        .logo-carousel-inner {
+          display: flex;
+          animation: logoScroll 30s linear infinite;
+          width: fit-content;
+        }
+        
+        .logo-container {
+          flex: 0 0 auto;
+          width: 130px;
+          height: 60px;
+          margin: 0 10px;
+        }
+        
+        @keyframes logoScroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .logo-container {
+            width: 110px;
+            margin: 0 8px;
+          }
+          
+          .logo-carousel-inner {
+            animation: logoScroll 25s linear infinite;
+          }
+        }
+      `}</style>
     </section>
   );
 };

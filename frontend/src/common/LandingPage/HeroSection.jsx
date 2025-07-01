@@ -7,31 +7,34 @@ import cceLogo from '/src/assets/cce.svg';
 export default function HeroSection() {
   return (
     <section className="w-full">
-      {/* header logos */}
-      <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 pt-6">
-        <img src={cceLogo}   alt="IIT"     className="h-5 sm:h-7" />
-        <img src={iitmandiLogo}   alt="CCE"     className="h-5 sm:h-7" />
-        <img src={nsdcLogo}  alt="NSDC"    className="h-5 sm:h-7" />
-        <img src={masaiLogo} alt="Masai"   className="h-4 sm:h-5" />
+      {/* Header logos */}
+      <div className="relative w-full py-4 flex items-center justify-center gap-4">
+        <img src={cceLogo} alt="CCE" className="w-[49px] object-contain" />
+        <img src={iitmandiLogo} alt="IIT Mandi" className="w-[52px] object-contain" />
+        <img src={nsdcLogo} alt="NSDC" className="w-[42px] h-[42px] object-contain" />
+        <img src={masaiLogo} alt="Masai" className="w-[50px] h-[22px] object-contain" />
       </div>
 
-      {/* title */}
-      <div className="text-center mt-5 mb-4 px-4">
-        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-[#202124]">
+      {/* Title */}
+      <div className="px-4 mt-6">
+        <h1 className="text-[34px] tracking-[-0.02em] leading-[120%] font-semibold font-poppins text-black text-center">
           Minor Programs
         </h1>
-        <p className="text-sm sm:text-base font-medium text-[#6d6d6d]">
+        <p className="text-base tracking-[-0.02em] leading-[120%] font-medium font-poppins text-black text-center mt-1 mb-4">
           offered by CCE, IIT Mandi
         </p>
       </div>
 
-      {/* hero */}
-      <img
-        src="https://coding-platform.s3.amazonaws.com/dev/lms/tickets/29ad5f5f-1dd6-4e9e-895a-01759bad9a65/O1CjAVecEdvwUuvB.jpg"
-        alt="IIT Mandi campus"
-        className="w-full object-cover h-[200px] sm:h-[230px] lg:h-[300px]"
-        draggable={false}
-      />
+      {/* Hero Image with Gradient Overlay */}
+      <div className="relative w-full">
+        <img
+          src="https://coding-platform.s3.amazonaws.com/dev/lms/tickets/29ad5f5f-1dd6-4e9e-895a-01759bad9a65/O1CjAVecEdvwUuvB.jpg"
+          alt="IIT Mandi campus"
+          className="w-full object-cover rounded-b-2xl"
+          draggable={false}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white opacity-100 rounded-b-2xl" />
+      </div>
     </section>
   );
 }

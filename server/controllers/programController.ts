@@ -1,4 +1,4 @@
-import Program from '../models/Program';
+import { Program } from '../models/Program';
 
 
 type CtxWithSet = {

@@ -29,17 +29,19 @@ const MyPrograms = () => {
         message: error.message || 'Failed to load programs',
         type: 'error'
       });
+      // Set empty programs array on error
+      setPrograms([]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleGoClick = (programId) => {
-    navigate(`/program-details-active/${programId}`);
-  };
-
-  const handleInactiveGoClick = (programId) => {
-    navigate(`/program-details-inactive/${programId}`);
+  const handleGoClick = (programId, isEnrolled) => {
+    if (isEnrolled) {
+      navigate(`/program-details-active/${programId}`);
+    } else {
+      navigate(`/program-details-inactives/${programId}`);
+    }
   };
 
   const handleBackClick = () => {
@@ -84,7 +86,7 @@ const MyPrograms = () => {
           </div>
 
           {/* Active Programs */}
-          {getActivePrograms().length > 0 && (
+          {getActivePrograms().length > 0 ? (
             <>
               {getActivePrograms().map((program) => (
                 <div key={program._id} className="rounded-2xl bg-[#eee0fe] border border-[#704ee7] p-4 mb-6">
@@ -124,7 +126,7 @@ const MyPrograms = () => {
                           <span>{calculateProgress(program)}%</span>
                         </div>
                         <button
-                          onClick={() => handleGoClick(program._id)}
+                          onClick={() => handleGoClick(program._id, program.isEnrolled)}
                           className="text-[#ffffff] text-xs font-medium hover:bg-[#5f39e4] transition-colors cursor-pointer"
                         >
                           <img src={ArrowRight} alt="Arrow Right" />
@@ -135,6 +137,13 @@ const MyPrograms = () => {
                 </div>
               ))}
             </>
+          ) : (
+            <div className="rounded-2xl bg-[#eee0fe] border border-[#704ee7] p-6 mb-6 text-center">
+              <h2 className="text-lg font-medium text-[#704ee7] mb-2">Get Your First Course Now</h2>
+              <p className="text-sm text-[#454545] mb-4">
+                Explore our minor programs and start your learning journey
+              </p>
+            </div>
           )}
 
           {/* Other Programs Section */}
@@ -162,7 +171,7 @@ const MyPrograms = () => {
                         </div>
                       </div>
                       <button
-                        onClick={() => handleInactiveGoClick(program._id)}
+                        onClick={() => handleGoClick(program._id, program.isEnrolled)}
                         className="text-[#ffffff] text-xs font-medium hover:bg-[#5f39e4] transition-colors cursor-pointer"
                       >
                         <img src={ArrowRight} alt="Arrow Right" />
@@ -174,7 +183,7 @@ const MyPrograms = () => {
             </div>
           )}
 
-          {/* No Programs Message */}
+          {/* No Programs At All Message */}
           {programs.length === 0 && !isLoading && (
             <div className="text-center py-8">
               <p className="text-gray-500">No programs found. Please check back later.</p>

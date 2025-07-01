@@ -117,35 +117,40 @@ const ResetPassword = () => {
 
   return (
     <>
-      <div className="w-full relative bg-[#eee0fe] h-[100vh] overflow-hidden text-left text-sm text-[#1d1b20] font-roboto">
-        <div className="absolute top-[calc(50%_-_250px)] left-[calc(50%_-_171.5px)] backdrop-filter-blur-[34px] rounded-3xl bg-[linear-gradient(180deg,#fff_15.87%,rgba(255,255,255,0)_65.87%),rgba(255,255,255,0.2)] border-solid border-[1px] box-border w-[343px] flex flex-col items-center justify-start py-6 px-4 gap-8 text-[28px] text-[#222222] font-poppins border-[rgba(255,255,255,0.8)]">
-          
+      <div className="w-full min-h-screen flex items-center justify-center bg-[#eee0fe]">
+        <div
+          className="w-[343px] rounded-3xl bg-white bg-opacity-90 border border-gray-200 shadow-lg flex flex-col items-center py-6 px-4 gap-8"
+          style={{
+            backdropFilter: "blur(34px)",
+            background: "linear-gradient(180deg, #fff 15.87%, rgba(255,255,255,0) 65.87%), rgba(255,255,255,0.2)"
+          }}
+        >
           {/* Logo Section */}
           <div className="h-[44.8px] flex flex-row items-center justify-center gap-4">
-            <img src={cceLogo} alt="CCE" />
-            <img src={iitmandiLogo} alt="IIT Mandi" />
-            <img src={nsdcLogo} alt="NSDC" />
-            <img src={masaiLogo} alt="Masai" />  
+            <img src={cceLogo} alt="CCE" className="w-[53px] h-[44px] object-contain" />
+            <img src={iitmandiLogo} alt="IIT Mandi" className="w-[56px] h-[44px] object-contain" />
+            <img src={nsdcLogo} alt="NSDC" className="w-[45px] h-[44px] object-contain" />
+            <img src={masaiLogo} alt="Masai" className="w-[53px] h-[24px] object-contain" />
           </div>
 
           {step === 1 ? (
-            <form onSubmit={handleEmailSubmit} className="self-stretch flex flex-col items-center justify-start gap-5">
-              <div className="self-stretch flex flex-col items-center justify-start gap-3 font-inter">
-                <div className="relative leading-[150%] font-semibold">Reset Password</div>
-                <div className="w-[287px] relative text-xs leading-[140%] text-[#454545] text-center inline-block font-poppins">
+            <form onSubmit={handleEmailSubmit} className="w-full flex flex-col items-center gap-5">
+              <div className="w-full flex flex-col items-center gap-3 font-inter">
+                <div className="text-[28px] font-semibold text-[#222] leading-[150%]">Reset Password</div>
+                <div className="w-[287px] text-xs leading-[140%] text-[#454545] text-center font-poppins">
                   Enter your personal email to receive reset instructions
                 </div>
               </div>
 
-              <div className="self-stretch flex flex-col items-start justify-start gap-1.5">
-                <div className="relative leading-[120%] text-xs text-[#555555]">Personal Email</div>
-                <div className="self-stretch rounded-lg bg-[#ffffff] border-[#d9d9d9] border-solid border-[1px] box-border overflow-hidden flex flex-row items-center justify-start py-3 px-4">
+              <div className="w-full flex flex-col items-start gap-1.5">
+                <div className="leading-[120%] text-xs text-[#555]">Personal Email</div>
+                <div className="w-full rounded-lg bg-white border border-gray-300 overflow-hidden flex flex-row items-center py-3 px-4">
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
                     placeholder="Enter your personal email address"
-                    className={`flex-1 relative leading-[140%] bg-transparent border-none outline-none ${errors.email ? 'text-red-500' : 'text-gray-700'}`}
+                    className={`flex-1 bg-transparent border-none outline-none ${errors.email ? 'text-red-500' : 'text-gray-700'}`}
                     required
                   />
                 </div>
@@ -157,35 +162,35 @@ const ResetPassword = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="self-stretch rounded-lg [background:linear-gradient(95.11deg,_#704ee7,_#5f39e4)] overflow-hidden flex flex-row items-center justify-center py-2.5 px-5 text-sm text-[#ffffff] hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                className="w-full rounded-lg bg-gradient-to-r from-[#704ee7] to-[#5f39e4] flex flex-row items-center justify-center py-2.5 px-5 text-sm text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
-                <div className="relative tracking-[0.01em] leading-[150%] font-semibold">
+                <span className="tracking-[0.01em] leading-[150%]">
                   {isLoading ? 'Sending...' : 'Send Reset Link'}
-                </div>
+                </span>
               </button>
 
-              <Link to="/login" className="relative text-xs leading-[120%] text-[#454545] hover:text-purple-600 transition-colors">
+              <Link to="/login" className="text-xs leading-[120%] text-[#454545] hover:text-purple-600 transition-colors">
                 Back to Login
               </Link>
             </form>
           ) : (
-            <form onSubmit={handlePasswordReset} className="self-stretch flex flex-col items-center justify-start gap-5">
-              <div className="self-stretch flex flex-col items-center justify-start gap-3 font-inter">
-                <div className="relative leading-[150%] font-semibold">Set New Password</div>
-                <div className="w-[287px] relative text-xs leading-[140%] text-[#454545] text-center inline-block font-poppins">
+            <form onSubmit={handlePasswordReset} className="w-full flex flex-col items-center gap-5">
+              <div className="w-full flex flex-col items-center gap-3 font-inter">
+                <div className="text-[28px] font-semibold text-[#222] leading-[150%]">Set New Password</div>
+                <div className="w-[287px] text-xs leading-[140%] text-[#454545] text-center font-poppins">
                   Enter your new password
                 </div>
               </div>
 
-              <div className="self-stretch flex flex-col items-start justify-start gap-1.5">
-                <div className="relative leading-[120%] text-xs text-[#555555]">New Password</div>
-                <div className="self-stretch rounded-lg bg-[#ffffff] border-[#d9d9d9] border-solid border-[1px] box-border overflow-hidden flex flex-row items-center justify-start py-3 px-4">
+              <div className="w-full flex flex-col items-start gap-1.5">
+                <div className="leading-[120%] text-xs text-[#555]">New Password</div>
+                <div className="w-full rounded-lg bg-white border border-gray-300 overflow-hidden flex flex-row items-center py-3 px-4">
                   <input
                     type={showPassword ? "text" : "password"}
                     value={newPassword}
                     onChange={(e) => handleInputChange('password', e.target.value)}
                     placeholder="Enter new password"
-                    className={`flex-1 relative leading-[140%] bg-transparent border-none outline-none ${errors.password ? 'text-red-500' : 'text-gray-700'}`}
+                    className={`flex-1 bg-transparent border-none outline-none ${errors.password ? 'text-red-500' : 'text-gray-700'}`}
                     required
                   />
                   <button
@@ -201,15 +206,15 @@ const ResetPassword = () => {
                 )}
               </div>
 
-              <div className="self-stretch flex flex-col items-start justify-start gap-1.5">
-                <div className="relative leading-[120%] text-xs text-[#555555]">Confirm Password</div>
-                <div className="self-stretch rounded-lg bg-[#ffffff] border-[#d9d9d9] border-solid border-[1px] box-border overflow-hidden flex flex-row items-center justify-start py-3 px-4">
+              <div className="w-full flex flex-col items-start gap-1.5">
+                <div className="leading-[120%] text-xs text-[#555]">Confirm Password</div>
+                <div className="w-full rounded-lg bg-white border border-gray-300 overflow-hidden flex flex-row items-center py-3 px-4">
                   <input
                     type={showConfirmPassword ? "text" : "password"}
                     value={confirmPassword}
                     onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
                     placeholder="Confirm new password"
-                    className={`flex-1 relative leading-[140%] bg-transparent border-none outline-none ${errors.confirmPassword ? 'text-red-500' : 'text-gray-700'}`}
+                    className={`flex-1 bg-transparent border-none outline-none ${errors.confirmPassword ? 'text-red-500' : 'text-gray-700'}`}
                     required
                   />
                   <button
@@ -228,11 +233,11 @@ const ResetPassword = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="self-stretch rounded-lg [background:linear-gradient(95.11deg,_#704ee7,_#5f39e4)] overflow-hidden flex flex-row items-center justify-center py-2.5 px-5 text-sm text-[#ffffff] hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                className="w-full rounded-lg bg-gradient-to-r from-[#704ee7] to-[#5f39e4] flex flex-row items-center justify-center py-2.5 px-5 text-sm text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
-                <div className="relative tracking-[0.01em] leading-[150%] font-semibold">
+                <span className="tracking-[0.01em] leading-[150%]">
                   {isLoading ? 'Resetting...' : 'Reset Password'}
-                </div>
+                </span>
               </button>
             </form>
           )}
