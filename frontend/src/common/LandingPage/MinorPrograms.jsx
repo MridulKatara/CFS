@@ -16,7 +16,7 @@ export default function MinorPrograms() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:7001';
+        const apiUrl = import.meta.env.VITE_API_URL || 'https://cfs-djzu.onrender.com';
         console.log("API URL:", apiUrl);
         
         // Fetch from allprograms endpoint
