@@ -119,7 +119,7 @@ const ProgramDetailsActive = () => {
               </div>
               <div className="space-y-2 text-xs text-darkslategray">
                 <p><span>- </span><span className="text-[#008000]">Paid</span></p>
-                <p><span>- </span><span className="font-medium">₹{program.semesters?.[0]?.fee || 15000}</span></p>
+                <p><span>- </span><span className="font-medium">₹{program.semesters?.[0]?.fee || 14000}</span></p>
                 <p><span>- </span><span className="font-medium">₹{program.semesters?.[1]?.fee || 15000}</span></p>
                 <p><span>- </span><span className="font-medium">₹{program.semesters?.[2]?.fee || 15000}</span></p>
               </div>
