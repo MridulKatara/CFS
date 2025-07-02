@@ -1,35 +1,32 @@
-import mongoose from 'mongoose';
+import { Schema, model } from "mongoose";
 
-const facultySchema = new mongoose.Schema({
-    name: String,
-    designation: String,
-    specialization: String
+const ProgramSchema = new Schema({
+  programId: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  programName: {
+    type: String,
+    required: true
+  },
+  detail: {
+    type: String,
+    required: true
+  },
+  duration: {
+    type: String,
+    required: true
+  },
+  isActive: {
+    type: Boolean,
+    default: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
-const enrollmentDetailsSchema = new mongoose.Schema({
-    fee: Number,
-    startDate: Date,
-    endDate: Date
-});
-
-const semesterSchema = new mongoose.Schema({
-    fee: Number,
-    semester: Number,
-    startDate: Date,
-    endDate: Date
-});
-
-const programSchema = new mongoose.Schema({
-    programId: String,
-    programName: String,
-    collegeName: String,
-    detail: String,
-    semesterCount: Number,
-    fee: String,
-    faculty: [facultySchema],
-    eligibility: String,
-    semesters: [semesterSchema],
-    enrollmentDetails: enrollmentDetailsSchema
-}, { timestamps: true });
-
-export const Program = mongoose.model('Program', programSchema);
+const Program = model("Program", ProgramSchema);
+export default Program;

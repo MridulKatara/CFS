@@ -1,46 +1,87 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
-import userData from '../../data/users.json';
+import apiService from '../../services/api';
 
 const EditProfile = () => {
     const navigate = useNavigate();
-    const firstUser = userData[0];
     const [formData, setFormData] = useState({
-        name: firstUser.fullName,
-        universityName: firstUser.universityName,
-        course: firstUser.program,
-        branch: firstUser.branch,
-        studentCode: firstUser.enrollmentId,
+        name: '',
+        universityName: '',
+        course: '',
+        branch: '',
+        studentCode: '',
         newPassword: '',
         confirmPassword: ''
     });
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                setLoading(true);
+                const response = await apiService.getUserProfile();
+                const user = response.user;
+                setFormData({
+                    name: user.fullName || '',
+                    universityName: user.universityName || '',
+                    course: user.program || '',
+                    branch: user.branch || '',
+                    studentCode: user.studentCode || '',
+                    newPassword: '',
+                    confirmPassword: ''
+                });
+            } catch {
+                setError('Failed to load profile');
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProfile();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        // Only allow name to be edited
-        if (name === 'name') {
-            setFormData(prev => ({
-                ...prev,
-                [name]: value
-            }));
-        }
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(null);
+        setSuccess(null);
         if (formData.newPassword && formData.newPassword !== formData.confirmPassword) {
-            alert("Passwords don't match!");
+            setError("Passwords don't match!");
             return;
         }
-        console.log('Saving profile:', formData);
-        // After saving, navigate back to profile
-        navigate('/profile');
+        try {
+            setLoading(true);
+            // Update name if changed
+            await apiService.updateUserProfile({ fullName: formData.name });
+            // Update password if provided
+            if (formData.newPassword) {
+                await apiService.updatePassword({ password: formData.newPassword });
+            }
+            setSuccess('Profile updated successfully!');
+            setTimeout(() => navigate('/profile'), 1000);
+        } catch {
+            setError('Failed to update profile');
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleBackClick = () => {
         navigate(-1);
     };
+
+    if (loading) {
+        return <div className="w-full min-h-screen flex items-center justify-center bg-[#f5f5f5]">Loading...</div>;
+    }
 
     return (
         <div className="w-full min-h-screen bg-[#f5f5f5] p-4">
@@ -150,15 +191,19 @@ const EditProfile = () => {
                         placeholder="Confirm your password"
                     />
                 </div>
-            </form>
 
-            {/* Save Button */}
-            <button
-                onClick={handleSubmit}
-                className="w-full mt-6 rounded-lg bg-[#704ee7] text-white py-3 font-semibold"
-            >
-                Save
-            </button>
+                {error && <div className="text-red-500 text-center">{error}</div>}
+                {success && <div className="text-green-600 text-center">{success}</div>}
+
+                {/* Save Button */}
+                <button
+                    type="submit"
+                    className="w-full mt-6 rounded-lg bg-[#704ee7] text-white py-3 font-semibold"
+                    disabled={loading}
+                >
+                    {loading ? 'Saving...' : 'Save'}
+                </button>
+            </form>
         </div>
     );
 };
