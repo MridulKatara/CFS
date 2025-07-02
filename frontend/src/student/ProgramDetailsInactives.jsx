@@ -44,7 +44,7 @@ const ProgramDetailsInactives = () => {
 	}
 
 	const handleRegisterClick = () => {
-		navigate('/payment', { state: { registration: true } });
+		navigate('/payment', { state: { registration: true, programId: program._id } });
 	};
 
 	return (
@@ -60,9 +60,9 @@ const ProgramDetailsInactives = () => {
 				<div className="flex-1 px-4 pb-32">
 					{/* Program Info */}
 					<div className="mb-6">
-						<h2 className="text-xl font-medium text-black mb-2">Minor in Business Analytics</h2>
+						<h2 className="text-xl font-medium text-black mb-2">{program.programName}</h2>
 						<p className="text-xs text-darkslategray mb-4">
-							A comprehensive program introducing students to computer science fundamentals and software engineering principles.
+							{program.detail}
 						</p>
 					</div>
 					{/* Highlight Card */}
@@ -88,12 +88,12 @@ const ProgramDetailsInactives = () => {
 					{/* Duration */}
 					<div className="mb-6">
 						<h3 className="text-sm font-medium mb-2">Duration</h3>
-						<p className="text-xs text-darkslategray">3 Semester</p>
+						<p className="text-xs text-darkslategray">{program.semesterCount} Semester</p>
 					</div>
 					{/* Course Fee */}
 					<div className="mb-6">
 						<h3 className="text-sm font-medium text-black mb-2">Course Fee</h3>
-						<p className="text-xs text-darkslategray mb-2">₹45000 (₹15000 per semester)</p>
+						<p className="text-xs text-darkslategray mb-2">{program.fee} (₹{program.semesters?.[0]?.fee || 15000} per semester)</p>
 						<div className="rounded-2xl bg-[#f7f7f7] p-3">
 							<div className="flex justify-between">
 								<div className="space-y-2 text-xs text-darkslategray">
@@ -104,9 +104,9 @@ const ProgramDetailsInactives = () => {
 								</div>
 								<div className="space-y-2 text-xs text-darkslategray">
 									<p><span>- </span><span className="text-[#008000]">Paid</span></p>
-									<p><span>- </span><span className="font-medium">₹14,000</span></p>
-									<p><span>- </span><span className="font-medium">₹15,000</span></p>
-									<p><span>- </span><span className="font-medium">₹15,000</span></p>
+									<p><span>- </span><span className="font-medium">₹{program.semesters?.[0]?.fee || 15000}</span></p>
+									<p><span>- </span><span className="font-medium">₹{program.semesters?.[1]?.fee || 15000}</span></p>
+									<p><span>- </span><span className="font-medium">₹{program.semesters?.[2]?.fee || 15000}</span></p>
 								</div>
 							</div>
 						</div>
@@ -115,7 +115,7 @@ const ProgramDetailsInactives = () => {
 					<div className="mb-6">
 						<h3 className="text-sm font-medium mb-2">Eligibility</h3>
 						<p className="text-xs text-darkslategray">
-							Open to students from all engineering disciplines with a minimum CGPA of 8.0
+							{program.eligibility}
 						</p>
 					</div>
 					{/* Tools Section */}
@@ -136,13 +136,13 @@ const ProgramDetailsInactives = () => {
 					<div className="mb-6">
 						<h3 className="text-sm font-medium mb-4">Faculty</h3>
 						<div className="space-y-3">
-							{['Dr. Indu Joshi', 'Dr. Adarsh Patel', 'Dr. Sneha Singh'].map((name) => (
-								<div key={name} className="flex items-center gap-3 p-3 rounded-3xl border border-whitesmoke-200">
-									<img className="w-14 h-14 rounded-[12.8px] object-cover" alt={name} src={Instructor} />
+							{program.faculty?.map((faculty, index) => (
+								<div key={index} className="flex items-center gap-3 p-3 rounded-3xl border border-whitesmoke-200">
+									<img className="w-14 h-14 rounded-[12.8px] object-cover" alt={faculty.name} src={Instructor} />
 									<div>
-										<h4 className="text-sm font-medium text-black">{name}</h4>
-										<p className="text-xs text-darkslategray">Associate Professor</p>
-										<p className="text-xs font-medium text-darkslategray">IIT Mandi</p>
+										<h4 className="text-sm font-medium text-black">{faculty.name}</h4>
+										<p className="text-xs text-darkslategray">{faculty.designation}</p>
+										<p className="text-xs font-medium text-darkslategray">{program.collegeName}</p>
 									</div>
 								</div>
 							))}
@@ -154,7 +154,7 @@ const ProgramDetailsInactives = () => {
 							className="w-full rounded-lg bg-gradient-to-r from-mediumslateblue to-[#5f39e4] py-2.5 px-5 text-white font-poppins font-semibold"
 							onClick={handleRegisterClick}
 						>
-							Pay ₹1000 & Register Now
+							Pay ₹{program.enrollmentDetails?.fee || 1000} & Register Now
 						</button>
 					</div>
 				</div>

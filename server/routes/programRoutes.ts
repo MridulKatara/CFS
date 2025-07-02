@@ -5,9 +5,12 @@ import {
     getProgramById,
     createProgram,
     updateProgram,
-    deleteProgram
+    deleteProgram,
+    getEnrolledPrograms
 } from '../controllers/programController';
-import { Program } from '../models/Program';
+import Program from '../models/Program';
+import AllProgram from '../models/AllPrograms';
+import { authMiddleware } from "../middleware/auth";
 
 const app = new Elysia({ prefix: '/programs' });
 
@@ -22,29 +25,19 @@ app
     })
     .get('/:id', async ({ params }) => {
         try {
-            // Log the ID for debugging
             console.log("Looking for program with ID:", params.id);
             
-            // Check if ID is valid ObjectId format
-            if (!mongoose.Types.ObjectId.isValid(params.id)) {
-                console.log("Invalid ObjectId format");
-                return {
-                    success: false,
-                    message: "Invalid program ID format",
-                    status: 400
-                };
+            // Try to find the program in AllProgram collection first
+            let program = await AllProgram.findById(params.id);
+            
+            // If not found in AllProgram, try in Program collection
+            if (!program) {
+                program = await Program.findById(params.id);
             }
-
-            // Try to find the program
-            const program = await Program.findById(params.id);
+            
             console.log("Program found:", !!program);
             
             if (!program) {
-                // Try a raw query to debug
-                console.log("Trying raw query...");
-                const rawProgram = await Program.findOne({_id: params.id});
-                console.log("Raw query result:", !!rawProgram);
-                
                 return {
                     success: false,
                     message: "Program not found",
@@ -64,6 +57,9 @@ app
     })
     .post('/', createProgram)
     .put('/:id', updateProgram)
-    .delete('/:id', deleteProgram);
+    .delete('/:id', deleteProgram)
+    .use(authMiddleware)
+    .get('/my-programs', getEnrolledPrograms)
+    .get('/allprograms', getAllPrograms);
 
 export default app; 

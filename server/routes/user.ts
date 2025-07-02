@@ -2,7 +2,7 @@ import { Elysia } from 'elysia';
 import { getProfile, updateProfile, updatePassword, getMyPrograms } from '../controllers/userController';
 import { authMiddleware } from '../middleware/auth';
 import { createOrder, verifyPayment } from '../controllers/paymentController';
-import { Program } from '../models/Program';
+import Program from '../models/Program';
 import MyProgram from '../models/MyProgram';
 
 const userRoutes = new Elysia({ prefix: '/user' })
@@ -33,7 +33,7 @@ const userRoutes = new Elysia({ prefix: '/user' })
           name: program.programName,
           title: program.programName,
           description: program.detail,
-          totalSemesters: program.semesterCount,
+          totalSemesters: 6,
           currentSemester: userProgram?.semesters.length || 1,
           progress: userProgram?.semesters.filter(s => s.paid).length || 0,
           mode: "Online",

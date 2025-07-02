@@ -1,4 +1,5 @@
-import { Program } from '../models/Program';
+import  Program  from '../models/Program';
+import AllProgram from '../models/AllPrograms';
 
 
 type CtxWithSet = {
@@ -8,13 +9,16 @@ type CtxWithSet = {
 };
 
 // Get all programs
-export const getAllPrograms = async ({ set }: CtxWithSet) => {
+export const getAllPrograms = async (req, res) => {
+    console.log("Getting all programs");
     try {
-        const programs = await Program.find().lean();
-        return programs;
+        const programs = await AllProgram.find({});
+        console.log("Programs:", programs);
+        res.status(200).json(programs);
     } catch (error) {
-        set.status = 500;
-        return { message: 'Server error', error };
+        console.error("Error fetching programs:", error);
+        console.log("Error:", error);
+        res.status(500).json({ message: "Failed to fetch all programs", error: error.message });
     }
 };
 
@@ -77,5 +81,23 @@ export const deleteProgram = async ({ params, set }: CtxWithSet) => {
     } catch (error) {
         set.status = 400;
         return { message: 'Error deleting program', error };
+    }
+};
+
+export const getEnrolledPrograms = async (req, res) => {
+    try {
+        // Get user ID from the authenticated request
+        const userId = req.user.id;
+        
+        // Find all programs where the user is enrolled
+        // This assumes you have a MyProgram model that stores enrollment data
+        const enrolledPrograms = await req.context.db.MyProgram.find({ userId });
+        
+        res.status(200).json({ 
+            programs: enrolledPrograms 
+        });
+    } catch (error) {
+        console.error("Error fetching enrolled programs:", error);
+        res.status(500).json({ message: "Failed to fetch enrolled programs", error: error.message });
     }
 }; 
