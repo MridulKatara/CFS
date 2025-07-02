@@ -107,7 +107,8 @@ class ApiService {
 
   // Program endpoints
   async getPrograms() {
-    return this.request('/programs');
+    console.log('Fetching all programs');
+    return this.request('/allprograms');
   }
 
   async getProgramById(id) {
@@ -121,7 +122,7 @@ class ApiService {
   }
 
   async getMyPrograms() {
-    return this.request('/user/programs');
+    return this.request('/user/my-programs');
   }
 
   async getHealth() {

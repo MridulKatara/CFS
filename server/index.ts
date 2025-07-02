@@ -3,6 +3,7 @@ import { cors } from '@elysiajs/cors'
 import connectDB from './config/db'
 import authRoutes from './routes/auth'
 import programRoutes from './routes/programRoutes'
+import allProgramRoutes from './routes/allProgramsRoutes'
 import userRoutes from './routes/user'
 
 // Connect to MongoDB
@@ -21,7 +22,9 @@ const app = new Elysia()
 }))
   .use(authRoutes)
   .use(programRoutes)
+  .use(allProgramRoutes)
   .use(userRoutes)
+  .use(programRoutes)
   .get('/health', () => 'Healthy')
   .get('/test', () => ({ message: 'Test endpoint working' }))
   .listen(7001);

@@ -24,7 +24,7 @@ const ProgramDetailsActive = () => {
     const fetchProgram = async () => {
       try {
         setIsLoading(true);
-        const response = await apiService.getEnrolledProgramDetails(programId);
+        const response = await apiService.getProgramDetails(programId);
         setProgram(response.data);
       } catch (err) {
         setError(err.message || 'Failed to load program details');
@@ -62,18 +62,18 @@ const ProgramDetailsActive = () => {
       <div className="px-4 pb-24">
         {/* Program Info */}
         <div className="mb-6">
-          <h2 className="text-xl font-medium text-black mb-2">{program.name}</h2>
+          <h2 className="text-xl font-medium text-black mb-2">{program.programName}</h2>
           <p className="text-xs text-darkslategray mb-4">
-            {program.description}
+            {program.detail}
           </p>
           <div className="flex gap-4 text-xs text-darkslategray">
             <div className="flex items-center gap-1">
               <img className="w-4 h-4" alt="Duration" src={Clock} />
-              <span>{program.totalSemesters} Semester</span>
+              <span>{program.semesterCount} Semester</span>
             </div>
             <div className="flex items-center gap-1">
               <img className="w-4 h-4" alt="Mode" src={VideoCamera} />
-              <span>{program.mode}</span>
+              <span>Online</span>
             </div>
           </div>
         </div>
@@ -88,19 +88,19 @@ const ProgramDetailsActive = () => {
                 <div className="absolute inset-0 rounded-3xl bg-[rgba(217,_217,_217,_0.6)]" />
                 <div className="absolute left-0 top-0 w-[68%] h-full rounded-3xl bg-[#704ee7]" />
               </div>
-              <span className="text-xs text-darkslategray">{program.progress}%</span>
+              <span className="text-xs text-darkslategray">68%</span>
               </div>
              
             </div>
           </div>
           <div>
-            <div className="text-xs text-darkslategray mb-2">Semester {program.currentSemester} progress</div>
+            <div className="text-xs text-darkslategray mb-2">Semester 1 progress</div>
             <div className='flex items-center gap-2'>
               <div className="relative w-[197px] h-1.5">
                 <div className="absolute inset-0 rounded-3xl bg-[rgba(217,_217,_217,_0.6)]" />
                 <div className="absolute left-0 top-0 w-[68%] h-full rounded-3xl bg-[#704ee7]" />
               </div>
-              <span className="text-xs text-darkslategray">{program.progress}%</span>
+              <span className="text-xs text-darkslategray">68%</span>
               </div>
           </div>
         </div>
@@ -108,7 +108,7 @@ const ProgramDetailsActive = () => {
         {/* Course Fee Section */}
         <div className="mb-6">
           <h3 className="text-sm font-medium text-black mb-2">Course Fee</h3>
-          <p className="text-xs text-darkslategray mb-2">₹{program.fee} (₹{program.feePerSemester} per semester)</p>
+          <p className="text-xs text-darkslategray mb-2">{program.fee} (₹{program.semesters?.[0]?.fee || 15000} per semester)</p>
           <div className="bg-[#f7f7f7] rounded-2xl p-3">
             <div className="flex justify-between">
               <div className="space-y-2 text-xs text-darkslategray">
@@ -119,9 +119,9 @@ const ProgramDetailsActive = () => {
               </div>
               <div className="space-y-2 text-xs text-darkslategray">
                 <p><span>- </span><span className="text-[#008000]">Paid</span></p>
-                <p><span>- </span><span className="font-medium">₹{program.feePerSemester}</span></p>
-                <p><span>- </span><span className="font-medium">₹{program.feePerSemester}</span></p>
-                <p><span>- </span><span className="font-medium">₹{program.feePerSemester}</span></p>
+                <p><span>- </span><span className="font-medium">₹{program.semesters?.[0]?.fee || 15000}</span></p>
+                <p><span>- </span><span className="font-medium">₹{program.semesters?.[1]?.fee || 15000}</span></p>
+                <p><span>- </span><span className="font-medium">₹{program.semesters?.[2]?.fee || 15000}</span></p>
               </div>
             </div>
           </div>
@@ -146,13 +146,13 @@ const ProgramDetailsActive = () => {
         <div>
           <h3 className="text-sm font-medium text-black mb-4">Faculty</h3>
           <div className="space-y-3">
-            {program.faculty.map((name) => (
-              <div key={name} className="flex items-start gap-3 p-3 rounded-3xl border border-[#F5F5F5]">
-                <img className="w-14 h-14 rounded-[12.8px] object-cover" alt={name} src={Instructor} />
+            {program.faculty?.map((faculty, index) => (
+              <div key={index} className="flex items-start gap-3 p-3 rounded-3xl border border-[#F5F5F5]">
+                <img className="w-14 h-14 rounded-[12.8px] object-cover" alt={faculty.name} src={Instructor} />
                 <div>
-                  <h4 className="text-sm font-medium text-black">{name}</h4>
-                  <p className="text-xs text-darkslategray">Associate Professor</p>
-                  <p className="text-xs font-medium text-darkslategray">IIT Mandi</p>
+                  <h4 className="text-sm font-medium text-black">{faculty.name}</h4>
+                  <p className="text-xs text-darkslategray">{faculty.designation}</p>
+                  <p className="text-xs font-medium text-darkslategray">{program.collegeName}</p>
                 </div>
               </div>
             ))}
