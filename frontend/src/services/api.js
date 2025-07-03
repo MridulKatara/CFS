@@ -105,6 +105,13 @@ class ApiService {
     });
   }
 
+  async updatePassword(passwordData) {
+    return this.request('/user/password', {
+      method: 'PUT',
+      body: JSON.stringify(passwordData),
+    });
+  }
+
   // Program endpoints
   async getPrograms() {
     console.log('Fetching all programs');
