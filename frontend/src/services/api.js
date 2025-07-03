@@ -158,6 +158,35 @@ class ApiService {
   async getEnrolledProgramDetails(programId) {
     return this.request(`/user/programs/${programId}`);
   }
+
+  // Notification endpoints
+  async saveNotificationToken(token) {
+    return this.request('/notifications/token', {
+      method: 'POST',
+      body: JSON.stringify({ token }),
+    });
+  }
+
+  async getUserNotifications() {
+    return this.request('/notifications');
+  }
+
+  async markNotificationAsRead(notificationId) {
+    return this.request(`/notifications/${notificationId}/read`, {
+      method: 'PUT',
+    });
+  }
+
+  async getAllUsers() {
+    return this.request('/admin/users');
+  }
+
+  async sendNotification(notificationData) {
+    return this.request('/notifications/send', {
+      method: 'POST',
+      body: JSON.stringify(notificationData),
+    });
+  }
 }
 
 export default new ApiService(); 
