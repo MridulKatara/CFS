@@ -3,6 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import apiService from '../../services/api';
 
+function validateStrongPassword(password) {
+    // At least 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char
+    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/.test(password);
+}
+
 const EditProfile = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -11,6 +16,7 @@ const EditProfile = () => {
         course: '',
         branch: '',
         studentCode: '',
+        currentPassword: '',
         newPassword: '',
         confirmPassword: ''
     });
@@ -30,6 +36,7 @@ const EditProfile = () => {
                     course: user.program || '',
                     branch: user.branch || '',
                     studentCode: user.studentCode || '',
+                    currentPassword: '',
                     newPassword: '',
                     confirmPassword: ''
                 });
@@ -54,9 +61,24 @@ const EditProfile = () => {
         e.preventDefault();
         setError(null);
         setSuccess(null);
-        if (formData.newPassword && formData.newPassword !== formData.confirmPassword) {
-            setError("Passwords don't match!");
-            return;
+        // Password change validation
+        if (formData.newPassword || formData.confirmPassword || formData.currentPassword) {
+            if (!formData.currentPassword) {
+                setError('Please enter your current password.');
+                return;
+            }
+            if (!formData.newPassword) {
+                setError('Please enter a new password.');
+                return;
+            }
+            if (!validateStrongPassword(formData.newPassword)) {
+                setError('Password must be at least 8 characters, include uppercase, lowercase, number, and special character.');
+                return;
+            }
+            if (formData.newPassword !== formData.confirmPassword) {
+                setError("Passwords don't match!");
+                return;
+            }
         }
         try {
             setLoading(true);
@@ -64,12 +86,12 @@ const EditProfile = () => {
             await apiService.updateUserProfile({ fullName: formData.name });
             // Update password if provided
             if (formData.newPassword) {
-                await apiService.updatePassword({ password: formData.newPassword });
+                await apiService.updatePassword({ currentPassword: formData.currentPassword, newPassword: formData.newPassword });
             }
             setSuccess('Profile updated successfully!');
             setTimeout(() => navigate('/profile'), 1000);
-        } catch {
-            setError('Failed to update profile');
+        } catch (err) {
+            setError(err?.message || 'Failed to update profile');
         } finally {
             setLoading(false);
         }
@@ -164,6 +186,19 @@ const EditProfile = () => {
                 {/* Change Password Section */}
                 <div className="text-center mb-4">
                     <h3 className="text-base font-semibold text-[#111]">Change Password</h3>
+                </div>
+
+                {/* Current Password */}
+                <div>
+                    <label className="text-sm text-[#555] mb-1 block">Current Password</label>
+                    <input
+                        type="password"
+                        name="currentPassword"
+                        value={formData.currentPassword}
+                        onChange={handleChange}
+                        className="w-full rounded-lg border border-[#d9d9d9] p-3 text-[#212121]"
+                        placeholder="Enter your current password"
+                    />
                 </div>
 
                 {/* New Password */}
