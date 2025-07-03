@@ -5,6 +5,7 @@ import authRoutes from './routes/auth'
 import programRoutes from './routes/programRoutes'
 import allProgramRoutes from './routes/allProgramsRoutes'
 import userRoutes from './routes/user'
+import notificationRoutes from './routes/notificationRoutes'
 
 // Connect to MongoDB
 connectDB()
@@ -24,7 +25,7 @@ const app = new Elysia()
   .use(programRoutes)
   .use(allProgramRoutes)
   .use(userRoutes)
-  .use(programRoutes)
+  .use(notificationRoutes)
   .get('/health', () => 'Healthy')
   .get('/test', () => ({ message: 'Test endpoint working' }))
   .listen(7001);
