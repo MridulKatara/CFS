@@ -9,6 +9,9 @@ export const authMiddleware = (app: Elysia) =>
       throw new Error('No token provided');
     }
     const token = authHeader.split(' ')[1];
+    if (!token) {
+      throw new Error('No token provided');
+    }
     const decoded = verifyToken(token) as { userId: string; role: string };
     const user = await User.findById(decoded.userId);
     if (!user) {
@@ -16,6 +19,9 @@ export const authMiddleware = (app: Elysia) =>
     }
     return { user };
   });
+
+// Export auth as an alias for authMiddleware for backward compatibility
+export const auth = authMiddleware;
 
 // export const isAdmin = new Elysia()
 //   .derive(({ user }: AuthContext) => {
