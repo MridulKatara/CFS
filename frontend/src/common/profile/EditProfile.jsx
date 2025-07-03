@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiArrowLeft } from 'react-icons/fi';
+import { FiArrowLeft, FiEye, FiEyeOff } from 'react-icons/fi';
 import apiService from '../../services/api';
 
 function validateStrongPassword(password) {
@@ -23,6 +23,10 @@ const EditProfile = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
+    // Add state variables for password visibility
+    const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -99,6 +103,23 @@ const EditProfile = () => {
 
     const handleBackClick = () => {
         navigate(-1);
+    };
+
+    // Add toggle function for password visibility
+    const togglePasswordVisibility = (field) => {
+        switch (field) {
+            case 'current':
+                setShowCurrentPassword(!showCurrentPassword);
+                break;
+            case 'new':
+                setShowNewPassword(!showNewPassword);
+                break;
+            case 'confirm':
+                setShowConfirmPassword(!showConfirmPassword);
+                break;
+            default:
+                break;
+        }
     };
 
     if (loading) {
@@ -191,40 +212,70 @@ const EditProfile = () => {
                 {/* Current Password */}
                 <div>
                     <label className="text-sm text-[#555] mb-1 block">Current Password</label>
-                    <input
-                        type="password"
-                        name="currentPassword"
-                        value={formData.currentPassword}
-                        onChange={handleChange}
-                        className="w-full rounded-lg border border-[#d9d9d9] p-3 text-[#212121]"
-                        placeholder="Enter your current password"
-                    />
+                    <div className="relative">
+                        <input
+                            type={showCurrentPassword ? "text" : "password"}
+                            name="currentPassword"
+                            value={formData.currentPassword}
+                            onChange={handleChange}
+                            className="w-full rounded-lg border border-[#d9d9d9] p-3 text-[#212121]"
+                            placeholder="Enter your current password"
+                        />
+                        <button
+                            type="button"
+                            onClick={() => togglePasswordVisibility('current')}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                            tabIndex="-1"
+                        >
+                            {showCurrentPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+                        </button>
+                    </div>
                 </div>
 
                 {/* New Password */}
                 <div>
                     <label className="text-sm text-[#555] mb-1 block">New Password</label>
-                    <input
-                        type="password"
-                        name="newPassword"
-                        value={formData.newPassword}
-                        onChange={handleChange}
-                        className="w-full rounded-lg border border-[#d9d9d9] p-3 text-[#212121]"
-                        placeholder="Create new password"
-                    />
+                    <div className="relative">
+                        <input
+                            type={showNewPassword ? "text" : "password"}
+                            name="newPassword"
+                            value={formData.newPassword}
+                            onChange={handleChange}
+                            className="w-full rounded-lg border border-[#d9d9d9] p-3 text-[#212121]"
+                            placeholder="Create new password"
+                        />
+                        <button
+                            type="button"
+                            onClick={() => togglePasswordVisibility('new')}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                            tabIndex="-1"
+                        >
+                            {showNewPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+                        </button>
+                    </div>
                 </div>
 
                 {/* Confirm Password */}
                 <div>
                     <label className="text-sm text-[#555] mb-1 block">Confirm Password</label>
-                    <input
-                        type="password"
-                        name="confirmPassword"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        className="w-full rounded-lg border border-[#d9d9d9] p-3 text-[#212121]"
-                        placeholder="Confirm your password"
-                    />
+                    <div className="relative">
+                        <input
+                            type={showConfirmPassword ? "text" : "password"}
+                            name="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            className="w-full rounded-lg border border-[#d9d9d9] p-3 text-[#212121]"
+                            placeholder="Confirm your password"
+                        />
+                        <button
+                            type="button"
+                            onClick={() => togglePasswordVisibility('confirm')}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                            tabIndex="-1"
+                        >
+                            {showConfirmPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+                        </button>
+                    </div>
                 </div>
 
                 {error && <div className="text-red-500 text-center">{error}</div>}

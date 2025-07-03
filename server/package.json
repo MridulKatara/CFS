@@ -24,6 +24,7 @@
     "bcryptjs": "^3.0.2",
     "elysia": "latest",
     "express": "^5.1.0",
+    "firebase-admin": "^13.4.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "latest",
     "razorpay": "^2.9.6"
