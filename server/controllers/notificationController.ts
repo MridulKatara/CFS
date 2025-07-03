@@ -1,4 +1,4 @@
-import { messaging } from '../config/firebase';
+import { messaging, sendMulticast } from '../config/firebase';
 import User from '../models/User';
 import Notification from '../models/Notification';
 
@@ -86,7 +86,7 @@ export const sendNotification = async ({ body }: any) => {
     await Promise.all(notificationPromises);
 
     // Send push notification via Firebase
-    const response = await messaging.sendMulticast({
+    const response = await sendMulticast({
       tokens,
       notification: {
         title,
