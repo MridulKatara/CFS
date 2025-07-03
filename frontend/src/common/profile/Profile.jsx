@@ -23,7 +23,7 @@ const Profile = () => {
                 // Fetch enrolled programs if available
                 const progRes = await apiService.getMyPrograms();
                 setEnrolledPrograms(progRes.data || []);
-            } catch (err) {
+            } catch {
                 setError('Failed to load profile');
             } finally {
                 setLoading(false);

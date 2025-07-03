@@ -60,14 +60,40 @@ const CreateAccountVerify = ({ form, onChange, onBack, onEdit }) => {
       
       if (result.success) {
         setSnackbar({
-          message: 'Account created successfully! Redirecting to login...',
+          message: 'Account created successfully! Redirecting to home page...',
           type: 'success'
         });
         
-        // Redirect to login after a short delay
-        setTimeout(() => {
-          window.location.href = '/login';
-        }, 2000);
+        // Login the user automatically after successful registration
+        try {
+          const loginResponse = await apiService.login({
+            personalEmail: form.email,
+            password: form.password
+          });
+          
+          if (loginResponse.success) {
+            // Store user data and token in localStorage
+            localStorage.setItem('user', JSON.stringify(loginResponse.data.user));
+            localStorage.setItem('token', loginResponse.data.token);
+            localStorage.setItem('isLoggedIn', 'true');
+            
+            // Redirect to home page after a short delay
+            setTimeout(() => {
+              window.location.href = '/home';
+            }, 2000);
+          } else {
+            // If auto-login fails, redirect to login page
+            setTimeout(() => {
+              window.location.href = '/login';
+            }, 2000);
+          }
+        } catch (loginError) {
+          console.error('Auto-login error:', loginError);
+          // If auto-login fails, redirect to login page
+          setTimeout(() => {
+            window.location.href = '/login';
+          }, 2000);
+        }
       } else {
         // Handle partial verification
         if (result.error === 'otpEmail') {
