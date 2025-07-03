@@ -144,7 +144,7 @@ const ResetPassword = () => {
 
               <div className="w-full flex flex-col items-start gap-1.5">
                 <div className="leading-[120%] text-xs text-[#555]">Personal Email</div>
-                <div className="w-full rounded-lg bg-white border border-gray-300 overflow-hidden flex flex-row items-center py-3 px-4">
+                <div className="w-full rounded-lg bg-white border border-gray-300 overflow-hidden flex flex-row items-center py-3 px-4 placeholder-gray-400">
                   <input
                     type="email"
                     value={email}
