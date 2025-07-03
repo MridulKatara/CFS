@@ -82,7 +82,7 @@ class ApiService {
   async forgotPassword(email) {
     return this.request('/auth/forgot-password', {
       method: 'POST',
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ personalEmail: email }),
     });
   }
 
