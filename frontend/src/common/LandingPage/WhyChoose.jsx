@@ -70,7 +70,7 @@ const CampusSlider = () => {
 // Faculty content for point 3
 const FacultyContent = () => {
   const faculty = [
-    { name: "Dr. Indu Joshi", role: "Associate Professor", institution: "IIT Mandi", img: t1 },
+    { name: "Dr. Indu Joshi", role: "Associate Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/f0adffdb-03d1-446b-b7a8-24ab7a45a2c3/VlcfFcDPAGCQgCXj.jpg` },
     { name: "Dr. Adarsh Patel", role: "Associate Professor", institution: "IIT Mandi", img: t2 },
     { name: "Dr. Sneha Singh", role: "Assistant Professor", institution: "IIT Mandi", img: t3 }
   ];
@@ -116,6 +116,78 @@ const PlacementsContent = () => {
     {
       name: "BharatPe",
       logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/bharatpe_a3a5a3f552.svg"
+    },
+    {
+      name: "Salesken",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/salesken_baefe048ac.svg"
+    },
+    {
+      name: "Vyapar",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/vyapar_3f3770ebb5.svg"
+    },
+    {
+      name: "Capgemini",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/capgemini_31a863e94f.svg"
+    },
+    {
+      name: "Simplilearn",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/simplilearn_f8af8de923.svg"
+    },
+    {
+      name: "Pagarbook",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/pagarbook_2746958f65.svg"
+    },
+    {
+      name: "Smallcase",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/smallcase_1740bcc33f.svg"
+    },
+    {
+      name: "BharatAgri",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/bharatagri_d4794042fe.svg"
+    },
+    {
+      name: "ShareChat",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/sharechat_23a9923a34.svg"
+    },
+    {
+      name: "LeapFinance",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/leapfinance_0d785d05eb.svg"
+    },
+    {
+      name: "Ola",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/ola_15b5ee2b82.svg"
+    },
+    {
+      name: "IBM",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/ibm_795b5429ee.svg"
+    },
+    {
+      name: "Ajio",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/ajio_a16cd7a85b.svg"
+    },
+    {
+      name: "GlobalLogic",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/globallogic_c30eb641f7.svg"
+    },
+    {
+      name: "EatFit",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/eatfit_9dc276a187.svg"
+    },
+    {
+      name: "Dream11",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/dream11_d6c8d97a52.svg"
+    },
+    {
+      name: "HomeLane",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/homelane_e9cadd0c3c.svg"
+    },
+    {
+      name: "Swiggy",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/swiggy_bc1b88842e.svg"
+    },
+    {
+      name: "Jio",
+      logo: "https://masai-website-images.s3.ap-south-1.amazonaws.com/My_Jio_For_Everything_Jio_5dd9635cab.webp"
     }
   ];
   
