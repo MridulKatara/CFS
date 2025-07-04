@@ -7,6 +7,7 @@ import allProgramRoutes from './routes/allProgramsRoutes'
 import userRoutes from './routes/user'
 import notificationRoutes from './routes/notificationRoutes'
 import adminRoutes from './routes/adminRoutes'
+import './config/firebase' 
 
 // Connect to MongoDB
 connectDB()
