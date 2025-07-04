@@ -23,32 +23,81 @@ try {
 // Export messaging if Firebase is initialized
 export const messaging = firebaseInitialized ? admin.messaging() : null;
 
-// Helper function to safely send messages
-export const sendMulticast = async (message: any) => {
+// Helper function to safely send messages with retry
+export const sendMulticast = async (message: any, retries = 3) => {
   if (!firebaseInitialized || !messaging) {
     console.warn('Firebase not initialized. Cannot send push notification.');
     return { successCount: 0, failureCount: 0 };
   }
   
-  try {
-    // Handle multicast messages (with tokens array)
-    if (message.tokens && Array.isArray(message.tokens)) {
-      // We need to use the admin.messaging() instance directly
-      const result = await admin.messaging().sendEachForMulticast({
-        tokens: message.tokens,
-        notification: message.notification,
-        data: message.data
-      });
-      return result;
-    } else {
-      // Handle single message
-      await messaging.send(message);
-      return { successCount: 1, failureCount: 0 };
+  let attempt = 0;
+  while (attempt < retries) {
+    try {
+      // Handle multicast messages (with tokens array)
+      if (message.tokens && Array.isArray(message.tokens)) {
+        // Break into smaller batches to avoid network issues
+        if (message.tokens.length > 5) {
+          console.log(`Breaking ${message.tokens.length} tokens into smaller batches`);
+          let successCount = 0;
+          let failureCount = 0;
+          
+          // Process in batches of 5
+          for (let i = 0; i < message.tokens.length; i += 5) {
+            const batchTokens = message.tokens.slice(i, i + 5);
+            console.log(`Sending batch ${Math.floor(i/5) + 1} with ${batchTokens.length} tokens`);
+            
+            try {
+              const result = await admin.messaging().sendEachForMulticast({
+                tokens: batchTokens,
+                notification: message.notification,
+                data: message.data
+              });
+              
+              successCount += result.successCount;
+              failureCount += result.failureCount;
+              
+              // Add a small delay between batches
+              if (i + 5 < message.tokens.length) {
+                await new Promise(resolve => setTimeout(resolve, 1000));
+              }
+            } catch (batchError) {
+              console.error('Error sending batch:', batchError);
+              failureCount += batchTokens.length;
+            }
+          }
+          
+          return { successCount, failureCount };
+        } else {
+          // Small number of tokens, send as one batch
+          const result = await admin.messaging().sendEachForMulticast({
+            tokens: message.tokens,
+            notification: message.notification,
+            data: message.data
+          });
+          return result;
+        }
+      } else {
+        // Handle single message
+        await messaging.send(message);
+        return { successCount: 1, failureCount: 0 };
+      }
+    } catch (error: any) {
+      attempt++;
+      console.error(`Error sending push notification (attempt ${attempt}/${retries}):`, error);
+      
+      if (attempt >= retries) {
+        console.error('All retry attempts failed');
+        return { successCount: 0, failureCount: message.tokens?.length || 1 };
+      }
+      
+      // Wait before retrying (exponential backoff)
+      const waitTime = Math.pow(2, attempt) * 1000; // 2s, 4s, 8s
+      console.log(`Waiting ${waitTime}ms before retry...`);
+      await new Promise(resolve => setTimeout(resolve, waitTime));
     }
-  } catch (error) {
-    console.error('Error sending push notification:', error);
-    return { successCount: 0, failureCount: 1 };
   }
+  
+  return { successCount: 0, failureCount: message.tokens?.length || 1 };
 };
 
 export default admin;
