@@ -106,9 +106,9 @@ export const sendNotification = async ({ body }: any) => {
     try {
       await Promise.all(notificationPromises);
       console.log('✅ All notifications created successfully');
-    } catch (dbError) {
+    } catch (dbError: any) {
       console.error('❌ Database error creating notifications:', dbError);
-      throw new Error(`Failed to create notifications: ${dbError.message}`);
+      throw new Error(`Failed to create notifications: ${dbError.message || 'Unknown database error'}`);
     }
 
     // Send push notification via Firebase
@@ -125,10 +125,15 @@ export const sendNotification = async ({ body }: any) => {
       }
     });
 
+    if (response.successCount === 0 && tokens.length > 0) {
+      console.warn('⚠️ No notifications were sent successfully despite having tokens');
+    }
+
     return { 
       success: true, 
       message: `Notification sent successfully to ${response.successCount} devices`,
-      failureCount: response.failureCount
+      failureCount: response.failureCount,
+      totalTokens: tokens.length
     };
   } catch (error: any) {
     throw new Error(error.message || 'Error sending notification');

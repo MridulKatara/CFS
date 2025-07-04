@@ -16,6 +16,7 @@ try {
       credential: admin.credential.cert(serviceAccount)
     });
     firebaseInitialized = true;
+    console.log('✅ Firebase initialized successfully with service account file');
   } else if (process.env.FIREBASE_SERVICE_ACCOUNT) {
     // Use environment variable
     const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
@@ -23,11 +24,12 @@ try {
       credential: admin.credential.cert(serviceAccount)
     });
     firebaseInitialized = true;
+    console.log('✅ Firebase initialized successfully with environment variable');
   } else {
-    console.warn('Firebase service account not found. Push notifications will not work.');
+    console.warn('⚠️ Firebase service account not found. Push notifications will not work.');
   }
 } catch (error) {
-  console.error('Failed to initialize Firebase:', error);
+  console.error('❌ Failed to initialize Firebase:', error);
 }
 
 // Export messaging if Firebase is initialized
