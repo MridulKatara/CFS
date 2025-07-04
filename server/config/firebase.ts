@@ -20,6 +20,7 @@ try {
   } else if (process.env.FIREBASE_SERVICE_ACCOUNT) {
     // Use environment variable
     const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    console.log('✅ Firebase initialized successfully with environment variable', serviceAccount);
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount)
     });
