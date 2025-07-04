@@ -48,6 +48,14 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    // Request notification permission when the app loads if user is logged in
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      requestNotificationPermission();
+    }
+  }, []);
+
   // Redirect logic after login
   if (isAuthenticated() && (location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/reset-password')) {
     if (role === 'admin') return <Navigate to="/admin/dashboard" />

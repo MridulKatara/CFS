@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import apiService from '../services/api';
+import { testNotifications } from '../utils/notificationTest';
 
 const NotificationManager = () => {
   const [users, setUsers] = useState([]);
@@ -7,7 +8,7 @@ const NotificationManager = () => {
   const [notification, setNotification] = useState({
     title: '',
     message: '',
-    type: 'General'
+    type: 'System Maintenance'
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
@@ -84,7 +85,7 @@ const NotificationManager = () => {
         setNotification({
           title: '',
           message: '',
-          type: 'General'
+          type: 'System Maintenance'
         });
         setSelectedUsers([]);
       } else {
@@ -94,6 +95,22 @@ const NotificationManager = () => {
       setError(err.message || 'Failed to send notification');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleTestNotifications = async () => {
+    setError(null);
+    setSuccess(null);
+    
+    try {
+      const result = await testNotifications();
+      if (result) {
+        setSuccess('Notification test passed! Check browser console for details.');
+      } else {
+        setError('Notification test failed! Check browser console for details.');
+      }
+    } catch (err) {
+      setError('Error running notification test: ' + err.message);
     }
   };
 
@@ -115,9 +132,8 @@ const NotificationManager = () => {
             onChange={handleInputChange}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
-            <option value="General">General</option>
-            <option value="Fee Payment">Fee Payment</option>
-            <option value="Course Announcement">Course Announcement</option>
+            <option value="Fee Payment Reminder">Fee Payment Reminder</option>
+            <option value="New Course Announcement">New Course Announcement</option>
             <option value="System Maintenance">System Maintenance</option>
           </select>
         </div>
@@ -184,13 +200,22 @@ const NotificationManager = () => {
           </div>
         </div>
         
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          {loading ? 'Sending...' : 'Send Notification'}
-        </button>
+        <div className="flex gap-2">
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            {loading ? 'Sending...' : 'Send Notification'}
+          </button>
+          <button
+            type="button"
+            onClick={handleTestNotifications}
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Test Notifications
+          </button>
+        </div>
       </form>
     </div>
   );

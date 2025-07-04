@@ -1,15 +1,16 @@
+/* eslint-disable no-undef */
 // Give the service worker access to Firebase Messaging.
 importScripts('https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/9.22.0/firebase-messaging-compat.js');
 
 // Initialize the Firebase app in the service worker
 firebase.initializeApp({
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyB-oIDH00Y1lXkyZKrwQhX7EtMbSnMdAq8",
+  authDomain: "nextgenlearning-1.firebaseapp.com",
+  projectId: "nextgenlearning-1",
+  storageBucket: "nextgenlearning-1.firebasestorage.app",
+  messagingSenderId: "944446921182",
+  appId: "1:944446921182:web:eba84f5b252cfe4178a54f",
 });
 
 // Retrieve an instance of Firebase Messaging
@@ -19,12 +20,12 @@ const messaging = firebase.messaging();
 messaging.onBackgroundMessage((payload) => {
   console.log('Received background message:', payload);
   
-  const notificationTitle = payload.notification.title;
+  const notificationTitle = payload.notification?.title || 'New Message';
   const notificationOptions = {
-    body: payload.notification.body,
+    body: payload.notification?.body || 'You have a new message',
     icon: '/icon-192x192.png',
     badge: '/icon-192x192.png',
-    data: payload.data
+    data: payload.data || {}
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);
