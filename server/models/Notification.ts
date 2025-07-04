@@ -1,6 +1,11 @@
 import mongoose from 'mongoose';
 
 const notificationSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
   type: {
     type: String,
     required: true,
@@ -8,7 +13,7 @@ const notificationSchema = new mongoose.Schema({
   },
   timestamp: {
     type: Date,
-    required: true,
+    default: Date.now,
   },
   title: {
     type: String,
