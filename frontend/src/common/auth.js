@@ -15,4 +15,5 @@ export function getUserRole() {
 export function logout() {
   localStorage.removeItem('user');
   localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('token');
 }

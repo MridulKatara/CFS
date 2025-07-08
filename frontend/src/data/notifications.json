@@ -49,5 +49,93 @@
         ],
         "contactEmail": "support@iitmandi.ac.in"
       }
+    },
+    {
+      "id": "4",
+      "type": "Exam Schedule Update",
+      "timestamp": "2024-04-15T09:45:00",
+      "title": "Exam Schedule Update",
+      "message": "The end-semester examination schedule has been updated. Please check your exam dates and venues.",
+      "isRead": false,
+      "details": {
+        "examPeriod": "May 20 - June 10, 2024",
+        "updatedCourses": ["CS301", "CS302", "CS303"],
+        "newVenues": ["Lecture Hall 1", "Computer Lab 2"],
+        "timeSlots": ["9:00 AM - 12:00 PM", "2:00 PM - 5:00 PM"],
+        "contactPerson": "Dr. Rajesh Kumar",
+        "contactEmail": "exams@iitmandi.ac.in"
+      }
+    },
+    {
+      "id": "5",
+      "type": "Workshop Announcement",
+      "timestamp": "2024-04-10T16:20:00",
+      "title": "Workshop Announcement",
+      "message": "Join us for a hands-on workshop on Machine Learning and AI applications in modern software development.",
+      "isRead": false,
+      "details": {
+        "workshopName": "ML & AI in Software Development",
+        "date": "2024-05-10",
+        "time": "10:00 AM - 4:00 PM",
+        "venue": "Innovation Lab, Block 3",
+        "instructor": "Dr. Sarah Johnson",
+        "prerequisites": "Basic Python knowledge",
+        "registrationDeadline": "2024-05-08",
+        "maxParticipants": 30,
+        "fee": "₹500"
+      }
+    },
+    {
+      "id": "6",
+      "type": "Library Notice",
+      "timestamp": "2024-04-05T11:30:00",
+      "title": "Library Notice",
+      "message": "You have books due for return. Please return them to avoid late fees and ensure other students can access them.",
+      "isRead": true,
+      "details": {
+        "dueBooks": [
+          {"title": "Introduction to Algorithms", "dueDate": "2024-04-15"},
+          {"title": "Database Management Systems", "dueDate": "2024-04-20"}
+        ],
+        "totalFines": "₹150",
+        "returnLocation": "Central Library, Ground Floor",
+        "libraryHours": "8:00 AM - 10:00 PM",
+        "contactNumber": "+91-1905-267000"
+      }
+    },
+    {
+      "id": "7",
+      "type": "Career Fair",
+      "timestamp": "2024-03-28T14:15:00",
+      "title": "Career Fair",
+      "message": "Annual Career Fair 2024 is scheduled for next month. Register now to connect with top companies and explore internship opportunities.",
+      "isRead": false,
+      "details": {
+        "eventDate": "2024-05-25",
+        "eventTime": "9:00 AM - 6:00 PM",
+        "venue": "Auditorium and Seminar Halls",
+        "participatingCompanies": ["Google", "Microsoft", "Amazon", "TCS", "Infosys"],
+        "registrationDeadline": "2024-05-20",
+        "dressCode": "Formal",
+        "bringResume": true,
+        "contactEmail": "career@iitmandi.ac.in"
+      }
+    },
+    {
+      "id": "8",
+      "type": "Hostel Maintenance",
+      "timestamp": "2024-03-20T08:45:00",
+      "title": "Hostel Maintenance",
+      "message": "Scheduled maintenance work will be carried out in your hostel block. Water supply will be affected during the maintenance period.",
+      "isRead": true,
+      "details": {
+        "maintenanceDate": "2024-04-12",
+        "maintenanceTime": "8:00 AM - 2:00 PM",
+        "affectedBlocks": ["Block A", "Block B"],
+        "affectedServices": ["Water Supply", "Electricity"],
+        "alternativeArrangements": "Water tankers will be available",
+        "emergencyContact": "+91-1905-267001",
+        "estimatedDuration": "6 hours"
+      }
     }
   ]

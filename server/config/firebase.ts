@@ -82,7 +82,11 @@ const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Send notification to web clients with retry logic
 export const sendNotificationToWeb = async (fcmTokens: string[], title: string, body: string, clickActionUrl: string = '/notification', maxRetries = 3) => {
- 
+  
+  if (!firebaseInitialized) {
+    console.warn('Firebase not initialized. Cannot send push notification.');
+    return { successCount: 0, failureCount: fcmTokens.length };
+  }
 
   // Filter out invalid tokens
   const validTokens = fcmTokens.filter(token => typeof token === 'string' && token.length > 20);
@@ -117,6 +121,23 @@ export const sendNotificationToWeb = async (fcmTokens: string[], title: string, 
     // Use sendEachForMulticast instead of sendMulticast
     const response = await admin.messaging().sendEachForMulticast(message);
     console.log(`Successfully sent message: ${response.successCount} success, ${response.failureCount} failure`);
+    
+    // Add detailed error logging
+    if (response.failureCount > 0 && response.responses) {
+      for (let i = 0; i < response.responses.length; i++) {
+        if (!response.responses[i].success) {
+          const errorCode = response.responses[i].error?.code;
+          if (errorCode === 'messaging/registration-token-not-registered') {
+            // Flag this token for removal from your database
+            console.log(`Token ${validTokens[i].substring(0, 10)}... is invalid and should be removed`);
+            
+            // Here you'd typically call a function to remove this token from your database
+            // For example: await removeInvalidToken(validTokens[i]);
+          }
+        }
+      }
+    }
+    
     return response;
   } catch (error) {
     console.error('Error sending message:', error);
