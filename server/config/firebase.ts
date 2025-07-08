@@ -82,11 +82,7 @@ const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Send notification to web clients with retry logic
 export const sendNotificationToWeb = async (fcmTokens: string[], title: string, body: string, clickActionUrl: string = '/notification', maxRetries = 3) => {
-  
-  if (!firebaseInitialized) {
-    console.warn('Firebase not initialized. Cannot send push notification.');
-    return { successCount: 0, failureCount: fcmTokens.length };
-  }
+ 
 
   // Filter out invalid tokens
   const validTokens = fcmTokens.filter(token => typeof token === 'string' && token.length > 20);
