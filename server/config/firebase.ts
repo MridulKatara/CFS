@@ -17,15 +17,15 @@ try {
   // First check for environment variables (recommended for production/deployment)
   if (process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_PRIVATE_KEY && process.env.FIREBASE_CLIENT_EMAIL) {
     // Initialize with environment variables
-    admin.initializeApp({
-      credential: admin.credential.cert({
-        projectId: process.env.FIREBASE_PROJECT_ID,
-        privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-        clientEmail: process.env.FIREBASE_CLIENT_EMAIL
-      } as admin.ServiceAccount),
-      projectId: process.env.FIREBASE_PROJECT_ID
-    });
-    firebaseInitialized = true;
+    // admin.initializeApp({
+    //   credential: admin.credential.cert({
+    //     projectId: process.env.FIREBASE_PROJECT_ID,
+    //     privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    //     clientEmail: process.env.FIREBASE_CLIENT_EMAIL
+    //   } as admin.ServiceAccount),
+    //   projectId: process.env.FIREBASE_PROJECT_ID
+    // });
+    // firebaseInitialized = true;
     console.log('✅ Firebase initialized successfully with individual environment variables');
   } 
   else if (process.env.FIREBASE_SERVICE_ACCOUNT) {
