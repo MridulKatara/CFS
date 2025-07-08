@@ -16,15 +16,14 @@ console.log('ENV CHECK - FIREBASE_PRIVATE_KEY exists:', !!process.env.FIREBASE_P
 try {
   // First check for environment variables (recommended for production/deployment)
   if (process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_PRIVATE_KEY && process.env.FIREBASE_CLIENT_EMAIL) {
-    // Initialize with environment variables
-    // admin.initializeApp({
-    //   credential: admin.credential.cert({
-    //     projectId: process.env.FIREBASE_PROJECT_ID,
-    //     privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-    //     clientEmail: process.env.FIREBASE_CLIENT_EMAIL
-    //   } as admin.ServiceAccount),
-    //   projectId: process.env.FIREBASE_PROJECT_ID
-    // });
+    admin.initializeApp({
+      credential: admin.credential.cert({
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n') : '',
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL
+      } as admin.ServiceAccount),
+      projectId: process.env.FIREBASE_PROJECT_ID
+    });
     // firebaseInitialized = true;
     console.log('✅ Firebase initialized successfully with individual environment variables');
   } 
@@ -86,14 +85,7 @@ export const sendNotificationToWeb = async (fcmTokens: string[], title: string, 
   console.log('process.env.FIREBASE_PROJECT_ID', process.env.FIREBASE_PROJECT_ID, "debugENV");
   console.log('process.env.FIREBASE_PRIVATE_KEY', process.env.FIREBASE_PRIVATE_KEY);
   console.log('process.env.FIREBASE_CLIENT_EMAIL', process.env.FIREBASE_CLIENT_EMAIL);
-  admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n') : '',
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL
-    } as admin.ServiceAccount),
-    projectId: process.env.FIREBASE_PROJECT_ID
-  });
+  
   if (!firebaseInitialized) {
     console.warn('Firebase not initialized. Cannot send push notification.');
     return { successCount: 0, failureCount: fcmTokens.length };
