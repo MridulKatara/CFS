@@ -47,7 +47,7 @@ const Notification = () => {
             </div>
 
             {/* Notifications List */}
-            <div className="px-4 py-6 space-y-3">
+            <div className="px-4 py-6 space-y-4">
                 {allNotifications.map((item) => (
                     <div 
                         key={`${item.type}-${item.id}`}

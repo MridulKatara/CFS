@@ -104,42 +104,44 @@ const MyPrograms = () => {
   return (
     <>
       <div className="w-full min-h-screen bg-[#ffffff] overflow-y-auto pb-20">
-        <div className="px-4">
-          {/* Header */}
-          <div className="flex items-center justify-between mt-4 mb-6">
-            <div className="w-8 h-8 cursor-pointer" onClick={handleBackClick}>
-              <img className="w-full h-full" alt="Back" src={Back} />
-            </div>
-            <h1 className="text-2xl font-semibold text-[#000] font-poppins">My Programs</h1>
-            <div className="w-8 h-8 invisible">
-              <img className="w-full h-full" alt="" src={VideoCamera} />
-            </div>
-          </div>
+        {/* Header */}
+        <div className="sticky top-0 bg-white z-10 px-4 py-5 flex items-center">
+          <button 
+            onClick={handleBackClick}
+            className="w-8 h-8 flex items-center justify-center"
+          >
+            <img className="w-6 h-6" alt="Back" src={Back} />
+          </button>
+          <h1 className="text-[#202124] text-2xl font-semibold flex-1 text-center">My Programs</h1>
+          <div className="w-8 h-8"></div>
+        </div>
 
+        {/* Content */}
+        <div className="px-4 py-6 space-y-4">
           {/* Active Programs or Empty State */}
           {activePrograms.length > 0 ? (
             activePrograms.map((program) => (
-                <div key={program._id} className="rounded-2xl bg-[#eee0fe] border border-[#704ee7] p-4 mb-6">
+                <div key={program._id} className="rounded-2xl bg-[#eee0fe] border border-[#704ee7] p-4">
                   <div className="flex justify-between items-start mb-1">
-                  <h2 className="text-sm font-medium">{program.programName}</h2>
+                    <h2 className="text-sm font-medium">{program.programName}</h2>
                   </div>
                   <p className="text-xs text-[#454545] mb-4">
-                  {program.detail}
+                    {program.detail}
                   </p>
                   <div className="flex gap-4 text-xs text-[#454545] mb-4">
                     <div className="flex items-center gap-1">
                       <img className="w-4 h-4" alt="Duration" src={Clock} />
-                    <span>{program.semesterCount || 3} Semester</span>
+                      <span>{program.semesterCount || 3} Semester</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <img className="w-4 h-4" alt="Mode" src={VideoCamera} />
-                    <span>Online</span>
+                      <span>Online</span>
+                    </div>
                   </div>
-                </div>
                   <div className="text-xs text-[#454545]">
                     <div className="mb-2">
                       <span>Current - </span>
-                    <span className="font-medium">Semester 1</span>
+                      <span className="font-medium">Semester 1</span>
                     </div>
                     <div>
                       <div className="flex items-center justify-between gap-2">
@@ -154,7 +156,7 @@ const MyPrograms = () => {
                           <span>{calculateProgress(program)}%</span>
                         </div>
                         <button
-                        onClick={() => handleGoClick(program._id, true)}
+                          onClick={() => handleGoClick(program._id, true)}
                           className="text-[#ffffff] text-xs font-medium hover:bg-[#5f39e4] transition-colors cursor-pointer"
                         >
                           <img src={ArrowRight} alt="Arrow Right" />
@@ -165,7 +167,7 @@ const MyPrograms = () => {
                 </div>
             ))
           ) : (
-            <div className="rounded-2xl bg-[#eee0fe] border border-[#704ee7] p-6 mb-6 text-center">
+            <div className="rounded-2xl bg-[#eee0fe] border border-[#704ee7] p-6 text-center">
               <h2 className="text-lg font-medium text-[#704ee7] mb-2">You are not enrolled in any program yet</h2>
               <p className="text-sm text-[#454545] mb-4">
                 Explore our minor programs and start your learning journey!
@@ -175,8 +177,8 @@ const MyPrograms = () => {
 
           {/* Other Programs Section */}
           {otherPrograms.length > 0 && (
-            <div>
-              <h2 className="text-xl font-medium text-[#000] mb-4">Other Minor Programs</h2>
+            <div className="mt-6">
+              <h2 className="text-xl font-medium text-[#202124] mb-4">Other Minor Programs</h2>
               <div className="space-y-4">
                 {otherPrograms.map((program) => (
                   <div key={program._id} className="rounded-2xl bg-[#eee0fe] border border-[#704ee7] p-4">

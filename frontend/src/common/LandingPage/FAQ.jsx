@@ -28,13 +28,13 @@ export default function FAQ() {
   };
 
   return (
-    <section className="py-12 px-4 sm:px-6 bg-white">
+    <section className="py-12 px-4 bg-white">
       <h2 className="text-center font-bold text-xl sm:text-2xl mb-6 text-[#202124]">
         FAQ
       </h2>
 
       {/* search bar */}
-      <div className="relative mb-6 max-w-sm mx-auto">
+      <div className="relative mb-6 max-w-md mx-auto">
         <div className="flex items-center border border-gray-300 rounded-lg bg-white overflow-hidden">
           <input
             className="w-full py-2 px-4 text-sm focus:outline-none"
@@ -56,7 +56,7 @@ export default function FAQ() {
         </div>
       )}
 
-      <div className="space-y-4 max-w-sm mx-auto">
+      <div className="space-y-4 max-w-md mx-auto">
         {processedFAQs.map((category, categoryIndex) => (
           <div key={category.title} className="mb-4">
             <h3 className="font-medium text-[#202124] mb-2">{category.title}</h3>
