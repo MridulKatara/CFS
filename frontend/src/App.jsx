@@ -23,23 +23,40 @@ function App() {
   const role = getUserRole()
   const [snackbar, setSnackbar] = useState(null);
 
+  // Initialize Firebase notifications when the app loads - always get a fresh token
   useEffect(() => {
-    // Request notification permission when user is authenticated
-    if (isAuthenticated()) {
-      requestNotificationPermission()
-        .then(token => {
+    const initializeFirebase = async () => {
+      if (isAuthenticated()) {
+        console.log('Initializing Firebase notifications...');
+        try {
+          // Request notification permission and get a fresh token each time
+          const token = await requestNotificationPermission(true);
           if (token) {
-            console.log('Notification permission granted');
+            console.log('Firebase notification token obtained and sent to server');
+          } else {
+            console.log('Failed to get notification token');
           }
-        });
-      
-      // Handle foreground messages
+        } catch (error) {
+          console.error('Error initializing Firebase notifications:', error);
+        }
+      }
+    };
+
+    initializeFirebase();
+  }, []);
+
+  // Handle foreground messages
+  useEffect(() => {
+    if (isAuthenticated()) {
       const unsubscribe = onForegroundMessage((payload) => {
         console.log('Received foreground message:', payload);
-        setSnackbar({
-          message: payload.notification.title + ': ' + payload.notification.body,
-          type: 'info'
-        });
+        // Display notification in UI
+        if (payload.notification) {
+          setSnackbar({
+            message: `${payload.notification.title}: ${payload.notification.body}`,
+            type: 'info'
+          });
+        }
       });
       
       return () => {
@@ -48,11 +65,16 @@ function App() {
     }
   }, []);
 
+  // Register service worker for background notifications
   useEffect(() => {
-    // Request notification permission when the app loads if user is logged in
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user) {
-      requestNotificationPermission();
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/firebase-messaging-sw.js')
+        .then(registration => {
+          console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch(error => {
+          console.error('Service Worker registration failed:', error);
+        });
     }
   }, []);
 
@@ -61,16 +83,6 @@ function App() {
     if (role === 'admin') return <Navigate to="/admin/dashboard" />
     if (role === 'student') return <Navigate to="/home" />
     // Add more roles as needed
-  }
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/firebase-messaging-sw.js')
-      .then(registration => {
-        console.log('Service Worker registered with scope:', registration.scope);
-      })
-      .catch(error => {
-        console.error('Service Worker registration failed:', error);
-      });
   }
 
   return (
