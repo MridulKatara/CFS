@@ -38,8 +38,11 @@ try {
   console.error('❌ Failed to initialize Firebase:', error);
 }
 
-// Send notification to web clients
-export const sendNotificationToWeb = async (fcmTokens: string[], title: string, body: string, clickActionUrl: string = '/notification') => {
+// Helper function to delay execution (for retry logic)
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+// Send notification to web clients with retry logic
+export const sendNotificationToWeb = async (fcmTokens: string[], title: string, body: string, clickActionUrl: string = '/notification', maxRetries = 3) => {
   if (!firebaseInitialized) {
     console.warn('Firebase not initialized. Cannot send push notification.');
     return { successCount: 0, failureCount: fcmTokens.length };
@@ -71,6 +74,7 @@ export const sendNotificationToWeb = async (fcmTokens: string[], title: string, 
       }
     },
   };
+  console.log('message', message);
 
   try {
     console.log('Sending notification to', validTokens.length, 'devices');
