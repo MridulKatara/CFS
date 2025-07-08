@@ -24,7 +24,7 @@ try {
       } as admin.ServiceAccount),
       projectId: process.env.FIREBASE_PROJECT_ID
     });
-    // firebaseInitialized = true;
+    firebaseInitialized = true;
     console.log('✅ Firebase initialized successfully with individual environment variables');
   } 
   else if (process.env.FIREBASE_SERVICE_ACCOUNT) {
@@ -82,9 +82,6 @@ const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Send notification to web clients with retry logic
 export const sendNotificationToWeb = async (fcmTokens: string[], title: string, body: string, clickActionUrl: string = '/notification', maxRetries = 3) => {
-  console.log('process.env.FIREBASE_PROJECT_ID', process.env.FIREBASE_PROJECT_ID, "debugENV");
-  console.log('process.env.FIREBASE_PRIVATE_KEY', process.env.FIREBASE_PRIVATE_KEY);
-  console.log('process.env.FIREBASE_CLIENT_EMAIL', process.env.FIREBASE_CLIENT_EMAIL);
   
   if (!firebaseInitialized) {
     console.warn('Firebase not initialized. Cannot send push notification.');
