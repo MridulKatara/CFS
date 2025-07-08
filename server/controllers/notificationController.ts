@@ -2,7 +2,7 @@ import { messaging, sendNotificationToWeb } from '../config/firebase';
 import User from '../models/User';
 import Notification from '../models/Notification';
 
-// Save FCM token for a user
+// Save FCM token for a user - update to replace token instead of adding to array
 export const saveNotificationToken = async ({ body, user }: any) => {
   try {
     const { token } = body;
@@ -12,14 +12,14 @@ export const saveNotificationToken = async ({ body, user }: any) => {
 
     console.log('Saving FCM token for user:', user._id, 'Token:', token);
 
-    // Update user's FCM tokens (add if not exists)
+    // Update user's FCM token - replace instead of addToSet
     const updatedUser = await User.findByIdAndUpdate(
       user._id,
-      { $addToSet: { fcmTokens: token } },
+      { fcmToken: token }, // Store as single token instead of array
       { new: true }
     );
 
-    console.log('Updated user FCM tokens:', updatedUser?.fcmTokens);
+    console.log('Updated user FCM token:', updatedUser?.fcmToken);
 
     return { success: true, message: 'Token saved successfully' };
   } catch (error: any) {
@@ -73,13 +73,13 @@ export const sendNotification = async ({ body }: any) => {
     // Find users and their FCM tokens
     const users = await User.find({ _id: { $in: userIds } });
     console.log('Found users:', users.length);
-    console.log('Users FCM tokens:', users.map(u => ({ id: u._id, tokens: u.fcmTokens || [] })));
     
-    const tokens = users.flatMap(user => user.fcmTokens || []);
-    console.log('Total tokens found:', tokens.length);
-
+    // Extract single tokens from users
+    const tokens = users.map(u => u.fcmToken).filter(Boolean);
+    console.log('Valid tokens found:', tokens.length);
+    
     if (tokens.length === 0) {
-      const userDetails = users.map(u => `${u.fullName} (${u.personalEmail}): ${u.fcmTokens?.length || 0} tokens`).join(', ');
+      const userDetails = users.map(u => `${u.fullName} (${u.personalEmail}): ${u.fcmToken ? 'Has token' : 'No token'}`).join(', ');
       throw new Error(`No FCM tokens found for the selected users. Found ${users.length} users but no tokens. Users: ${userDetails}. Make sure users have visited the application and granted notification permissions.`);
     }
 

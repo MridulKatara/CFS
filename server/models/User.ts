@@ -14,7 +14,7 @@ export interface IUser {
   password: string;
   mobileNumber: string; // Added mobile number field
   comparePassword(candidatePassword: string): Promise<boolean>;
-  fcmTokens: string[];
+  fcmToken?: string; // Changed from fcmTokens array to single fcmToken
 }
 
 export interface IUserDocument extends Document<Types.ObjectId>, IUser {
@@ -33,10 +33,10 @@ const userSchema = new mongoose.Schema({
   role: { type: String, enum: ['super-admin', 'admin', 'student'], default: 'student' },
   password: { type: String, required: true },
   mobileNumber: { type: String, required: true, unique: true }, // Added mobile number field
-  fcmTokens: {
-    type: [String],
-    default: []
-  },
+  fcmToken: {
+    type: String,
+    default: null
+  }, // Changed from fcmTokens array to single fcmToken
 }, {
   timestamps: true 
 });
