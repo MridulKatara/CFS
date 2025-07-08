@@ -1,4 +1,4 @@
-import { messaging, sendMulticast } from '../config/firebase';
+import { messaging, sendNotificationToWeb } from '../config/firebase';
 import User from '../models/User';
 import Notification from '../models/Notification';
 
@@ -112,22 +112,11 @@ export const sendNotification = async ({ body }: any) => {
       throw new Error(`Failed to create notifications: ${dbError.message || 'Unknown database error'}`);
     }
 
-    // Then attempt to send push notifications
-    // This is separated so database records are created even if push notifications fail
+    // Then attempt to send push notifications using the new function
     try {
-      // Send push notification via Firebase
-      const response = await sendMulticast({
-        tokens,
-        notification: {
-          title,
-          body: message
-        },
-        data: {
-          type,
-          ...details,
-          url: '/notification'
-        }
-      });
+      // Send push notification via Firebase using the new function
+      const clickActionUrl = '/notification';
+      const response = await sendNotificationToWeb(tokens, title, message, clickActionUrl);
 
       console.log(`Push notification results: ${response.successCount} successful, ${response.failureCount} failed`);
       
