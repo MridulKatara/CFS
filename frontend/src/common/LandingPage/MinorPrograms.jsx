@@ -89,8 +89,8 @@ export default function MinorPrograms() {
   );
 
   return (
-    <section className="py-10 px-4 bg-white">
-      <h2 className="text-center font-bold text-xl sm:text-2xl text-[#202124]">
+    <section className="py-10 px-4 sm:px-6 lg:px-8 bg-white">
+      <h2 className="text-center font-bold text-xl sm:text-2xl lg:text-3xl text-[#202124]">
         Our Minor Programs
       </h2>
       <p className="text-xs sm:text-sm text-center mt-1 mb-6 leading-snug text-[#6d6d6d] max-w-3xl mx-auto">
@@ -102,7 +102,7 @@ export default function MinorPrograms() {
           allPrograms.map((program) => (
           <article
             key={program.programId}
-            className="relative bg-[#f9f4ff] border border-[#e8dcf8] rounded-2xl p-4 overflow-hidden"
+              className="relative bg-[#f9f4ff] border border-[#e8dcf8] rounded-lg p-4 overflow-hidden"
           >
               <h3 className="font-semibold text-base text-[#202124]">
               {program.programName}
