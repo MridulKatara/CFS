@@ -94,16 +94,17 @@ export const sendNotification = async ({ body }: any) => {
     
     console.log('Creating notification with data:', notificationData);
     
-    const notificationPromises = users.map(user => {
-      const userNotificationData = {
-        ...notificationData,
-        userId: user._id
-      };
-      console.log('Creating notification for user:', user._id, 'with data:', userNotificationData);
-      return Notification.create(userNotificationData);
-    });
-    
+    // First create all notifications in the database
     try {
+      const notificationPromises = users.map(user => {
+        const userNotificationData = {
+          ...notificationData,
+          userId: user._id
+        };
+        console.log('Creating notification for user:', user._id, 'with data:', userNotificationData);
+        return Notification.create(userNotificationData);
+      });
+      
       await Promise.all(notificationPromises);
       console.log('✅ All notifications created successfully');
     } catch (dbError: any) {
@@ -111,31 +112,49 @@ export const sendNotification = async ({ body }: any) => {
       throw new Error(`Failed to create notifications: ${dbError.message || 'Unknown database error'}`);
     }
 
-    // Send push notification via Firebase
-    const response = await sendMulticast({
-      tokens,
-      notification: {
-        title,
-        body: message
-      },
-      data: {
-        type,
-        ...details,
-        url: '/notification'
+    // Then attempt to send push notifications
+    // This is separated so database records are created even if push notifications fail
+    try {
+      // Send push notification via Firebase
+      const response = await sendMulticast({
+        tokens,
+        notification: {
+          title,
+          body: message
+        },
+        data: {
+          type,
+          ...details,
+          url: '/notification'
+        }
+      });
+
+      console.log(`Push notification results: ${response.successCount} successful, ${response.failureCount} failed`);
+      
+      if (response.successCount === 0 && tokens.length > 0) {
+        console.warn('⚠️ No notifications were sent successfully despite having tokens');
       }
-    });
 
-    if (response.successCount === 0 && tokens.length > 0) {
-      console.warn('⚠️ No notifications were sent successfully despite having tokens');
+      return { 
+        success: true, 
+        message: `Notification sent successfully to ${response.successCount} devices`,
+        failureCount: response.failureCount,
+        totalTokens: tokens.length
+      };
+    } catch (pushError: any) {
+      console.error('❌ Error sending push notifications:', pushError);
+      
+      // Return partial success since database notifications were created
+      return { 
+        success: true, 
+        message: `Notifications saved to database but push delivery failed: ${pushError.message}`,
+        failureCount: tokens.length,
+        totalTokens: tokens.length,
+        pushError: pushError.message
+      };
     }
-
-    return { 
-      success: true, 
-      message: `Notification sent successfully to ${response.successCount} devices`,
-      failureCount: response.failureCount,
-      totalTokens: tokens.length
-    };
   } catch (error: any) {
+    console.error('❌ Error in sendNotification:', error);
     throw new Error(error.message || 'Error sending notification');
   }
 };
