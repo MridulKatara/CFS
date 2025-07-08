@@ -1,9 +1,17 @@
 import admin from 'firebase-admin';
 import path from 'path';
 import fs from 'fs';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // Initialize Firebase Admin with service account
 let firebaseInitialized = false;
+
+// Debug logs to verify environment variables are available
+console.log('ENV CHECK - FIREBASE_PROJECT_ID exists:', !!process.env.FIREBASE_PROJECT_ID);
+console.log('ENV CHECK - FIREBASE_CLIENT_EMAIL exists:', !!process.env.FIREBASE_CLIENT_EMAIL);
+console.log('ENV CHECK - FIREBASE_PRIVATE_KEY exists:', !!process.env.FIREBASE_PRIVATE_KEY);
 
 try {
   // First check for environment variables (recommended for production/deployment)
@@ -18,8 +26,34 @@ try {
       projectId: process.env.FIREBASE_PROJECT_ID
     });
     firebaseInitialized = true;
-    console.log('✅ Firebase initialized successfully with environment variables');
+    console.log('✅ Firebase initialized successfully with individual environment variables');
   } 
+  else if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+    // Use the environment variable with the full JSON credentials
+    try {
+      const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+      
+      // Check if service account has the required fields
+      if (!serviceAccount.project_id || !serviceAccount.private_key || !serviceAccount.client_email) {
+        throw new Error('FIREBASE_SERVICE_ACCOUNT is missing required fields');
+      }
+      
+      admin.initializeApp({
+        credential: admin.credential.cert({
+          projectId: serviceAccount.project_id,
+          privateKey: serviceAccount.private_key,
+          clientEmail: serviceAccount.client_email
+        } as admin.ServiceAccount),
+        projectId: serviceAccount.project_id
+      });
+      
+      console.log('✅ Firebase initialized successfully with FIREBASE_SERVICE_ACCOUNT');
+      firebaseInitialized = true;
+    } catch (parseError) {
+      console.error('❌ Failed to initialize with FIREBASE_SERVICE_ACCOUNT:', parseError);
+      console.error('Please ensure the FIREBASE_SERVICE_ACCOUNT environment variable contains valid JSON');
+    }
+  }
   else {
     // Try to find the service account file
     const serviceAccountPath = path.resolve(__dirname, '../service-account-key.json');
@@ -32,32 +66,6 @@ try {
       });
       firebaseInitialized = true;
       console.log('✅ Firebase initialized successfully with service account file');
-    } else if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-      // Use the environment variable with the full JSON credentials
-      try {
-        const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-        
-        // Check if service account has the required fields
-        if (!serviceAccount.project_id || !serviceAccount.private_key || !serviceAccount.client_email) {
-          throw new Error('FIREBASE_SERVICE_ACCOUNT is missing required fields');
-        }
-        console.log('serviceAccount', serviceAccount);
-        
-        admin.initializeApp({
-          credential: admin.credential.cert({
-            projectId: serviceAccount.project_id,
-            privateKey: serviceAccount.private_key,
-            clientEmail: serviceAccount.client_email
-          } as admin.ServiceAccount),
-          projectId: serviceAccount.project_id
-        });
-        
-        console.log('✅ Firebase initialized successfully with FIREBASE_SERVICE_ACCOUNT');
-        firebaseInitialized = true;
-      } catch (parseError) {
-        console.error('❌ Failed to initialize with FIREBASE_SERVICE_ACCOUNT:', parseError);
-        console.error('Please ensure the FIREBASE_SERVICE_ACCOUNT environment variable contains valid JSON');
-      }
     } else {
       console.error('❌ No Firebase credentials available - notifications will not work');
       console.error('Please set either:');
