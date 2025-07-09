@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import certImg from "/src/assets/certificate.svg";
-import t2 from '/src/assets/t2.png';
-import t3 from '/src/assets/t3.png';
 
 const slides = [
   {
@@ -193,9 +191,10 @@ const CampusSlider = () => {
 // Faculty content for point 3
 const FacultyContent = () => {
   const faculty = [
-    { name: "Dr. Indu Joshi", role: "Associate Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/f0adffdb-03d1-446b-b7a8-24ab7a45a2c3/VlcfFcDPAGCQgCXj.jpg` },
-    { name: "Dr. Adarsh Patel", role: "Associate Professor", institution: "IIT Mandi", img: t2 },
-    { name: "Dr. Sneha Singh", role: "Assistant Professor", institution: "IIT Mandi", img: t3 }
+    { name: "Dr. Tushar JAIN", role: "Head CCE, IIT Mandi", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/96ea7635-f86d-4314-a878-635f02678a11/DMao2csPnQRdUE0G.jpg` },
+    { name: "Dr. Sneha Singh", role: "Associate Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/7e1bf450-21d5-4b20-bb8e-337125f6403e/VCRFTyaLfVypom0E.jpeg` },
+    { name: "Dr. Adarsh Patel", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/082dec54-2aae-400d-91f7-eae85b1f29bc/RfpSqCRu2ygjuABy.jpg` },
+    { name: "Dr. Jyoti Nigam", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/b75b532e-5525-4ccd-9acf-d40864e56ca0/IQCa1KCiiylDPpfQ.jpg` },
   ];
 
   return (
