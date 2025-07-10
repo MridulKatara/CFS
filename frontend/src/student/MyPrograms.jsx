@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import Clock from '../assets/Clock.svg';
 import VideoCamera from '../assets/VideoCamera.svg';
 import Back from '../assets/Icons.svg';
-import ArrowRight from '../assets/ArrowRight.svg';
 import BottomNavBar from './ButtomNavItem';
 import apiService from '../services/api';
 import Snackbar from '../components/Snackbar';
@@ -80,9 +79,8 @@ const MyPrograms = () => {
     );
   };
 
-  const calculateProgress = (program) => {
-    // For now, return a default progress since we don't have currentSemester data
-    return 33; // Default to 33% for first semester
+  const calculateProgress = () => {
+    return 33;
   };
 
   if (isLoading) {
@@ -121,7 +119,17 @@ const MyPrograms = () => {
           {/* Active Programs or Empty State */}
           {activePrograms.length > 0 ? (
             activePrograms.map((program) => (
-                <div key={program._id} className="rounded-2xl bg-[#eee0fe] border border-[#704ee7] p-4">
+              <div 
+                key={program._id} 
+                className="rounded-2xl border border-[#704ee7] p-4 relative shadow-sm cursor-pointer transition-all duration-300 hover:shadow-lg hover:translate-y-[-2px]"
+                style={{ 
+                  backgroundImage: 'url("/Frame 1707487247.svg")', 
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
+                onClick={() => handleGoClick(program._id, true)}
+              >
+                <div className="relative z-10">
                   <div className="flex justify-between items-start mb-1">
                     <h2 className="text-sm font-medium">{program.programName}</h2>
                   </div>
@@ -155,23 +163,27 @@ const MyPrograms = () => {
                           </div>
                           <span>{calculateProgress(program)}%</span>
                         </div>
-                        <button
-                          onClick={() => handleGoClick(program._id, true)}
-                          className="text-[#ffffff] text-xs font-medium hover:bg-[#5f39e4] transition-colors cursor-pointer"
-                        >
-                          <img src={ArrowRight} alt="Arrow Right" />
-                        </button>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
             ))
           ) : (
-            <div className="rounded-2xl bg-[#eee0fe] border border-[#704ee7] p-6 text-center">
-              <h2 className="text-lg font-medium text-[#704ee7] mb-2">You are not enrolled in any program yet</h2>
-              <p className="text-sm text-[#454545] mb-4">
-                Explore our minor programs and start your learning journey!
-              </p>
+            <div 
+              className="rounded-2xl border border-[#704ee7] p-6 text-center relative shadow-sm"
+              style={{ 
+                backgroundImage: 'url("/Frame 1707487247.svg")', 
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
+            >
+              <div className="relative z-10">
+                <h2 className="text-lg font-medium text-[#704ee7] mb-2">You are not enrolled in any program yet</h2>
+                <p className="text-sm text-[#454545] mb-4">
+                  Explore our minor programs and start your learning journey!
+                </p>
+              </div>
             </div>
           )}
 
@@ -181,30 +193,36 @@ const MyPrograms = () => {
               <h2 className="text-xl font-medium text-[#202124] mb-4">Other Minor Programs</h2>
               <div className="space-y-4">
                 {otherPrograms.map((program) => (
-                  <div key={program._id} className="rounded-2xl bg-[#eee0fe] border border-[#704ee7] p-4">
-                    <div className="flex justify-between items-start mb-1">
-                      <h3 className="text-sm font-medium">{program.programName}</h3>
-                    </div>
-                    <p className="text-xs text-[#454545] mb-4">
-                      {program.detail}
-                    </p>
-                    <div className="flex gap-4 text-xs text-[#454545] justify-between">
-                      <div className='flex items-center gap-2'>
-                        <div className="flex items-center gap-1">
-                          <img className="w-4 h-4" alt="Duration" src={Clock} />
-                          <span>{program.semesterCount || 3} Semester</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <img className="w-4 h-4" alt="Mode" src={VideoCamera} />
-                          <span>Online</span>
-                        </div>
+                  <div 
+                    key={program._id} 
+                    className="rounded-2xl border border-[#704ee7] p-4 relative shadow-sm cursor-pointer transition-all duration-300 hover:shadow-lg hover:translate-y-[-2px]"
+                    style={{ 
+                      backgroundImage: 'url("/Frame 1707487247.svg")', 
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                    onClick={() => handleGoClick(program._id, false)}
+                  >
+                    <div className="relative z-10">
+                      <div className="flex justify-between items-start mb-1">
+                        <h3 className="text-sm font-medium">{program.programName}</h3>
                       </div>
-                      <button
-                        onClick={() => handleGoClick(program._id, false)}
-                        className="text-[#ffffff] text-xs font-medium hover:bg-[#5f39e4] transition-colors cursor-pointer"
-                      >
-                        <img src={ArrowRight} alt="Arrow Right" />
-                      </button>
+                      <p className="text-xs text-[#454545] mb-4">
+                        {program.detail}
+                      </p>
+                      <div className="flex gap-4 text-xs text-[#454545] justify-between">
+                        <div className='flex items-center gap-2'>
+                          <div className="flex items-center gap-1">
+                            <img className="w-4 h-4" alt="Duration" src={Clock} />
+                            <span>{program.semesterCount || 3} Semester</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <img className="w-4 h-4" alt="Mode" src={VideoCamera} />
+                            <span>Online</span>
+                          </div>
+                        </div>
+
+                      </div>
                     </div>
                   </div>
                 ))}

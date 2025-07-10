@@ -15,9 +15,9 @@ const BottomNavBar = () => {
 
   return (
     <nav className="fixed bottom-0 w-full bg-white border-t border-[#f5f5f5] z-50">
-      <div className="h-6 bg-white flex justify-center items-center">
+      {/* <div className="h-6 bg-white flex justify-center items-center">
         <div className="w-[108px] h-1 bg-[#1d1b20] rounded-xl"></div>
-      </div>
+      </div> */}
       <div className="flex justify-between px-2 py-2">
         {navItems.map(({ label, icon: Icon, to }) => {
           const active = location.pathname.startsWith(to);
