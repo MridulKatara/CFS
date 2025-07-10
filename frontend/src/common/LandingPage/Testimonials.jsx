@@ -6,19 +6,19 @@ const videoTestimonials = [
   {
     id: 1,
     url: "https://cdn.masaischool.com/coding-platform/dev/lms/tickets/02cbbc81-e715-4234-a8e2-3daf28c59ba0/DUPKkMlXPCtDTHZ1.mp4",
-    name: "Dr. Lal Singh",
+    name: "Dr. VASANTHI S",
     title: "Professor, IIT Mandi"
   },
   {
     id: 2,
     url: "https://cdn.masaischool.com/coding-platform/dev/lms/tickets/eed94c1a-8ca4-4f23-b88f-6d433e899c01/lPW3vABeVCzpReze.mp4",
-    name: "Dr. Aditya Kumar",
+    name: "Dr. DEEPAK N R.",
     title: "Associate Professor, IIT Mandi"
   },
   {
     id: 3,
     url: "https://cdn.masaischool.com/coding-platform/dev/lms/tickets/b311007c-c77b-4d9d-93dc-4fe9455f0f14/qTPlXJLm21XPoPhX.mp4",
-    name: "Dr. Ravi Shankar",
+    name: "Dr. RAVIVHANDRA K R",
     title: "Assistant Professor, IIT Mandi"
   }
 ];
