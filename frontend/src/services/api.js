@@ -178,6 +178,31 @@ class ApiService {
     });
   }
 
+  // University endpoints
+  async getUniversities() {
+    return this.request('/api/universities');
+  }
+
+  async addUniversity(universityData) {
+    return this.request('/api/universities', {
+      method: 'POST',
+      body: JSON.stringify(universityData),
+    });
+  }
+
+  async updateUniversity(id, universityData) {
+    return this.request(`/api/universities/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(universityData),
+    });
+  }
+
+  async deleteUniversity(id) {
+    return this.request(`/api/universities/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
   async getAllUsers() {
     return this.request('/admin/users');
   }

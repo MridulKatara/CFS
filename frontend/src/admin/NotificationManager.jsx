@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import apiService from '../services/api';
 import { testNotifications } from '../utils/notificationTest';
+import AdminNavBar from './AdminNavBar';
 
 const NotificationManager = () => {
   const [users, setUsers] = useState([]);
@@ -115,108 +116,113 @@ const NotificationManager = () => {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-semibold mb-6">Notification Manager</h1>
-      
-      {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
-      {success && <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">{success}</div>}
-      
-      <form onSubmit={handleSubmit} className="mb-6">
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Notification Type
-          </label>
-          <select
-            name="type"
-            value={notification.type}
-            onChange={handleInputChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          >
-            <option value="Fee Payment Reminder">Fee Payment Reminder</option>
-            <option value="New Course Announcement">New Course Announcement</option>
-            <option value="System Maintenance">System Maintenance</option>
-          </select>
-        </div>
+    <div className="min-h-screen bg-gray-50">
+      <AdminNavBar />
+      <div className="container mx-auto p-4">
+        <h1 className="text-2xl font-bold mb-6">Notification Manager</h1>
         
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Title
-          </label>
-          <input
-            type="text"
-            name="title"
-            value={notification.title}
-            onChange={handleInputChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Notification Title"
-          />
-        </div>
+        {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
+        {success && <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">{success}</div>}
         
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Message
-          </label>
-          <textarea
-            name="message"
-            value={notification.message}
-            onChange={handleInputChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Notification Message"
-            rows="4"
-          ></textarea>
-        </div>
-        
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Select Recipients
-          </label>
-          <div className="flex items-center mb-2">
-            <input
-              type="checkbox"
-              id="selectAll"
-              checked={selectedUsers.length === users.length && users.length > 0}
-              onChange={handleSelectAll}
-              className="mr-2"
-            />
-            <label htmlFor="selectAll">Select All</label>
-          </div>
-          
-          <div className="max-h-60 overflow-y-auto border rounded p-2">
-            {users.map(user => (
-              <div key={user._id} className="flex items-center mb-1">
+        <div className="bg-white rounded-lg shadow p-6">
+          <form onSubmit={handleSubmit} className="mb-6">
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Notification Type
+              </label>
+              <select
+                name="type"
+                value={notification.type}
+                onChange={handleInputChange}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option value="Fee Payment Reminder">Fee Payment Reminder</option>
+                <option value="New Course Announcement">New Course Announcement</option>
+                <option value="System Maintenance">System Maintenance</option>
+              </select>
+            </div>
+            
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Title
+              </label>
+              <input
+                type="text"
+                name="title"
+                value={notification.title}
+                onChange={handleInputChange}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Notification Title"
+              />
+            </div>
+            
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Message
+              </label>
+              <textarea
+                name="message"
+                value={notification.message}
+                onChange={handleInputChange}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Notification Message"
+                rows="4"
+              ></textarea>
+            </div>
+            
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Select Recipients
+              </label>
+              <div className="flex items-center mb-2">
                 <input
                   type="checkbox"
-                  id={`user-${user._id}`}
-                  checked={selectedUsers.includes(user._id)}
-                  onChange={() => handleUserSelection(user._id)}
+                  id="selectAll"
+                  checked={selectedUsers.length === users.length && users.length > 0}
+                  onChange={handleSelectAll}
                   className="mr-2"
                 />
-                <label htmlFor={`user-${user._id}`}>
-                  {user.fullName} ({user.personalEmail})
-                </label>
+                <label htmlFor="selectAll">Select All</label>
               </div>
-            ))}
-            {users.length === 0 && <p className="text-gray-500">No users found</p>}
-          </div>
+              
+              <div className="max-h-60 overflow-y-auto border rounded p-2">
+                {users.map(user => (
+                  <div key={user._id} className="flex items-center mb-1">
+                    <input
+                      type="checkbox"
+                      id={`user-${user._id}`}
+                      checked={selectedUsers.includes(user._id)}
+                      onChange={() => handleUserSelection(user._id)}
+                      className="mr-2"
+                    />
+                    <label htmlFor={`user-${user._id}`}>
+                      {user.fullName} ({user.personalEmail})
+                    </label>
+                  </div>
+                ))}
+                {users.length === 0 && <p className="text-gray-500">No users found</p>}
+              </div>
+            </div>
+            
+            <div className="flex gap-2">
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-[#704ee7] hover:bg-[#5f39e4] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                {loading ? 'Sending...' : 'Send Notification'}
+              </button>
+              <button
+                type="button"
+                onClick={handleTestNotifications}
+                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Test Notifications
+              </button>
+            </div>
+          </form>
         </div>
-        
-        <div className="flex gap-2">
-          <button
-            type="submit"
-            disabled={loading}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            {loading ? 'Sending...' : 'Send Notification'}
-          </button>
-          <button
-            type="button"
-            onClick={handleTestNotifications}
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Test Notifications
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };
