@@ -7,19 +7,37 @@ const videoTestimonials = [
     id: 1,
     url: "https://cdn.masaischool.com/coding-platform/dev/lms/tickets/02cbbc81-e715-4234-a8e2-3daf28c59ba0/DUPKkMlXPCtDTHZ1.mp4",
     name: "Dr. VASANTHI S",
-    title: "Professor, IIT Mandi"
+    title: "Dean, IQAC"
   },
   {
     id: 2,
     url: "https://cdn.masaischool.com/coding-platform/dev/lms/tickets/eed94c1a-8ca4-4f23-b88f-6d433e899c01/lPW3vABeVCzpReze.mp4",
     name: "Dr. DEEPAK N R.",
-    title: "Associate Professor, IIT Mandi"
+    title: "Professor & Head, Dept. of ISE, Atria"
   },
   {
     id: 3,
     url: "https://cdn.masaischool.com/coding-platform/dev/lms/tickets/b311007c-c77b-4d9d-93dc-4fe9455f0f14/qTPlXJLm21XPoPhX.mp4",
     name: "Dr. RAVIVHANDRA K R",
-    title: "Assistant Professor, IIT Mandi"
+    title: "Professor and Dean Academics, Atria"
+  },
+  {
+    id: 4,
+    url: "https://cdn.masaischool.com/coding-platform/dev/lms/tickets/9f06551d-3ad8-4541-bd62-23eca726d37a/LecPXYG1gAHtxCNW.mp4",
+    name: "Dr. ARGHA SARKAR",
+    title: "Associate Professor, REVA University"
+  },
+  {
+    id: 5,
+    url: "https://cdn.masaischool.com/coding-platform/dev/lms/tickets/f328858d-70e9-4adc-9149-98a3492b23f0/AXBFDC1dS1DW3UEr.mp4",
+    name: "Dr. ASHWINKUMAR U M",
+    title: "Director & Professor, REVA University"
+  },
+  {
+    id: 6,
+    url: "https://cdn.masaischool.com/coding-platform/dev/lms/tickets/bfac50f1-e38c-4850-b4d4-9a2bd8b2be0c/xotFtsCP3emMBPpG.mp4",
+    name: "Dr. SANJAY R. CHITNIS",
+    title: "Vice Chancellor, REVA University"
   }
 ];
 
