@@ -14,6 +14,8 @@ import ProgramDetailsActive from './student/ProgramDetailsActive'
 import ProgramDetailsInactives from './student/ProgramDetailsInactives'
 import Dashboard from './admin/Dashboard'
 import Universities from './admin/Universities'
+import Programs from './admin/Programs'
+import ProgramForm from './admin/ProgramForm'
 import NotificationManager from './admin/NotificationManager'
 import AdminProfile from './admin/Profile'
 import PrivateRoute from './common/PrivateRoute'
@@ -112,6 +114,9 @@ function App() {
         {/* Admin routes */}
         <Route element={<PrivateRoute />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/programs" element={<Programs />} />
+          <Route path="/admin/programs/new" element={<ProgramForm />} />
+          <Route path="/admin/programs/edit/:id" element={<ProgramForm />} />
           <Route path="/admin/universities" element={<Universities />} />
           <Route path="/admin/notifications" element={<NotificationManager />} />
           <Route path="/admin/profile" element={<AdminProfile />} />
