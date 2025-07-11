@@ -10,6 +10,7 @@ const notificationRoutes = new Elysia({ prefix: '/notifications' })
   .put('/:id/read', notificationController.markNotificationAsRead)
   
   // Admin routes - add admin middleware here
-  .post('/send', notificationController.sendNotification);
+  .post('/send', notificationController.sendNotification)
+  .get('/recent', notificationController.getRecentNotifications);
 
 export default notificationRoutes;

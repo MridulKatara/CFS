@@ -147,3 +147,50 @@ export const sendNotification = async ({ body }: any) => {
     throw new Error(error.message || 'Error sending notification');
   }
 };
+
+// Admin: Get recent unique notifications (for dashboard)
+export const getRecentNotifications = async () => {
+  try {
+    // Aggregate to get unique notifications by title, message, and type
+    // Sort by timestamp in descending order and limit to 5 most recent
+    const recentNotifications = await Notification.aggregate([
+      {
+        $sort: { timestamp: -1 }
+      },
+      {
+        $group: {
+          _id: {
+            title: "$title",
+            message: "$message",
+            type: "$type"
+          },
+          timestamp: { $first: "$timestamp" },
+          details: { $first: "$details" },
+          id: { $first: "$_id" }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          id: "$id",
+          title: "$_id.title",
+          message: "$_id.message",
+          type: "$_id.type",
+          timestamp: 1,
+          details: 1
+        }
+      },
+      {
+        $sort: { timestamp: -1 }
+      },
+      {
+        $limit: 5
+      }
+    ]);
+
+    return { success: true, notifications: recentNotifications };
+  } catch (error: any) {
+    console.error('Error fetching recent notifications:', error);
+    throw new Error(error.message || 'Error fetching recent notifications');
+  }
+};

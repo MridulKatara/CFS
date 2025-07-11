@@ -172,6 +172,10 @@ class ApiService {
     return this.request('/notifications');
   }
 
+  async getRecentNotifications() {
+    return this.request('/notifications/recent');
+  }
+
   async markNotificationAsRead(notificationId) {
     return this.request(`/notifications/${notificationId}/read`, {
       method: 'PUT',

@@ -1,18 +1,21 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import NotificationManager from './NotificationManager';
 import LogoutModal from '../common/profile/LogoutModal';
-import { FiLogOut, FiUsers, FiBookOpen, FiBook, FiBriefcase } from 'react-icons/fi';
+import { FiLogOut, FiUsers, FiBookOpen, FiBook, FiBriefcase, FiBell } from 'react-icons/fi';
 import AdminNavBar from './AdminNavBar';
 import ApiService from '../services/api';
+import { format } from 'date-fns';
 
 const Dashboard = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [stats, setStats] = useState({
     universities: 0,
     users: 0,
+    programs: 0,
     loading: true
   });
+  const [recentNotifications, setRecentNotifications] = useState([]);
+  const [notificationsLoading, setNotificationsLoading] = useState(true);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -23,9 +26,13 @@ const Dashboard = () => {
         // Fetch user count
         const userResponse = await ApiService.getAllUsers();
 
+        // Fetch programs count
+        const programs = await ApiService.getPrograms();
+
         setStats({
           universities: universities ? universities.length : 0,
           users: userResponse?.users?.length || 0,
+          programs: programs ? programs.length : 0,
           loading: false
         });
       } catch (error) {
@@ -34,7 +41,22 @@ const Dashboard = () => {
       }
     };
 
+    const fetchRecentNotifications = async () => {
+      try {
+        setNotificationsLoading(true);
+        const response = await ApiService.getRecentNotifications();
+        if (response && response.success) {
+          setRecentNotifications(response.notifications || []);
+        }
+      } catch (error) {
+        console.error("Failed to fetch notifications:", error);
+      } finally {
+        setNotificationsLoading(false);
+      }
+    };
+
     fetchStats();
+    fetchRecentNotifications();
   }, []);
 
   const StatCard = ({ icon: Icon, title, value, color }) => (
@@ -54,6 +76,15 @@ const Dashboard = () => {
       </div>
     </div>
   );
+
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    try {
+      return format(new Date(dateString), 'MMM d, yyyy • h:mm a');
+    } catch (error) {
+      return 'Invalid date';
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -86,7 +117,7 @@ const Dashboard = () => {
           <StatCard 
             icon={FiBookOpen} 
             title="Programs" 
-            value="--" 
+            value={stats.programs} 
             color="bg-green-500" 
           />
           <StatCard 
@@ -98,8 +129,42 @@ const Dashboard = () => {
         </div>
         
         <div className="mt-8 bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
-          <p className="text-gray-500">No recent activity to display.</p>
+          <h2 className="text-xl font-semibold mb-4">Recent Notifications</h2>
+          
+          {notificationsLoading ? (
+            <div className="flex justify-center py-8">
+              <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#704ee7]"></div>
+            </div>
+          ) : recentNotifications.length === 0 ? (
+            <p className="text-gray-500">No recent notifications to display.</p>
+          ) : (
+            <ul className="divide-y">
+              {recentNotifications.map((notification) => (
+                <li key={notification.id} className="py-4">
+                  <div className="flex items-start">
+                    <div className={`rounded-full p-2 mr-4 text-white ${
+                      notification.type === 'Fee Payment Reminder' ? 'bg-blue-500' :
+                      notification.type === 'New Course Announcement' ? 'bg-green-500' : 'bg-[#704ee7]'
+                    }`}>
+                      <FiBell size={18} />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-800">{notification.title}</h3>
+                      <p className="text-gray-600 mt-1">{notification.message}</p>
+                      <p className="text-gray-400 text-sm mt-1">{formatDate(notification.timestamp)}</p>
+                    </div>
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                      notification.type === 'Fee Payment Reminder' ? 'bg-blue-100 text-blue-800' :
+                      notification.type === 'New Course Announcement' ? 'bg-green-100 text-green-800' : 
+                      'bg-purple-100 text-purple-800'
+                    }`}>
+                      {notification.type}
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {showLogoutModal && <LogoutModal onClose={() => setShowLogoutModal(false)} />}
