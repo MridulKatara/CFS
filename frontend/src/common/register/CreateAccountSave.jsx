@@ -1,14 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import masaiLogo from '/src/assets/masai.svg';
 import nsdcLogo from '/src/assets/nsdc.svg';
 import iitmandiLogo from '/src/assets/iitmandi.svg';
 import cceLogo from '/src/assets/cce.svg';
 import { validatePassword, validateConfirmPassword, validateRequired } from '../../utils/validation';
+import ApiService from "../../services/api";
 
 const CreateAccountSave = ({ form, onChange, onNext }) => {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [universities, setUniversities] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // Fetch universities on component mount
+  useEffect(() => {
+    const fetchUniversities = async () => {
+      try {
+        setLoading(true);
+        const data = await ApiService.getUniversities();
+        setUniversities(data || []);
+      } catch (error) {
+        console.error("Failed to fetch universities:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUniversities();
+  }, []);
 
   const validateForm = () => {
     const newErrors = {};
@@ -89,29 +109,83 @@ const CreateAccountSave = ({ form, onChange, onNext }) => {
               <div className="relative leading-[150%] font-semibold">Create Account</div>
             </div>
             <div className="self-stretch flex flex-col items-start justify-start gap-4 text-xs text-[#555]">
-              {[
-                { label: "Name", field: "name", placeholder: "Enter your name" },
-                { label: "University Name", field: "university", placeholder: "Enter your university name" },
-                { label: "Course", field: "course", placeholder: "Enter your course" },
-                { label: "Branch", field: "branch", placeholder: "Enter your branch" },
-              ].map(({ label, field, placeholder }) => (
-                <div key={field} className="self-stretch flex flex-col items-start justify-start gap-1.5">
-                  <div className="relative leading-[120%]">{label}</div>
-                  <div className="self-stretch flex flex-col items-start justify-start text-[#b3b3b3]">
-                    <input
-                      type="text"
-                      value={form[field]}
-                      onChange={e => handleInputChange(field, e.target.value)}
-                      placeholder={placeholder}
-                      className={`self-stretch rounded-lg bg-[#fff] border-[#d9d9d9] border-solid border-[1px] box-border py-3 px-4 min-w-[240px] leading-[140%] outline-none ${errors[field] ? 'border-red-500' : ''}`}
-                      required
-                    />
-                    {errors[field] && (
-                      <div className="text-red-500 text-xs mt-1">{errors[field]}</div>
-                    )}
-                  </div>
+              {/* Name Field */}
+              <div className="self-stretch flex flex-col items-start justify-start gap-1.5">
+                <div className="relative leading-[120%]">Name</div>
+                <div className="self-stretch flex flex-col items-start justify-start text-[#b3b3b3]">
+                  <input
+                    type="text"
+                    value={form.name}
+                    onChange={e => handleInputChange('name', e.target.value)}
+                    placeholder="Enter your name"
+                    className={`self-stretch rounded-lg bg-[#fff] border-[#d9d9d9] border-solid border-[1px] box-border py-3 px-4 min-w-[240px] leading-[140%] outline-none ${errors.name ? 'border-red-500' : ''}`}
+                    required
+                  />
+                  {errors.name && (
+                    <div className="text-red-500 text-xs mt-1">{errors.name}</div>
+                  )}
                 </div>
-              ))}
+              </div>
+
+              {/* University Dropdown */}
+              <div className="self-stretch flex flex-col items-start justify-start gap-1.5">
+                <div className="relative leading-[120%]">University Name</div>
+                <div className="self-stretch flex flex-col items-start justify-start text-[#b3b3b3]">
+                  <select
+                    value={form.university}
+                    onChange={e => handleInputChange('university', e.target.value)}
+                    className={`self-stretch rounded-lg bg-[#fff] border-[#d9d9d9] border-solid border-[1px] box-border py-3 px-4 min-w-[240px] leading-[140%] outline-none ${errors.university ? 'border-red-500' : ''}`}
+                    required
+                    disabled={loading}
+                  >
+                    <option value="">Select your university</option>
+                    {universities.map(university => (
+                      <option key={university._id} value={university.name}>
+                        {university.name}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.university && (
+                    <div className="text-red-500 text-xs mt-1">{errors.university}</div>
+                  )}
+                </div>
+              </div>
+
+              {/* Course Field */}
+              <div className="self-stretch flex flex-col items-start justify-start gap-1.5">
+                <div className="relative leading-[120%]">Course</div>
+                <div className="self-stretch flex flex-col items-start justify-start text-[#b3b3b3]">
+                  <input
+                    type="text"
+                    value={form.course}
+                    onChange={e => handleInputChange('course', e.target.value)}
+                    placeholder="Enter your course"
+                    className={`self-stretch rounded-lg bg-[#fff] border-[#d9d9d9] border-solid border-[1px] box-border py-3 px-4 min-w-[240px] leading-[140%] outline-none ${errors.course ? 'border-red-500' : ''}`}
+                    required
+                  />
+                  {errors.course && (
+                    <div className="text-red-500 text-xs mt-1">{errors.course}</div>
+                  )}
+                </div>
+              </div>
+
+              {/* Branch Field */}
+              <div className="self-stretch flex flex-col items-start justify-start gap-1.5">
+                <div className="relative leading-[120%]">Branch</div>
+                <div className="self-stretch flex flex-col items-start justify-start text-[#b3b3b3]">
+                  <input
+                    type="text"
+                    value={form.branch}
+                    onChange={e => handleInputChange('branch', e.target.value)}
+                    placeholder="Enter your branch"
+                    className={`self-stretch rounded-lg bg-[#fff] border-[#d9d9d9] border-solid border-[1px] box-border py-3 px-4 min-w-[240px] leading-[140%] outline-none ${errors.branch ? 'border-red-500' : ''}`}
+                    required
+                  />
+                  {errors.branch && (
+                    <div className="text-red-500 text-xs mt-1">{errors.branch}</div>
+                  )}
+                </div>
+              </div>
 
               {/* Password Field */}
               <div className="self-stretch flex flex-col items-start justify-start gap-1.5">

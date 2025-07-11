@@ -7,6 +7,7 @@ import allProgramRoutes from './routes/allProgramsRoutes'
 import userRoutes from './routes/user'
 import notificationRoutes from './routes/notificationRoutes'
 import adminRoutes from './routes/adminRoutes'
+import universityRoutes from './routes/universityRoutes'
 import './config/firebase' 
 
 // Connect to MongoDB
@@ -29,6 +30,7 @@ const app = new Elysia()
   .use(userRoutes)
   .use(notificationRoutes)
   .use(adminRoutes)
+  .use(universityRoutes)
   .get('/health', () => 'Healthy')
   .get('/test', () => ({ message: 'Test endpoint working' }))
   .listen(7001);

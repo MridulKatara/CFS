@@ -13,6 +13,9 @@ import Payment from './student/Payment'
 import ProgramDetailsActive from './student/ProgramDetailsActive'
 import ProgramDetailsInactives from './student/ProgramDetailsInactives'
 import Dashboard from './admin/Dashboard'
+import Universities from './admin/Universities'
+import NotificationManager from './admin/NotificationManager'
+import AdminProfile from './admin/Profile'
 import PrivateRoute from './common/PrivateRoute'
 import { getUserRole, isAuthenticated } from './common/auth'
 import { requestNotificationPermission, onForegroundMessage } from './services/firebase'
@@ -109,7 +112,9 @@ function App() {
         {/* Admin routes */}
         <Route element={<PrivateRoute />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
-          {/* Add more admin routes here */}
+          <Route path="/admin/universities" element={<Universities />} />
+          <Route path="/admin/notifications" element={<NotificationManager />} />
+          <Route path="/admin/profile" element={<AdminProfile />} />
         </Route>
 
         {/* Default route */}
