@@ -160,12 +160,12 @@ export const addToolToProgram = async ({ params, body, set }: CtxWithSet) => {
 // ADMIN: Remove a tool from program toolkit
 export const removeToolFromProgram = async ({ params, set }: CtxWithSet) => {
     try {
-        if (!params?.programId || !params?.toolId) {
+        if (!params?.id || !params?.toolId) {
             set.status = 400;
             return { success: false, message: 'Program ID and Tool ID are required' };
         }
         
-        const program = await AllProgram.findById(params.programId);
+        const program = await AllProgram.findById(params.id);
         
         if (!program) {
             set.status = 404;
@@ -231,12 +231,12 @@ export const addFactToProgram = async ({ params, body, set }: CtxWithSet) => {
 // ADMIN: Remove a fact from program
 export const removeFactFromProgram = async ({ params, set }: CtxWithSet) => {
     try {
-        if (!params?.programId || !params?.factId) {
+        if (!params?.id || !params?.factId) {
             set.status = 400;
             return { success: false, message: 'Program ID and Fact ID are required' };
         }
         
-        const program = await AllProgram.findById(params.programId);
+        const program = await AllProgram.findById(params.id);
         
         if (!program) {
             set.status = 404;

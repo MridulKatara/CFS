@@ -26,10 +26,10 @@ const adminRoutes = new Elysia({ prefix: '/admin' })
   
   // Toolkit management routes
   .post('/programs/:id/toolkit', programController.addToolToProgram)
-  .delete('/programs/:programId/toolkit/:toolId', programController.removeToolFromProgram)
+  .delete('/programs/:id/toolkit/:toolId', programController.removeToolFromProgram)
   
   // Facts management routes
   .post('/programs/:id/facts', programController.addFactToProgram)
-  .delete('/programs/:programId/facts/:factId', programController.removeFactFromProgram);
+  .delete('/programs/:id/facts/:factId', programController.removeFactFromProgram);
 
 export default adminRoutes; 
