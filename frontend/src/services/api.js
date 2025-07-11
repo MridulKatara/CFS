@@ -160,6 +160,68 @@ class ApiService {
     return this.request(`/user/programs/${programId}`);
   }
 
+  // Admin User management
+  async getAllUsers() {
+    return this.request('/admin/users');
+  }
+
+  // Admin Program management
+  async getAdminPrograms() {
+    return this.request('/admin/programs');
+  }
+
+  async getAdminProgramById(id) {
+    return this.request(`/admin/programs/${id}`);
+  }
+
+  async createProgram(programData) {
+    return this.request('/admin/programs', {
+      method: 'POST',
+      body: JSON.stringify(programData),
+    });
+  }
+
+  async updateProgram(id, programData) {
+    return this.request(`/admin/programs/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(programData),
+    });
+  }
+
+  async deleteProgram(id) {
+    return this.request(`/admin/programs/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  // Admin Toolkit management
+  async addToolToProgram(programId, toolData) {
+    return this.request(`/admin/programs/${programId}/toolkit`, {
+      method: 'POST',
+      body: JSON.stringify(toolData),
+    });
+  }
+
+  async removeToolFromProgram(programId, toolId) {
+    return this.request(`/admin/programs/${programId}/toolkit/${toolId}`, {
+      method: 'DELETE',
+    });
+  }
+
+  // Admin Facts management
+  async addFactToProgram(programId, factData) {
+    return this.request(`/admin/programs/${programId}/facts`, {
+      method: 'POST',
+      body: JSON.stringify(factData),
+    });
+  }
+
+  async removeFactFromProgram(programId, factId) {
+    return this.request(`/admin/programs/${programId}/facts/${factId}`, {
+      method: 'DELETE',
+    });
+  }
+
   // Notification endpoints
   async saveNotificationToken(token) {
     return this.request('/notifications/token', {
@@ -205,10 +267,6 @@ class ApiService {
     return this.request(`/api/universities/${id}`, {
       method: 'DELETE',
     });
-  }
-
-  async getAllUsers() {
-    return this.request('/admin/users');
   }
 
   async sendNotification(notificationData) {
