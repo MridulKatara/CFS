@@ -9,8 +9,6 @@ const Register = () => {
   const [form, setForm] = useState({
     name: "",
     university: "",
-    course: "",
-    branch: "",
     password: "",
     confirmPassword: "",
     email: "",

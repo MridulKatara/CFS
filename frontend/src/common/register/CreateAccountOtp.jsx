@@ -67,9 +67,6 @@ const CreateAccountOtp = ({ form, onChange, onNext, onBack, editField, setEditFi
         personalEmail: form.email,
         mobileNumber: form.phone,
         universityName: form.university,
-        program: form.course,
-        branch: form.branch,
-        currentSemester: 1, // Default value, can be made dynamic
         password: form.password
       };
 

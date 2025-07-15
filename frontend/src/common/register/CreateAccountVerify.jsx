@@ -16,23 +16,24 @@ const CreateAccountVerify = ({ form, onChange, onBack, onEdit }) => {
   const validateForm = () => {
     const newErrors = {};
 
-    // Validate email OTP
-    if (!form.emailOtp) {
-      newErrors.emailOtp = 'Email OTP is required';
+    // Validate that at least one OTP is provided
+    if (!form.emailOtp && !form.phoneOtp) {
+      newErrors.otpError = 'Please enter at least one OTP (email or phone)';
     } else {
-      const emailOtpValidation = validateOtp(form.emailOtp);
-      if (!emailOtpValidation.isValid) {
-        newErrors.emailOtp = emailOtpValidation.error;
+      // If email OTP is provided, validate it
+      if (form.emailOtp) {
+        const emailOtpValidation = validateOtp(form.emailOtp);
+        if (!emailOtpValidation.isValid) {
+          newErrors.emailOtp = emailOtpValidation.error;
+        }
       }
-    }
-
-    // Validate phone OTP
-    if (!form.phoneOtp) {
-      newErrors.phoneOtp = 'Phone OTP is required';
-    } else {
-      const phoneOtpValidation = validateOtp(form.phoneOtp);
-      if (!phoneOtpValidation.isValid) {
-        newErrors.phoneOtp = phoneOtpValidation.error;
+      
+      // If phone OTP is provided, validate it
+      if (form.phoneOtp) {
+        const phoneOtpValidation = validateOtp(form.phoneOtp);
+        if (!phoneOtpValidation.isValid) {
+          newErrors.phoneOtp = phoneOtpValidation.error;
+        }
       }
     }
 
@@ -95,12 +96,11 @@ const CreateAccountVerify = ({ form, onChange, onBack, onEdit }) => {
           }, 2000);
         }
       } else {
-        // Handle partial verification
-        if (result.error === 'otpEmail') {
-          setErrors({ emailOtp: 'Invalid email OTP' });
-        } else if (result.error === 'otpMobile') {
-          setErrors({ phoneOtp: 'Invalid phone OTP' });
-        }
+        // Handle verification error
+        setSnackbar({
+          message: result.message || 'OTP verification failed. Please try again.',
+          type: 'error'
+        });
       }
     } catch (error) {
       setSnackbar({
@@ -197,31 +197,35 @@ const CreateAccountVerify = ({ form, onChange, onBack, onEdit }) => {
                   </span>
                 </p>
               </div>
+              <div className="text-sm text-center text-[#704ee7] font-medium">
+                Enter any one OTP to verify your account
+              </div>
+              {errors.otpError && (
+                <div className="text-red-500 text-xs mt-1">{errors.otpError}</div>
+              )}
             </div>
             <div className="self-stretch flex flex-col items-start justify-start gap-4 text-xs text-[#555]">
               <div className="self-stretch flex flex-col items-start justify-start gap-1.5">
-                <div className="relative leading-[120%]">Email OTP</div>
+                <div className="relative leading-[120%]">Email OTP (Optional if Phone OTP is provided)</div>
                 <input
                   type="text"
                   value={form.emailOtp}
                   onChange={e => handleInputChange("emailOtp", e.target.value)}
                   placeholder="Enter your email OTP"
                   className={`self-stretch rounded-lg bg-[#fff] border-[#d9d9d9] border-solid border-[1px] box-border py-3 px-4 min-w-[240px] leading-[140%] outline-none ${errors.emailOtp ? 'border-red-500' : ''}`}
-                  required
                 />
                 {errors.emailOtp && (
                   <div className="text-red-500 text-xs mt-1">{errors.emailOtp}</div>
                 )}
               </div>
               <div className="self-stretch flex flex-col items-start justify-start gap-1">
-                <div className="relative leading-[120%]">Phone OTP</div>
+                <div className="relative leading-[120%]">Phone OTP (Optional if Email OTP is provided)</div>
                 <input
                   type="text"
                   value={form.phoneOtp}
                   onChange={e => handleInputChange("phoneOtp", e.target.value)}
                   placeholder="Enter your phone number OTP"
                   className={`self-stretch rounded-lg bg-[#fff] border-[#d9d9d9] border-solid border-[1px] box-border py-3 px-4 min-w-[240px] leading-[140%] outline-none ${errors.phoneOtp ? 'border-red-500' : ''}`}
-                  required
                 />
                 {errors.phoneOtp && (
                   <div className="text-red-500 text-xs mt-1">{errors.phoneOtp}</div>
@@ -246,23 +250,24 @@ const CreateAccountVerify = ({ form, onChange, onBack, onEdit }) => {
             </div>
             <div className="relative text-xs leading-[170%] text-center text-[#555] mt-2">
               <p className="m-0">{`Didn't get the OTP? `}</p>
-              <p className="m-0 text-[#603ae4]">
-                <span className="font-medium">
-                  <span 
-                    className="text-[#603ae4] [text-decoration:underline] cursor-pointer hover:text-purple-600"
-                    onClick={() => handleResendOtp('email')}
-                  >
-                    {isResending ? 'Resending...' : 'Resend email OTP'}
-                  </span>
-                  <span className="text-[#555]">{` | `}</span>
-                  <span 
-                    className="text-[#603ae4] [text-decoration:underline] cursor-pointer hover:text-purple-600"
-                    onClick={() => handleResendOtp('mobile')}
-                  >
-                    {isResending ? 'Resending...' : 'Resend Phone OTP'}
-                  </span>
-                </span>
-              </p>
+              <div className="flex justify-center gap-4 mt-2">
+                <button
+                  type="button"
+                  onClick={() => handleResendOtp('email')}
+                  className="font-medium text-[#603ae4] disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={isResending}
+                >
+                  Resend Email OTP
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleResendOtp('mobile')}
+                  className="font-medium text-[#603ae4] disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={isResending}
+                >
+                  Resend Phone OTP
+                </button>
+              </div>
             </div>
           </form>
         </div>

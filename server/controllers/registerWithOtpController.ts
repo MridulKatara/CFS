@@ -6,11 +6,11 @@ import { sendEmail } from '../utils/sesUtils';
 import { sendSms } from '../utils/smsUtils';
 
 export const initiateRegistration = async ({ body }: any) => {
-  const { fullName, personalEmail, mobileNumber, universityName, program, branch, password, currentSemester } = body;
+  const { fullName, personalEmail, mobileNumber, universityName, password } = body;
   
   // 1. Check if user exists
   if (await User.findOne({ $or: [{ personalEmail }, { mobileNumber }] })) {
-    throw new Error('User with this email, mobile, or enrollment ID already exists');
+    throw new Error('User with this email or mobile number already exists');
   }
 
   // Store user data in OtpVerification for later use
@@ -19,10 +19,9 @@ export const initiateRegistration = async ({ body }: any) => {
     personalEmail,
     mobileNumber,
     universityName,
-    program,
-    branch,
-    currentSemester,
-    password // Store hashed password here
+    password, // Store hashed password here
+    role: 'student',
+    currentSemester: 1
   };
 
   // 2. Generate OTPs
@@ -72,22 +71,34 @@ export const verifyRegistrationOtp = async ({ body }: any) => {
   const otpDoc = await OtpVerification.findOne({ email, mobileNumber });
   if (!otpDoc) throw new Error('OTP not found or expired');
 
+  // Check if either email OTP or mobile OTP is valid
   let emailValid = false, mobileValid = false;
-  if (otpEmail) emailValid = await compareOtp(otpEmail, otpDoc.otpEmail);
-  if (otpMobile) mobileValid = await compareOtp(otpMobile, otpDoc.otpMobile);
+  
+  if (otpEmail) {
+    emailValid = await compareOtp(otpEmail, otpDoc.otpEmail);
+  }
+  
+  if (otpMobile) {
+    mobileValid = await compareOtp(otpMobile, otpDoc.otpMobile);
+  }
 
-  if (!emailValid && !mobileValid) throw new Error('Both OTPs are incorrect');
-  if (!emailValid) return { success: false, error: 'otpEmail' };
-  if (!mobileValid) return { success: false, error: 'otpMobile' };
+  // If at least one OTP is valid, proceed with registration
+  if (emailValid || mobileValid) {
+    // Create the user after OTP verification
+    const userData = otpDoc.userData;
+    await User.create(userData);
 
-  // Create the user after OTP verification
-  const userData = otpDoc.userData;
-  await User.create(userData);
+    // Delete OTP doc after successful verification and user creation
+    await OtpVerification.deleteOne({ _id: otpDoc._id });
 
-  // Delete OTP doc after successful verification and user creation
-  await OtpVerification.deleteOne({ _id: otpDoc._id });
+    return { success: true };
+  }
 
-  return { success: true };
+  // If neither OTP is valid, return error
+  return { 
+    success: false, 
+    message: 'Invalid OTP. Please check and try again.' 
+  };
 };
 
 export const resendOtp = async ({ body }: any) => {

@@ -5,16 +5,15 @@ export interface IUser {
   fullName: string;
   personalEmail: string;
   universityName: string;
-  // enrollmentId: string;
-  program: string;
-  currentSemester: number;
-  branch: string;
-  paymentStatus: 'Pending' | 'Completed';
+  program?: string;
+  currentSemester?: number;
+  branch?: string;
+  paymentStatus?: 'Pending' | 'Completed';
   role: 'super-admin' | 'admin' | 'student';
   password: string;
-  mobileNumber: string; // Added mobile number field
+  mobileNumber: string;
   comparePassword(candidatePassword: string): Promise<boolean>;
-  fcmToken?: string; // Changed from fcmTokens array to single fcmToken
+  fcmToken?: string;
 }
 
 export interface IUserDocument extends Document<Types.ObjectId>, IUser {
@@ -25,18 +24,17 @@ const userSchema = new mongoose.Schema({
   fullName: { type: String, required: true },
   personalEmail: { type: String, required: true, unique: true },
   universityName: { type: String, required: true },
-  // enrollmentId: { type: String, required: true, unique: true },
-  program: { type: String, required: true },
-  currentSemester: { type: Number, required: true },
-  branch: { type: String, required: true },
+  program: { type: String, required: false },
+  currentSemester: { type: Number, required: false, default: 1 },
+  branch: { type: String, required: false },
   paymentStatus: { type: String, enum: ['Pending', 'Completed'], default: 'Pending' },
   role: { type: String, enum: ['super-admin', 'admin', 'student'], default: 'student' },
   password: { type: String, required: true },
-  mobileNumber: { type: String, required: true, unique: true }, // Added mobile number field
+  mobileNumber: { type: String, required: true, unique: true },
   fcmToken: {
     type: String,
     default: null
-  }, // Changed from fcmTokens array to single fcmToken
+  },
 }, {
   timestamps: true 
 });

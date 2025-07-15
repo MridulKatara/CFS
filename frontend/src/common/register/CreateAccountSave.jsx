@@ -37,8 +37,6 @@ const CreateAccountSave = ({ form, onChange, onNext }) => {
     const requiredFields = [
       { field: 'name', label: 'Name' },
       { field: 'university', label: 'University Name' },
-      { field: 'course', label: 'Course' },
-      { field: 'branch', label: 'Branch' },
       { field: 'password', label: 'Password' },
       { field: 'confirmPassword', label: 'Confirm Password' }
     ];
@@ -147,42 +145,6 @@ const CreateAccountSave = ({ form, onChange, onNext }) => {
                   </select>
                   {errors.university && (
                     <div className="text-red-500 text-xs mt-1">{errors.university}</div>
-                  )}
-                </div>
-              </div>
-
-              {/* Course Field */}
-              <div className="self-stretch flex flex-col items-start justify-start gap-1.5">
-                <div className="relative leading-[120%]">Course</div>
-                <div className="self-stretch flex flex-col items-start justify-start text-[#b3b3b3]">
-                  <input
-                    type="text"
-                    value={form.course}
-                    onChange={e => handleInputChange('course', e.target.value)}
-                    placeholder="Enter your course"
-                    className={`self-stretch rounded-lg bg-[#fff] border-[#d9d9d9] border-solid border-[1px] box-border py-3 px-4 min-w-[240px] leading-[140%] outline-none ${errors.course ? 'border-red-500' : ''}`}
-                    required
-                  />
-                  {errors.course && (
-                    <div className="text-red-500 text-xs mt-1">{errors.course}</div>
-                  )}
-                </div>
-              </div>
-
-              {/* Branch Field */}
-              <div className="self-stretch flex flex-col items-start justify-start gap-1.5">
-                <div className="relative leading-[120%]">Branch</div>
-                <div className="self-stretch flex flex-col items-start justify-start text-[#b3b3b3]">
-                  <input
-                    type="text"
-                    value={form.branch}
-                    onChange={e => handleInputChange('branch', e.target.value)}
-                    placeholder="Enter your branch"
-                    className={`self-stretch rounded-lg bg-[#fff] border-[#d9d9d9] border-solid border-[1px] box-border py-3 px-4 min-w-[240px] leading-[140%] outline-none ${errors.branch ? 'border-red-500' : ''}`}
-                    required
-                  />
-                  {errors.branch && (
-                    <div className="text-red-500 text-xs mt-1">{errors.branch}</div>
                   )}
                 </div>
               </div>
