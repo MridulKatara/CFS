@@ -3,12 +3,6 @@ import { useNavigate, useParams } from "react-router-dom"
 import Back from '../assets/Icons.svg';
 import Clock from '../assets/Clock.svg';
 import VideoCamera from '../assets/VideoCamera.svg';
-import ChatGPT from '../assets/t1.png';
-import Plotly from '../assets/t2.png';
-import NumPy from '../assets/t3.png';
-import Spacy from '../assets/t4.jpg';
-import Matplotlib from '../assets/t5.png';
-import OpenCV from '../assets/t6.png';
 import BottomNavBar from './ButtomNavItem';
 import apiService from '../services/api';
 
@@ -121,19 +115,27 @@ const ProgramDetailsActive = () => {
             </div>
           </div>
         </div>
-        <div className="mb-6">
-          <h3 className="text-base font-medium text-black mb-4">Tools You Will Learn:</h3>
-          <div className="grid grid-cols-3 gap-4 mb-2">
-            <img className="w-16 h-16 object-contain" alt="ChatGPT" src={ChatGPT} />
-            <img className="w-16 h-16 object-contain" alt="Plotly" src={Plotly} />
-            <img className="w-16 h-16 object-contain" alt="NumPy" src={NumPy} />
+        {program.toolkit && program.toolkit.length > 0 && (
+          <div className="mb-6">
+            <h3 className="text-base font-medium text-black mb-4">Tools You Will Learn:</h3>
+            <div className="grid grid-cols-3 gap-4">
+              {program.toolkit.map((tool, index) => (
+                <div key={index} className="flex flex-col items-center">
+                  <img 
+                    className="w-16 h-16 object-contain" 
+                    alt={tool.name} 
+                    src={tool.logoUrl} 
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = 'https://via.placeholder.com/64?text=' + tool.name.charAt(0);
+                    }}
+                  />
+                  <p className="text-xs text-center mt-1">{tool.name}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="grid grid-cols-3 gap-4">
-            <img className="w-16 h-16 object-contain" alt="Spacy" src={Spacy} />
-            <img className="w-16 h-16 object-contain" alt="Matplotlib" src={Matplotlib} />
-            <img className="w-16 h-16 object-contain" alt="OpenCV" src={OpenCV} />
-          </div>
-        </div>
+        )}
         <div>
           <h3 className="text-base font-medium text-black mb-4">Faculty</h3>
           <div className="space-y-3">

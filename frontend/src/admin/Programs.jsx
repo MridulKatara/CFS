@@ -18,11 +18,23 @@ const Programs = () => {
     try {
       setLoading(true);
       const response = await ApiService.getAdminPrograms();
-      setPrograms(response || []);
+      
+      // Handle the new response format
+      if (response && response.success && Array.isArray(response.data)) {
+        setPrograms(response.data);
+      } else if (response && Array.isArray(response)) {
+        // Fallback for old format
+        setPrograms(response);
+      } else {
+        setPrograms([]);
+        console.error('Unexpected response format:', response);
+      }
+      
       setError('');
     } catch (err) {
       console.error('Failed to fetch programs:', err);
       setError('Failed to load programs. Please try again.');
+      setPrograms([]);
     } finally {
       setLoading(false);
     }
@@ -35,8 +47,13 @@ const Programs = () => {
 
     try {
       setLoading(true);
-      await ApiService.deleteProgram(id);
-      setPrograms(programs.filter(program => program._id !== id));
+      const response = await ApiService.deleteProgram(id);
+      
+      if (response && response.success) {
+        setPrograms(programs.filter(program => program._id !== id));
+      } else {
+        throw new Error('Failed to delete program');
+      }
     } catch (err) {
       console.error('Failed to delete program:', err);
       setError('Failed to delete program. Please try again.');
