@@ -230,16 +230,26 @@ class ApiService {
     });
   }
 
-  async getUserNotifications() {
-    return this.request('/notifications');
+  async getUserNotifications(page = 1, limit = 10) {
+    return this.request(`/notifications?page=${page}&limit=${limit}`);
   }
 
-  async getRecentNotifications() {
-    return this.request('/notifications/recent');
+  async getRecentNotifications(page = 1, limit = 10) {
+    return this.request(`/notifications/recent?page=${page}&limit=${limit}`);
   }
 
   async markNotificationAsRead(notificationId) {
     return this.request(`/notifications/${notificationId}/read`, {
+      method: 'PUT',
+    });
+  }
+
+  async getUnreadNotificationCount() {
+    return this.request('/notifications/unread/count');
+  }
+
+  async markAllNotificationsAsRead() {
+    return this.request('/notifications/mark-all-read', {
       method: 'PUT',
     });
   }

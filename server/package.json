@@ -4,7 +4,8 @@
     "type": "module",
     "private": true,
     "scripts": {
-        "dev": "bunx nodemon --watch . --ext ts --exec 'bun run index.ts'"
+        "dev": "bunx nodemon --watch . --ext ts --exec 'bun run index.ts'",
+        "build": "bun build index.ts --outdir ./dist --target node"
     },
     "devDependencies": {
         "@elysiajs/cors": "^1.0.0",
