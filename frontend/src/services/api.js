@@ -23,7 +23,7 @@ class ApiService {
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    console.log(config);
+    
     try {
       const response = await fetch(url, config);
       
@@ -47,6 +47,16 @@ class ApiService {
       return data;
     } catch (error) {
       console.error('API request failed:', error);
+      
+      // Check if it's a network error (server unreachable)
+      if (error.message === 'Failed to fetch' || error.name === 'TypeError') {
+        return {
+          success: false,
+          message: 'Unable to connect to server. Please check your internet connection or try again later.',
+          isNetworkError: true
+        };
+      }
+      
       throw error;
     }
   }
@@ -231,11 +241,43 @@ class ApiService {
   }
 
   async getUserNotifications(page = 1, limit = 10) {
-    return this.request(`/notifications?page=${page}&limit=${limit}`);
+    try {
+      const response = await this.request(`/notifications?page=${page}&limit=${limit}`);
+      
+      // Ensure notifications array exists
+      if (response.success && !response.notifications) {
+        response.notifications = [];
+      }
+      
+      return response;
+    } catch (error) {
+      console.error('Error fetching user notifications:', error);
+      return { 
+        success: false, 
+        message: error.message || 'Failed to fetch notifications',
+        notifications: [] 
+      };
+    }
   }
 
   async getRecentNotifications(page = 1, limit = 10) {
-    return this.request(`/notifications/recent?page=${page}&limit=${limit}`);
+    try {
+      const response = await this.request(`/notifications/recent?page=${page}&limit=${limit}`);
+      
+      // Ensure notifications array exists
+      if (response.success && !response.notifications) {
+        response.notifications = [];
+      }
+      
+      return response;
+    } catch (error) {
+      console.error('Error fetching recent notifications:', error);
+      return { 
+        success: false, 
+        message: error.message || 'Failed to fetch notifications',
+        notifications: [] 
+      };
+    }
   }
 
   async markNotificationAsRead(notificationId) {

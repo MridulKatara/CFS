@@ -104,12 +104,25 @@ const Notification = () => {
     };
 
     const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('en-US', {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric'
-        });
+        if (!dateString) return '';
+        
+        try {
+            const date = new Date(dateString);
+            
+            // Check if date is valid
+            if (isNaN(date.getTime())) {
+                return '';
+            }
+            
+            return date.toLocaleDateString('en-US', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            });
+        } catch (error) {
+            console.error('Error formatting date:', error);
+            return '';
+        }
     };
 
     return (
@@ -165,10 +178,10 @@ const Notification = () => {
                                     <div className="space-y-2">
                                         <div className="flex justify-between items-start">
                                             <h3 className="text-base font-medium text-[#202124]">
-                                                {notification.notificationTitle}
+                                                {notification.notificationTitle || "Notification"}
                                             </h3>
                                             <span className="text-xs text-gray-500">
-                                                {formatDate(notification.deliveredAt)}
+                                                {formatDate(notification.deliveredAt) || ""}
                                             </span>
                                         </div>
                                         
@@ -184,7 +197,7 @@ const Notification = () => {
                                                     ? 'bg-purple-100 text-purple-800'
                                                     : 'bg-blue-100 text-blue-800'
                                             }`}>
-                                                {notification.notificationType}
+                                                {notification.notificationType || "General"}
                                             </span>
                                             
                                             {!notification.isRead && (

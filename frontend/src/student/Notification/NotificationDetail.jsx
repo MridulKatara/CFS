@@ -54,14 +54,27 @@ const NotificationDetail = () => {
   }, [id, navigate]);
 
   const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleString('en-US', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    if (!dateString) return '';
+    
+    try {
+      const date = new Date(dateString);
+      
+      // Check if date is valid
+      if (isNaN(date.getTime())) {
+        return '';
+      }
+      
+      return date.toLocaleString('en-US', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    } catch (error) {
+      console.error('Error formatting date:', error);
+      return '';
+    }
   };
 
   const getTypeColor = (type) => {
@@ -110,14 +123,14 @@ const NotificationDetail = () => {
             <div className="mb-4">
               <div className="flex justify-between items-start">
                 <h2 className="text-xl font-semibold text-[#202124]">
-                  {notification.notificationTitle}
+                  {notification.notificationTitle || "Notification"}
                 </h2>
                 <span className={`px-3 py-1 text-xs font-medium rounded-full ${getTypeColor(notification.notificationType)}`}>
-                  {notification.notificationType}
+                  {notification.notificationType || "General"}
                 </span>
               </div>
               <p className="text-sm text-gray-500 mt-1">
-                {formatDate(notification.deliveredAt)}
+                {formatDate(notification.deliveredAt) || ""}
               </p>
             </div>
             
