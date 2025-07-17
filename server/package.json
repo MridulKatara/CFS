@@ -13,6 +13,7 @@
         "@types/bcryptjs": "^3.0.0",
         "@types/bun": "latest",
         "@types/jsonwebtoken": "latest",
+        "@types/uuid": "^9.0.8",
         "typescript": "latest"
     },
     "peerDependencies": {
@@ -29,6 +30,8 @@
         "firebase-admin": "^13.4.0",
         "jsonwebtoken": "^9.0.2",
         "mongoose": "latest",
-        "razorpay": "^2.9.6"
+        "multer": "^1.4.5-lts.1",
+        "razorpay": "^2.9.6",
+        "uuid": "^9.0.1"
     }
 }

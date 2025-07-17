@@ -5,6 +5,7 @@ const semesterPaymentSchema = new mongoose.Schema({
     paid: { type: Boolean, default: false },
     paymentId: { type: String }, // Razorpay payment id
     paidAt: { type: Date },
+    status: { type: String, enum: ['pending_verification', 'verified', 'rejected'], default: 'pending_verification' },
 });
 
 const myProgramSchema = new mongoose.Schema({
@@ -13,6 +14,7 @@ const myProgramSchema = new mongoose.Schema({
     enrollmentFeePaid: { type: Boolean, default: false },
     enrollmentPaymentId: { type: String }, // Razorpay payment id
     enrollmentPaidAt: { type: Date },
+    enrollmentStatus: { type: String, enum: ['pending_verification', 'verified', 'rejected'], default: 'pending_verification' },
     semesters: [semesterPaymentSchema],
 }, {
     timestamps: true,

@@ -58,24 +58,17 @@ const MyPrograms = () => {
     navigate(-1);
   };
 
-  // Get enrolled program IDs for comparison
-  const getEnrolledProgramIds = () => {
-    return enrolledPrograms.map(program => program.programId);
-  };
-
-  // Filter programs that user is enrolled in
+  // Filter programs that user is enrolled in (verified status)
   const getActivePrograms = () => {
-    const enrolledIds = getEnrolledProgramIds();
     return allPrograms.filter(program => 
-      enrolledIds.includes(program.programId)
+      program.enrollmentStatus === 'enrolled' || program.isEnrolled
     );
   };
 
-  // Filter programs that user is NOT enrolled in
+  // Filter programs that user is NOT enrolled in or have pending/rejected status
   const getOtherPrograms = () => {
-    const enrolledIds = getEnrolledProgramIds();
     return allPrograms.filter(program => 
-      !enrolledIds.includes(program.programId)
+      !program.isEnrolled && program.enrollmentStatus !== 'enrolled'
     );
   };
 
@@ -129,6 +122,17 @@ const MyPrograms = () => {
                 }}
                 onClick={() => handleGoClick(program._id, true)}
               >
+                {/* Payment Status Badge */}
+                {program.paymentStatus === 'pending_verification' && (
+                  <div className="absolute top-2 right-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full">
+                    Payment Pending
+                  </div>
+                )}
+                {program.paymentStatus === 'rejected' && (
+                  <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                    Payment Rejected
+                  </div>
+                )}
                 <div className="relative z-10">
                   <div className="flex justify-between items-start mb-1">
                     <h2 className="text-sm font-medium">{program.programName}</h2>
@@ -203,6 +207,17 @@ const MyPrograms = () => {
                     }}
                     onClick={() => handleGoClick(program._id, false)}
                   >
+                    {/* Payment Status Badge */}
+                    {program.paymentStatus === 'pending_verification' && (
+                      <div className="absolute top-2 right-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full">
+                        Payment Pending
+                      </div>
+                    )}
+                    {program.paymentStatus === 'rejected' && (
+                      <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                        Payment Rejected
+                      </div>
+                    )}
                     <div className="relative z-10">
                       <div className="flex justify-between items-start mb-1">
                         <h3 className="text-sm font-medium">{program.programName}</h3>

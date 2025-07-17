@@ -1,5 +1,5 @@
-const API_BASE_URL = 'https://cfs-djzu.onrender.com';
-// const API_BASE_URL = 'http://localhost:7001';
+// const API_BASE_URL = 'https://cfs-djzu.onrender.com';
+const API_BASE_URL = 'http://localhost:7001';
 
 class ApiService {
   constructor() {
@@ -145,6 +145,32 @@ class ApiService {
 
   async getHealth() {
     return this.request('/health');
+  }
+
+  // Payment endpoints
+  async createPaymentOrder(orderData) {
+    return this.request('/user/payment/order', {
+      method: 'POST',
+      body: JSON.stringify(orderData),
+    });
+  }
+
+  async verifyPayment(paymentData) {
+    return this.request('/user/payment/verify', {
+      method: 'POST',
+      body: JSON.stringify(paymentData),
+    });
+  }
+
+  async uploadPaymentReceipt(receiptData) {
+    return this.request('/user/payment/upload-receipt', {
+      method: 'POST',
+      body: JSON.stringify(receiptData),
+    });
+  }
+
+  async getPaymentHistory() {
+    return this.request('/user/payment/history');
   }
 
   async getProgramDetails(programId) {
@@ -327,6 +353,18 @@ class ApiService {
       body: JSON.stringify(notificationData),
     });
   }
+
+  // Admin Payment verification
+  async getPendingPayments() {
+    return this.request('/admin/payments/pending');
+  }
+
+  async verifyAdminPayment(verificationData) {
+    return this.request('/admin/payments/verify', {
+      method: 'POST',
+      body: JSON.stringify(verificationData),
+    });
+  }
 }
 
-export default new ApiService(); 
+export default new ApiService();

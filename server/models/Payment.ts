@@ -8,8 +8,19 @@ const paymentSchema = new mongoose.Schema({
     amount: { type: Number, required: true },
     razorpayOrderId: { type: String },
     razorpayPaymentId: { type: String },
-    status: { type: String, enum: ['created', 'paid', 'failed'], default: 'created' },
+    status: { type: String, enum: ['created', 'paid', 'failed', 'pending_verification'], default: 'created' },
     paidAt: { type: Date },
+    // File upload fields
+    receiptFile: {
+        url: { type: String },
+        key: { type: String },
+        originalName: { type: String },
+        uploadedAt: { type: Date }
+    },
+    paymentMethod: { type: String, enum: ['razorpay', 'manual_upload'], default: 'razorpay' },
+    verified: { type: Boolean, default: false },
+    verifiedAt: { type: Date },
+    verifiedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 }, {
     timestamps: true,
 });

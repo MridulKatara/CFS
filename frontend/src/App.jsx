@@ -18,6 +18,7 @@ import Programs from './admin/Programs'
 import ProgramForm from './admin/ProgramForm'
 import NotificationManager from './admin/NotificationManager'
 import AdminProfile from './admin/Profile'
+import PaymentVerification from './admin/PaymentVerification'
 import PrivateRoute from './common/PrivateRoute'
 import { getUserRole, isAuthenticated } from './common/auth'
 import { requestNotificationPermission, onForegroundMessage } from './services/firebase'
@@ -118,6 +119,7 @@ function App() {
           <Route path="/admin/programs/new" element={<ProgramForm />} />
           <Route path="/admin/programs/edit/:id" element={<ProgramForm />} />
           <Route path="/admin/universities" element={<Universities />} />
+          <Route path="/admin/payments" element={<PaymentVerification />} />
           <Route path="/admin/notifications" element={<NotificationManager />} />
           <Route path="/admin/profile" element={<AdminProfile />} />
         </Route>

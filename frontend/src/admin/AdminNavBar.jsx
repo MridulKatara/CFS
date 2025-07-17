@@ -67,10 +67,51 @@ const ProgramIcon = ({ active }) => (
   </svg>
 );
 
+// Payment icon component
+const PaymentIcon = ({ active }) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M20 4H4C2.89543 4 2 4.89543 2 6V18C2 19.1046 2.89543 20 4 20H20C21.1046 20 22 19.1046 22 18V6C22 4.89543 21.1046 4 20 4Z"
+      stroke={active ? "#704ee7" : "#757575"}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M22 10H2"
+      stroke={active ? "#704ee7" : "#757575"}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M6 14H6.01"
+      stroke={active ? "#704ee7" : "#757575"}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M10 14H10.01"
+      stroke={active ? "#704ee7" : "#757575"}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 const navItems = [
   { label: 'Dashboard', icon: HomeIcon, to: '/admin/dashboard' },
   { label: 'Programs', icon: ProgramIcon, to: '/admin/programs' },
   { label: 'Universities', icon: UniversityIcon, to: '/admin/universities' },
+  { label: 'Payments', icon: PaymentIcon, to: '/admin/payments' },
   { label: 'Notifications', icon: NotificationIcon, to: '/admin/notifications' },
   { label: 'Profile', icon: ProfileIcon, to: '/admin/profile' },
 ];

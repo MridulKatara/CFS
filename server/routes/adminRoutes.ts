@@ -17,6 +17,10 @@ const adminRoutes = new Elysia({ prefix: '/admin' })
   .use(adminMiddleware)
   .get('/users', adminController.getAllUsers)
   
+  // Payment verification routes
+  .get('/payments/pending', adminController.getPendingPayments)
+  .post('/payments/verify', adminController.verifyPayment)
+  
   // Program management routes
   .get('/programs', programController.getAllPrograms)
   .get('/programs/:id', programController.getAdminProgramById)
