@@ -496,13 +496,13 @@ const points = [
   {
     num: 1,
     heading: "Minor Certification",
-    body: "Earn a recognized Minor Certificate supported by IIT Mandi, NSDC & your university",
+    body: "Receive a recognized Minor Certificate endorsed by IIT Mandi, NSDC, and your home university.",
     media: <img src={certImg} alt="certificate" className="rounded-xl w-full" />
   },
   {
     num: 2,
     heading: "Campus Immersion",
-    body: "Opportunity to experience IIT campus life during events and orientations",
+    body: "Get the chance to experience IIT Mandi’s campus during orientations and special events",
     media: <CampusSlider />
   },
   {
