@@ -13,9 +13,7 @@ const EditProfile = () => {
     const [formData, setFormData] = useState({
         name: '',
         universityName: '',
-        course: '',
-        branch: '',
-        studentCode: '',
+        mobileNumber: '',
         currentPassword: '',
         newPassword: '',
         confirmPassword: ''
@@ -37,9 +35,7 @@ const EditProfile = () => {
                 setFormData({
                     name: user.fullName || '',
                     universityName: user.universityName || '',
-                    course: user.program || '',
-                    branch: user.branch || '',
-                    studentCode: user.studentCode || '',
+                    mobileNumber: user.mobileNumber || '',
                     currentPassword: '',
                     newPassword: '',
                     confirmPassword: ''
@@ -162,42 +158,16 @@ const EditProfile = () => {
                     />
                 </div>
 
-                {/* Course - Read Only */}
+                {/* Mobile Number - Read Only */}
                 <div>
-                    <label className="text-sm text-[#555] mb-1 block">Course</label>
+                    <label className="text-sm text-[#555] mb-1 block">Mobile Number</label>
                     <input
-                        type="text"
-                        name="course"
-                        value={formData.course}
+                        type="tel"
+                        name="mobileNumber"
+                        value={formData.mobileNumber}
                         readOnly
                         className="w-full rounded-lg border border-[#d9d9d9] p-3 bg-[#fafafa] text-[#666]"
-                        placeholder="Enter your course"
-                    />
-                </div>
-
-                {/* Branch - Read Only */}
-                <div>
-                    <label className="text-sm text-[#555] mb-1 block">Branch</label>
-                    <input
-                        type="text"
-                        name="branch"
-                        value={formData.branch}
-                        readOnly
-                        className="w-full rounded-lg border border-[#d9d9d9] p-3 bg-[#fafafa] text-[#666]"
-                        placeholder="Enter your branch"
-                    />
-                </div>
-
-                {/* Student Code - Read Only */}
-                <div>
-                    <label className="text-sm text-[#555] mb-1 block">Student Code</label>
-                    <input
-                        type="text"
-                        name="studentCode"
-                        value={formData.studentCode}
-                        readOnly
-                        className="w-full rounded-lg border border-[#d9d9d9] p-3 bg-[#fafafa] text-[#666]"
-                        placeholder="Enter your Student code"
+                        placeholder="Your mobile number"
                     />
                 </div>
 

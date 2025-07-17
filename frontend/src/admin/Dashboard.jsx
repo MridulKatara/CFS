@@ -89,18 +89,18 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <AdminNavBar />
-      <div className="container mx-auto p-4">
-        <div className="flex justify-between items-center mb-6">
+    <div className="container mx-auto p-4">
+      <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-          <button 
-            onClick={() => setShowLogoutModal(true)} 
-            className="bg-gray-100 p-2 rounded-full hover:bg-gray-200 flex items-center gap-2"
-          >
-            <FiLogOut className="w-5 h-5 text-red-500" />
-            <span className="text-gray-700">Logout</span>
-          </button>
-        </div>
-        
+        <button 
+          onClick={() => setShowLogoutModal(true)} 
+          className="bg-gray-100 p-2 rounded-full hover:bg-gray-200 flex items-center gap-2"
+        >
+          <FiLogOut className="w-5 h-5 text-red-500" />
+          <span className="text-gray-700">Logout</span>
+        </button>
+      </div>
+      
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <StatCard 
             icon={FiBriefcase} 
@@ -165,8 +165,8 @@ const Dashboard = () => {
               ))}
             </ul>
           )}
-        </div>
-
+      </div>
+      
         {showLogoutModal && <LogoutModal onClose={() => setShowLogoutModal(false)} />}
       </div>
     </div>

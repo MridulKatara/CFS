@@ -36,6 +36,10 @@ const Profile = () => {
         navigate('/edit-profile');
     };
 
+    const handleEnrollClick = () => {
+        navigate('/my-program');
+    };
+
     if (loading) {
         return (
             <div className="w-full min-h-screen flex items-center justify-center bg-[#f5f5f5]">
@@ -99,6 +103,10 @@ const Profile = () => {
                             <div className="leading-[120%]">University</div>
                             <div className="w-full text-sm md:text-base leading-[140%] font-medium font-poppins text-gray-700">{userData.universityName}</div>
                         </div>
+                        <div className="flex flex-col items-start justify-start gap-0.5">
+                            <div className="leading-[120%]">Mobile Number</div>
+                            <div className="w-full text-sm md:text-base leading-[140%] font-medium font-poppins text-gray-700">{userData.mobileNumber || '-'}</div>
+                        </div>
                     </div>
                     {/* My Community Card */}
                     <div className="w-full flex flex-row items-center justify-between bg-[#fff7f3] rounded-xl px-4 py-3 mb-3">
@@ -106,7 +114,7 @@ const Profile = () => {
                         <span className="bg-[#fa5620] text-white text-xs font-semibold rounded-xl px-3 py-1">Coming Soon</span>
                     </div>
                     {/* Enrolled Programs */}
-                    {enrolledPrograms.length > 0 && (
+                    {enrolledPrograms.length > 0 ? (
                         enrolledPrograms.map((program, idx) => (
                             <div key={program._id || idx} className="w-full bg-white rounded-2xl border border-gray-200 p-4 mb-3 flex flex-col gap-2 shadow-sm">
                                 <div className="text-xs text-gray-500">Program Name</div>
@@ -123,6 +131,19 @@ const Profile = () => {
                                 </div>
                             </div>
                         ))
+                    ) : (
+                        <div className="w-full flex flex-col items-center justify-center py-6 gap-4">
+                            <div className="text-center text-gray-600">
+                                <p className="text-lg font-medium">You are not enrolled in any program yet</p>
+                                <p className="text-sm mt-1">Explore available programs and start your learning journey</p>
+                            </div>
+                            <button 
+                                onClick={handleEnrollClick}
+                                className="bg-[#fa5620] text-white font-medium py-3 px-6 rounded-xl hover:bg-[#e04e1c] transition-colors shadow-sm"
+                            >
+                                Enroll Now
+                            </button>
+                        </div>
                     )}
                 </div>
             </div>

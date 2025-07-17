@@ -8,11 +8,7 @@ export default function AboutIIT() {
             About IIT Mandi
           </h2>
           <p className="text-xs sm:text-sm lg:text-base leading-relaxed text-[#6d6d6d]">
-            IIT Mandi is one of India's premier technical institutes, recognized
-            for its cutting‑edge research, top‑tier faculty, and commitment to
-            real‑world innovation. Through its Centre for Continuing Education
-            (CCE), IIT Mandi offers industry‑aligned programs that empower
-            students across the country.
+          IIT Mandi is one of India’s premier technical institutes, renowned for its research and  faculty collaborates through its CCE department with leading colleges to offer programs that help students gain practical skills, explore new areas, and get ready for tomorrow’s opportunities.
           </p>
         </div>
       </section>

@@ -22,17 +22,17 @@ const CreateAccountVerify = ({ form, onChange, onBack, onEdit }) => {
     } else {
       // If email OTP is provided, validate it
       if (form.emailOtp) {
-        const emailOtpValidation = validateOtp(form.emailOtp);
-        if (!emailOtpValidation.isValid) {
-          newErrors.emailOtp = emailOtpValidation.error;
-        }
+      const emailOtpValidation = validateOtp(form.emailOtp);
+      if (!emailOtpValidation.isValid) {
+        newErrors.emailOtp = emailOtpValidation.error;
       }
-      
+    }
+
       // If phone OTP is provided, validate it
       if (form.phoneOtp) {
-        const phoneOtpValidation = validateOtp(form.phoneOtp);
-        if (!phoneOtpValidation.isValid) {
-          newErrors.phoneOtp = phoneOtpValidation.error;
+      const phoneOtpValidation = validateOtp(form.phoneOtp);
+      if (!phoneOtpValidation.isValid) {
+        newErrors.phoneOtp = phoneOtpValidation.error;
         }
       }
     }
@@ -253,7 +253,7 @@ const CreateAccountVerify = ({ form, onChange, onBack, onEdit }) => {
               <div className="flex justify-center gap-4 mt-2">
                 <button
                   type="button"
-                  onClick={() => handleResendOtp('email')}
+                    onClick={() => handleResendOtp('email')}
                   className="font-medium text-[#603ae4] disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={isResending}
                 >
@@ -261,7 +261,7 @@ const CreateAccountVerify = ({ form, onChange, onBack, onEdit }) => {
                 </button>
                 <button
                   type="button"
-                  onClick={() => handleResendOtp('mobile')}
+                    onClick={() => handleResendOtp('mobile')}
                   className="font-medium text-[#603ae4] disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={isResending}
                 >

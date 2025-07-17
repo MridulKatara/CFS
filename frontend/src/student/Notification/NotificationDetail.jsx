@@ -4,8 +4,8 @@ import ApiService from '../../services/api';
 import Snackbar from '../../components/Snackbar';
 
 const NotificationDetail = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
+    const { id } = useParams();
+    const navigate = useNavigate();
   const [notification, setNotification] = useState(null);
   const [loading, setLoading] = useState(true);
   const [snackbar, setSnackbar] = useState(null);
@@ -20,7 +20,7 @@ const NotificationDetail = () => {
         
         if (response.success) {
           const foundNotification = response.notifications.find(n => n._id === id);
-          
+
           if (foundNotification) {
             setNotification(foundNotification);
           } else {
@@ -92,21 +92,21 @@ const NotificationDetail = () => {
     }
   };
 
-  return (
+    return (
     <div className="w-full min-h-screen bg-[#f5f5f5]">
-      {/* Header */}
-      <div className="sticky top-0 bg-white z-10 px-4 py-5 flex items-center">
-        <button 
+            {/* Header */}
+            <div className="sticky top-0 bg-white z-10 px-4 py-5 flex items-center">
+                <button 
           onClick={() => navigate('/notification')}
-          className="w-8 h-8 flex items-center justify-center"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="#202124"/>
-          </svg>
-        </button>
+                    className="w-8 h-8 flex items-center justify-center"
+                >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="#202124"/>
+                    </svg>
+                </button>
         <h1 className="text-[#202124] text-xl font-semibold flex-1 text-center">Notification Details</h1>
-        <div className="w-8 h-8"></div>
-      </div>
+                <div className="w-8 h-8"></div>
+            </div>
 
       {/* Notification Content */}
       <div className="px-4 py-6">
@@ -124,11 +124,11 @@ const NotificationDetail = () => {
               <div className="flex justify-between items-start">
                 <h2 className="text-xl font-semibold text-[#202124]">
                   {notification.notificationTitle || "Notification"}
-                </h2>
+                    </h2>
                 <span className={`px-3 py-1 text-xs font-medium rounded-full ${getTypeColor(notification.notificationType)}`}>
                   {notification.notificationType || "General"}
-                </span>
-              </div>
+                                    </span>
+                                </div>
               <p className="text-sm text-gray-500 mt-1">
                 {formatDate(notification.deliveredAt) || ""}
               </p>
@@ -139,9 +139,9 @@ const NotificationDetail = () => {
                 {notification.message || "No additional details available."}
               </p>
             </div>
-          </div>
-        )}
-      </div>
+                        </div>
+                    )}
+            </div>
 
       {snackbar && (
         <Snackbar
@@ -150,8 +150,8 @@ const NotificationDetail = () => {
           onClose={() => setSnackbar(null)}
         />
       )}
-    </div>
-  );
+        </div>
+    );
 };
 
 export default NotificationDetail;

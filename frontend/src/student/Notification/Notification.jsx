@@ -169,20 +169,20 @@ const Notification = () => {
                                 <div 
                                     key={notification._id}
                                     onClick={() => handleNotificationClick(notification)}
-                                    className={`rounded-2xl bg-white p-4 shadow-sm ${
+                        className={`rounded-2xl bg-white p-4 shadow-sm ${
                                         !notification.isRead 
-                                            ? 'border-l-[3px] border-[#704ee7]' 
+                                ? 'border-l-[3px] border-[#704ee7]' 
                                             : ''
-                                    }`}
-                                >
-                                    <div className="space-y-2">
+                        }`}
+                    >
+                        <div className="space-y-2">
                                         <div className="flex justify-between items-start">
-                                            <h3 className="text-base font-medium text-[#202124]">
+                            <h3 className="text-base font-medium text-[#202124]">
                                                 {notification.notificationTitle || "Notification"}
-                                            </h3>
+                            </h3>
                                             <span className="text-xs text-gray-500">
                                                 {formatDate(notification.deliveredAt) || ""}
-                                            </span>
+                                    </span>
                                         </div>
                                         
                                         <div className="flex items-center gap-2">
@@ -198,11 +198,11 @@ const Notification = () => {
                                                     : 'bg-blue-100 text-blue-800'
                                             }`}>
                                                 {notification.notificationType || "General"}
-                                            </span>
+                                        </span>
                                             
                                             {!notification.isRead && (
                                                 <span className="w-2 h-2 rounded-full bg-[#704ee7]"></span>
-                                            )}
+                                    )}
                                         </div>
                                     </div>
                                 </div>
@@ -263,7 +263,7 @@ const Notification = () => {
                                         <path d="M10 6L8.59 7.41L13.17 12L8.59 16.59L10 18L16 12L10 6Z" fill="currentColor"/>
                                     </svg>
                                 </button>
-                            </div>
+                    </div>
                         )}
                     </>
                 )}

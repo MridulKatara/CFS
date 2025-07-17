@@ -84,14 +84,14 @@ export const verifyRegistrationOtp = async ({ body }: any) => {
 
   // If at least one OTP is valid, proceed with registration
   if (emailValid || mobileValid) {
-    // Create the user after OTP verification
-    const userData = otpDoc.userData;
-    await User.create(userData);
+  // Create the user after OTP verification
+  const userData = otpDoc.userData;
+  await User.create(userData);
 
-    // Delete OTP doc after successful verification and user creation
-    await OtpVerification.deleteOne({ _id: otpDoc._id });
+  // Delete OTP doc after successful verification and user creation
+  await OtpVerification.deleteOne({ _id: otpDoc._id });
 
-    return { success: true };
+  return { success: true };
   }
 
   // If neither OTP is valid, return error

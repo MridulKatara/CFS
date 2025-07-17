@@ -80,7 +80,7 @@ const NotificationManager = () => {
         setLoading(false);
       }
     };
-    
+
     fetchData();
   }, []);
 
@@ -134,7 +134,7 @@ const NotificationManager = () => {
       });
       return;
     }
-    
+
     if (!formData.message.trim()) {
       setSnackbar({
         message: 'Please enter a notification message',
@@ -142,7 +142,7 @@ const NotificationManager = () => {
       });
       return;
     }
-    
+
     if (formData.selectedUsers.length === 0) {
       setSnackbar({
         message: 'Please select at least one user',
@@ -160,7 +160,7 @@ const NotificationManager = () => {
         message: formData.message,
         type: formData.type
       });
-      
+
       if (response.success) {
         // Add the new notification to the list
         const newNotification = {
@@ -222,61 +222,61 @@ const NotificationManager = () => {
       
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         <h1 className="text-2xl font-bold mb-6">Notification Manager</h1>
-        
+      
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Send Notification Form */}
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-xl font-semibold mb-4">Send New Notification</h2>
-            
+      
             <form onSubmit={handleSubmit}>
-              <div className="mb-4">
+        <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Notification Type
-                </label>
-                <select
-                  name="type"
+            Notification Type
+          </label>
+          <select
+            name="type"
                   value={formData.type}
-                  onChange={handleInputChange}
+            onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                >
+          >
                   {notificationTypes.map(type => (
                     <option key={type} value={type}>{type}</option>
                   ))}
-                </select>
-              </div>
-              
-              <div className="mb-4">
+          </select>
+        </div>
+        
+        <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Title
-                </label>
-                <input
-                  type="text"
-                  name="title"
+            Title
+          </label>
+          <input
+            type="text"
+            name="title"
                   value={formData.title}
-                  onChange={handleInputChange}
+            onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="Enter notification title"
-                />
-              </div>
-              
-              <div className="mb-4">
+          />
+        </div>
+        
+        <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Message
-                </label>
-                <textarea
-                  name="message"
+            Message
+          </label>
+          <textarea
+            name="message"
                   value={formData.message}
-                  onChange={handleInputChange}
+            onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="Enter notification message"
-                  rows="4"
-                ></textarea>
-              </div>
-              
-              <div className="mb-4">
+            rows="4"
+          ></textarea>
+        </div>
+        
+        <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Recipients
-                </label>
+          </label>
                 <div className="flex gap-2 mb-2">
                   <button
                     type="button"
@@ -292,24 +292,24 @@ const NotificationManager = () => {
                   >
                     Clear
                   </button>
-                </div>
-                
+          </div>
+          
                 <div className="max-h-60 overflow-y-auto border border-gray-300 rounded-md p-2">
                   {users.length === 0 ? (
                     <p className="text-gray-500 text-center py-2">No users found</p>
                   ) : (
                     users.map(user => (
                       <div key={user._id} className="flex items-center py-1 border-b border-gray-100 last:border-b-0">
-                        <input
-                          type="checkbox"
-                          id={`user-${user._id}`}
+                <input
+                  type="checkbox"
+                  id={`user-${user._id}`}
                           checked={formData.selectedUsers.includes(user._id)}
                           onChange={() => handleUserCheckboxChange(user._id)}
                           className="mr-2 h-4 w-4 text-indigo-600 focus:ring-indigo-500 rounded"
-                        />
+                />
                         <label htmlFor={`user-${user._id}`} className="text-sm text-gray-700 cursor-pointer flex-1">
-                          {user.fullName} ({user.personalEmail})
-                        </label>
+                  {user.fullName} ({user.personalEmail})
+                </label>
                       </div>
                     ))
                   )}
@@ -374,8 +374,8 @@ const NotificationManager = () => {
                       </div>
                     </div>
                   ))}
-                </div>
-                
+        </div>
+        
                 {/* Pagination Controls */}
                 <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                   <div className="text-sm text-gray-500">
@@ -399,7 +399,7 @@ const NotificationManager = () => {
                           (pageNum >= pagination.page - 1 && pageNum <= pagination.page + 1)
                         ) {
                           return (
-                            <button
+          <button
                               key={pageNum}
                               onClick={() => handlePageChange(pageNum)}
                               className={`w-8 h-8 flex items-center justify-center rounded-md ${
@@ -407,9 +407,9 @@ const NotificationManager = () => {
                                   ? 'bg-indigo-600 text-white' 
                                   : 'border border-gray-300 text-gray-700'
                               }`}
-                            >
+          >
                               {pageNum}
-                            </button>
+          </button>
                           );
                         } else if (
                           (pageNum === 2 && pagination.page > 3) || 
@@ -420,13 +420,13 @@ const NotificationManager = () => {
                         return null;
                       })}
                     </div>
-                    <button
+          <button
                       onClick={() => handlePageChange(pagination.page + 1)}
                       disabled={pagination.page === pagination.totalPages}
                       className="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
+          >
                       Next
-                    </button>
+          </button>
                   </div>
                 </div>
               </>

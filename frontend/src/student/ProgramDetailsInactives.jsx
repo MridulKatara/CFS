@@ -12,30 +12,13 @@ const ProgramDetailsInactives = () => {
   const [error, setError] = useState(null);
 
   const facultyData = [
-    {
-      name: "Dr. Tushar JAIN",
-      designation: "Head CCE, IIT Mandi",
-      institution: "IIT Mandi",
-      img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/96ea7635-f86d-4314-a878-635f02678a11/DMao2csPnQRdUE0G.jpg`,
-    },
-    {
-      name: "Dr. Sneha Singh",
-      designation: "Associate Professor",
-      institution: "IIT Mandi",
-      img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/7e1bf450-21d5-4b20-bb8e-337125f6403e/VCRFTyaLfVypom0E.jpeg`,
-    },
-    {
-      name: "Dr. Adarsh Patel",
-      designation: "Assistant Professor",
-      institution: "IIT Mandi",
-      img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/082dec54-2aae-400d-91f7-eae85b1f29bc/RfpSqCRu2ygjuABy.jpg`,
-    },
-    {
-      name: "Dr. Jyoti Nigam",
-      designation: "Assistant Professor",
-      institution: "IIT Mandi",
-      img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/b75b532e-5525-4ccd-9acf-d40864e56ca0/IQCa1KCiiylDPpfQ.jpg`,
-    },
+    { name: "Dr.Abhinava Tripati", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/bcee9c75-9520-4472-b96b-3a755d924020/0az1FSVstjFXSHT0.png` },
+    { name: "Dr. Sneha Singh", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/7e1bf450-21d5-4b20-bb8e-337125f6403e/VCRFTyaLfVypom0E.jpeg` },
+    { name: "Dr. Adarsh Patel", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/082dec54-2aae-400d-91f7-eae85b1f29bc/RfpSqCRu2ygjuABy.jpg` },
+    { name: "Dr. Jyoti Nigam", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/b75b532e-5525-4ccd-9acf-d40864e56ca0/IQCa1KCiiylDPpfQ.jpg` },
+    { name: "Dr. Aditya Nigam", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/a0796d9b-f275-4972-ac4e-ced4ac254f2c/QFbrkXcIrCTP1tH0.png` },
+    { name: "Dr. Manoj Thakur", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/82faf43a-ab76-4010-813a-c8c998eac79e/RXtSQYD3pKKCY2l3.png` },
+    { name: "Dr. Varun Kumar", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/0306b6f5-afb0-4b31-8cfc-4f9ae8261ead/BbPbaxvLZTGdGbw0.png` },
   ];
 
   useEffect(() => {
@@ -172,26 +155,26 @@ const ProgramDetailsInactives = () => {
             </div>
           </div>
           {program.toolkit && program.toolkit.length > 0 && (
-            <div className="mb-6">
-              <h3 className="text-base font-medium text-black mb-4">
-                Tools You Will Learn:
-              </h3>
+          <div className="mb-6">
+            <h3 className="text-base font-medium text-black mb-4">
+              Tools You Will Learn:
+            </h3>
               <div className="grid grid-cols-3 gap-4">
                 {program.toolkit.map((tool, index) => (
                   <div key={index} className="flex flex-col items-center">
-                    <img 
-                      className="w-16 h-16 object-contain" 
+              <img
+                className="w-16 h-16 object-contain"
                       alt={tool.name} 
                       src={tool.logoUrl} 
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.src = 'https://via.placeholder.com/64?text=' + tool.name.charAt(0);
                       }}
-                    />
+              />
                     <p className="text-xs text-center mt-1">{tool.name}</p>
                   </div>
                 ))}
-              </div>
+            </div>
             </div>
           )}
           <div className="mb-6">

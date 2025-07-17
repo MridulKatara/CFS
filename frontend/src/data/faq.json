@@ -5,71 +5,51 @@
         "questions": [
           {
             "question": "What is the CCE IIT Mandi Minor Program?",
-            "answer": "The program is a 3-semester certification course offered by IIT Mandi in partnership with NSDC, Masai, and partner universities. It aims to provide hands-on, industry-relevant skills alongside your main degree."
+            "answer": "The IIT Mandi Minor Program is a three-semester, credit-linked certification offered by IIT Mandi in collaboration with NSDC, Masai, and select partner universities. It is designed to help students build practical, industry-relevant skills alongside their main degree."
           },
           {
-            "question": "Who can apply for this program?",
-            "answer": "The program is open to students from all streams and backgrounds enrolled in partner universities."
+            "question": "Who can apply?",
+            "answer": "Students from any stream enrolled at a participating partner university are eligible to apply."
           },
           {
-            "question": "What specialisations are offered?",
-            "answer": "There are four Minor tracks: Minor in Artificial Intelligence, Minor in CSE and Advanced Tech, Minor in Business Analytics, and Minor in Data Science & Machine Learning."
+            "question": "What specialisations are available?",
+            "answer": "Students can choose from four Minor tracks: Artificial Intelligence, Computer Science & Advanced Technologies, Data Science & Machine Learning, and Business Analytics."
           },
           {
-            "question": "What is the structure and duration of the program?",
-            "answer": "The program runs across 3 semesters. Each semester focuses on specific credit-based modules, totalling 18 credits (7 + 8 + 3 credits)."
+            "question": "What is the program structure and duration?",
+            "answer": "The Minor runs for 3 semesters, covering 18 academic credits (7 + 8 + 3). The curriculum blends live weekend classes, hands-on projects, real-world case studies, and mentorship."
           },
           {
-            "question": "What are the key features of the program?",
-            "answer": "Live weekend classes by IIT faculty and industry experts, hands-on projects, case studies, offline mentorship, AI-powered LMS with recordings and masterclasses, offline exams, and placement/internship opportunities for students with a CGPA of 7+."
+            "question": "What are the key learning features?",
+            "answer": "Classes are delivered by IIT Mandi faculty and industry experts. Students benefit from an AI-powered learning platform (LMS), live sessions, offline exams, masterclasses, and offline mentorship opportunities. Placement and internship support are available for students maintaining a CGPA of 7.0 or above."
           },
           {
-            "question": "Is there any certification?",
-            "answer": "Yes, students receive a Minor certification from IIT Mandi upon successful completion of the program."
+            "question": "Will I receive a certificate?",
+            "answer": "Yes. On successful completion, students receive an official Minor Certificate from IIT Mandi."
           },
           {
-            "question": "What is the fee for the program?",
-            "answer": "The total fee is ₹45,000, payable as ₹15,000 per semester."
+            "question": "What is the program fee?",
+            "answer": "The total fee is ₹45,000, payable in three instalments of ₹15,000 per semester."
           },
           {
-            "question": "Are there any offline components?",
-            "answer": "Yes. Students may get opportunities to attend the on-campus graduation ceremony."
+            "question": "Are there offline components?",
+            "answer": "Where applicable, students may have opportunities for in-person mentorship or to attend an on-campus graduation ceremony."
           },
           {
-            "question": "Who conducts evaluations?",
-            "answer": "Evaluations are conducted by IIT Mandi, Masai, and partner universities through both online and offline assessments."
+            "question": "Who conducts assessments?",
+            "answer": "Evaluations are conducted jointly by IIT Mandi, Masai, and the partner universities through a combination of online and offline assessments."
           },
           {
-            "question": "How can I get support during the program?",
-            "answer": "A dedicated support team, regular sessions, and an AI-powered LMS are available to address student concerns."
+            "question": "Is this a degree program?",
+            "answer": "No. This is a part-time, credit-linked certification program, not equivalent to a full B.Tech degree. Credits earned can be added to a student’s Academic Bank of Credits (ABC) as per NEP guidelines."
           },
           {
-            "question": "Whom can I contact for more queries?",
-            "answer": "📧 Email: info.cce@iitmandi.ac.in 📞 Phone: 6364919735"
+            "question": "What is the medium of instruction?",
+            "answer": "All sessions and materials are provided in English."
           },
           {
-            "question": "Is this program a degree program?",
-            "answer": "No, this program does not confer a degree. It is a credit-linked part-time program."
-          },
-          {
-            "question": "Is this program officially affiliated with IIT Mandi?",
-            "answer": "Yes, the program is officially affiliated with IIT Mandi. It is also listed on their official website."
-          },
-          {
-            "question": "What is the duration of this program?",
-            "answer": "The program duration is 3 semesters."
-          },
-          {
-            "question": "What is the meaning of a credit-linked program?",
-            "answer": "This program offers 18 academic credits upon successful completion. These can be added to a student's Academic Bank of Credits (ABC) as per NEP guidelines."
-          },
-          {
-            "question": "Is this program equivalent to pursuing a B.Tech from IIT Mandi?",
-            "answer": "No. A B.Tech degree requires clearing JEE Advanced and involves 160+ credits. This Minor program is a part-time certification that complements your current education."
-          },
-          {
-            "question": "What is the primary language of the course?",
-            "answer": "English."
+            "question": "Whom can I contact for support?",
+            "answer": "For any questions, please reach out to info.cce@iitmandi.ac.in or call us at 6364919735."
           }
         ]
       },
@@ -82,11 +62,11 @@
           },
           {
             "question": "I have basic knowledge of AI/Python/BA/Data Science fundamentals. Can I start directly from the second Module?",
-            "answer": "No, the program does not offer lateral entry. The first Module is mandatory as it builds foundational knowledge."
+            "answer": "The program does not offer lateral entry into the second Module, as the first Module serves as a prerequisite. We recommend starting from the first Module to ensure you have the foundational knowledge needed for success. By fully engaging with the assignments, evaluations, and projects, you’ll not only refine your skills but also set yourself up to excel and achieve a CGPA of 7 or higher."
           },
           {
             "question": "Do I need to have in-depth knowledge of Mathematics for this program?",
-            "answer": "No, all concepts will be taught from the fundamentals."
+            "answer": "No prior in-depth knowledge is needed to join this course. As the concepts that will be taught will be from fundamental topics."
           },
           {
             "question": "I have “0” knowledge about coding. Can I enrol in the program?",
@@ -107,11 +87,11 @@
           },
           {
             "question": "Is attendance mandatory for all classes?",
-            "answer": "Attendance in live classes is highly recommended as you will be able to grasp concepts better with the flow of live classes. However, if you miss any live sessions, recordings will be made available to you."
+            "answer": "Attendance in live classes is highly recommended as you will be able to grasp concepts better with the flow of live classes. The classes will be scheduled at a time which is after your college/ in most cases office hours. However, if you miss any live sessions, recordings will be made available to you on the learning platform."
           },
           {
             "question": "Do we have offline classes?",
-            "answer": "No, the course is designed to be fully online to ensure accessibility for students from across the country and internationally."
+            "answer": "No, the course is designed to be fully online to ensure accessibility for students from across the country and even internationally. This format allows you to learn from anywhere, offering flexibility and convenience while maintaining a high-quality educational experience."
           },
           {
             "question": "What if I miss the live classes?",
@@ -119,11 +99,11 @@
           },
           {
             "question": "If I have doubts, will I get one-on-one mentorship?",
-            "answer": "One-to-one mentorship is not available, but tutorial sessions and small breakout rooms provide TA interaction for doubt resolution."
+            "answer": "If you have any queries related to the curriculum, you can raise them during the tutorial session or through discussions. One-to-one mentorship is not available, but in place of that, during the tutorial session, we divide students into small breakout rooms where you can interact with your TAs to get your doubts clarified."
           },
           {
             "question": "Who will support me in case of doubts? Is there a support team or a helpline number?",
-            "answer": "You can raise a support ticket on the Masai LMS platform and attend regular support sessions."
+            "answer": "In case of any doubts, you can raise your issues by raising the support ticket on Masai LMS Platform and you can also attend the regular support sessions conducted on a regular basis."
           },
           {
             "question": "What are the overall program clearance criteria?",
@@ -136,27 +116,27 @@
         "questions": [
           {
             "question": "When will I receive my student kit?",
-            "answer": "After enrolling and completing the payment of the 1st semester fees, during program orientation you will receive the KIT."
+            "answer": "After enrolling and completing the payment of the 1st semester fees afterwards during program orientation you will receive the KIT."
           },
           {
             "question": "What is Campus Immersion, and when will it take place?",
-            "answer": "Campus Immersion is a two- to three-day event that will take place in the IIT Mandi campus after Semester 1. Hostel and food cost < Rs. 1000/day. Travel costs are extra."
+            "answer": "Campus Immersion is a two- to three-day event that will take place in the IIT Mandi campus, based on the availability of the campus. The campus immersion takes place after Semester 1. During the Campus immersion event, you get the chance to stay on the campus during this period and will get the chance to interact with your professors. Hostel and Food expenses will be less than Rs 1000 per day during the event. The travel expenses will be on the student."
           },
           {
             "question": "Can I visit the IIT Mandi campus using my student ID anytime?",
-            "answer": "No, campus access is allowed only during scheduled events such as Orientation, Campus Immersion, and Graduation."
+            "answer": "No, you can not access the IIT Mandi Campus facility at any time. You are allowed to visit the campus for the scheduled events like Orientation, Campus Immersion and Graduation ceremony."
           },
           {
             "question": "Are the campus events mandatory to attend?",
-            "answer": "No, they are not mandatory."
+            "answer": "We will invite you to the campus for the campus immersion events. It is not mandatory to attend these events."
           },
           {
             "question": "Do I need to pay for the campus immersion?",
-            "answer": "Yes, a minimal charge (under Rs. 1000/day) is applicable for accommodation and food."
+            "answer": "During the campus events, you need to pay a minimal amount (less than Rs. 1000 per day) for the accommodation and food."
           },
           {
             "question": "Can we participate in college fests hosted at IIT Mandi?",
-            "answer": "Only if invited and your college is participating."
+            "answer": "Only if you are participating from your college and your college has been invited for the fest."
           }
         ]
       },
@@ -165,27 +145,27 @@
         "questions": [
           {
             "question": "How many exams will be conducted during the program?",
-            "answer": "2 online evaluations per semester, plus an offline exam at the end in major cities (within 500 km)."
+            "answer": "Every Semester there will be 2 evaluations which will be online. At the end of three Modules/end of the program, we will have an offline evaluation which will be scheduled in all major cities and will be within 500 kms from your place."
           },
           {
             "question": "What will be the timings of each evaluation?",
-            "answer": "Quizzes: 1 hour; Mid-evaluation & End-module: 1.5–2 hours."
+            "answer": "Quizzes time 1 hr each & Mid-evaluation & End-Module 1:30 - 2 hrs."
           },
           {
             "question": "What is the clearance criterion for the exams?",
-            "answer": "30% in each Module."
+            "answer": "The clearance criterion for each semester is 30% in each Module."
           },
           {
             "question": "What will be the deadline for assignments?",
-            "answer": "Daily Learning Checks (MCQ): 1 day; regular assignments: 10 days."
+            "answer": "During the course, we will release 2 kinds of assignments, one is Daily Learning Checks which are MCQ in nature, has a deadline of 1 day and assignments has a deadline of 10 days."
           },
           {
             "question": "Do we have to give offline exams on campus?",
-            "answer": "No, the final exam will be offline but not on IIT Guwahati campus—only in major city centers."
+            "answer": "At the end of the program, there will be a mandatory offline exam that will be conducted in major cities across every state. You will be required to select a preferred exam center from the available options and appear for the evaluation in person.The offline exam will not be scheduled at IIT Guwahati campus."
           },
           {
             "question": "What if I fail the exams? Can I continue with the program?",
-            "answer": "You need 30% across all modules. If not met, you must re-enroll and pay again."
+            "answer": "The overall program completion criteria require a score of 30% across all three Modules, which is achievable with consistent effort. If you are unable to meet this requirement, you can reappear for a new batch by paying the course fee and repeating the program."
           }
         ]
       },
@@ -193,16 +173,24 @@
         "title": "Placements",
         "questions": [
           {
+            "question": "Criteria:",
+            "answer": "Graduation and available for placements. The detailed process will be shared at the time of placement readiness."
+          },
+          {
             "question": "What is the placement process after the completion of course?",
-            "answer": "1. Complete the program with CGPA 7+; 2. Attend placement readiness sessions; 3. Onboard to Masai portal; 4. Apply and attend hiring drives."
+            "answer": [
+              "1. After the successful completion of the program and upon securing a CGPA of 7 and above, you will be eligible for Internship/placement readiness sessions. This includes support in becoming placement-ready through guidance on the interview process, resume building, and profile development.",
+              "2. Once this is complete, you will be onboarded on the placement portal of Masai School, which is our implementation partner for the program.",
+              "3. Based on your profile and skill score, you will be able to apply to companies and convert opportunities into offers. You will also be onboarded onto a platform where various companies are present, giving you access to numerous placement opportunities. Additionally, you may have the chance to participate in hiring drives conducted regularly by Masai School."
+            ]
           },
           {
             "question": "Can I avail of the IIT Mandi Facilities during the course?",
-            "answer": "Yes, but only with approval or during invited events."
+            "answer": "You can visit the campus only when invited for the scheduled events. Other than that if you wish to visit the campus, you need to write an email to Masai School so we can seek approvals."
           },
           {
             "question": "Will I be able to attend the IIT Mandi campus placement?",
-            "answer": "No, you will be onboarded to a separate placement portal tailored for this program."
+            "answer": "It may not be fair to you, as students from BTech backgrounds will have a different level of competition. Thus to have a level playing ground for all students in this program, you will be onboarded on a placement portal basis your performance i.e. 7 CGPA in the overall program"
           }
         ]
       },
@@ -211,27 +199,27 @@
         "questions": [
           {
             "question": "What if I am unable to understand the concepts? Can I discontinue the program?",
-            "answer": "Discontinuation is not an option. You are encouraged to seek support from TAs, forums, and program coordinators."
+            "answer": "We understand that some concepts can be challenging, but rest assured, you’ll have plenty of support along the way. You’ll have access to teaching assistant tutorials (Ph.D. scholars from IIT), discussion forums on the Learning Management System (LMS), and sessions with industry experts—all of which are valuable resources to help you clarify any doubts and move forward confidently.Once enrolled, discontinuation is not an option; however, you can request additional support if needed. The program encourages you to stay determined and committed, as persistence is key to success. We are here to provide all the assistance you need throughout your learning journey."
           },
           {
             "question": "I am from a non-technical background. Will I be able to cope with the program?",
-            "answer": "Yes, the program starts from basics."
+            "answer": "Yes absolutely, this course is designed in such a way that even a non-tech person can learn everything as its start from basics."
           },
           {
             "question": "I am not comfortable with English. Will the sessions be taught in Hindi or other native languages?",
-            "answer": "No, the sessions are conducted in English."
+            "answer": "The primary language of the course is English to cater for the demand of all the students."
           },
           {
             "question": "What support will I get during the course?",
-            "answer": "Tutorials, doubt discussions, Zoom support hours, and direct access to TAs and coordinators."
+            "answer": "All live class concepts are supplemented with tutorial sessions, which include recaps and doubt-solving sessions. If you have any doubts about the lectures or assignments, you can raise them using the 'Discussions' feature. The teaching assistant will answer all technical queries and for non-curriculum-related doubts, there will be a two-hour support session on Zoom, where your Program Coordinator will assist you."
           },
           {
             "question": "How will I receive my class schedule?",
-            "answer": "Through LMS, WhatsApp groups, and shared calendar."
+            "answer": "Learning Management System, Official WhatsApp and the schedule will be shared on a calendar for reference."
           },
           {
             "question": "What platforms will we use for this program?",
-            "answer": "Zoom, WhatsApp, LMS."
+            "answer": "Zoom, WhatsApp, Learning Management System."
           }
         ]
       },
@@ -240,19 +228,19 @@
         "questions": [
           {
             "question": "What certificate will I receive at the end of the program?",
-            "answer": "Course completion certificate and performance transcript if you clear 30% criteria."
+            "answer": "At the end of the program, you will get the certificate of course completion as well as your transcript based on your performance, once you meet the clearance criteria of a minimum of 30%."
           },
           {
             "question": "Will I receive a physical copy of my certificate?",
-            "answer": "Yes."
+            "answer": "Yes, a physical copy of the certificate will be provided to you."
           },
           {
             "question": "Do we get alumni access to IIT Mandi?",
-            "answer": "Yes, after successful completion."
+            "answer": "Yes, You will get access to the alumni network of IIT Mandi upon successful completion of the program."
           },
           {
             "question": "What is the validity of the student ID card and email ID?",
-            "answer": "ID card valid for 18 months; email ID stays with you even after the program."
+            "answer": "The student ID card is valid for 18 months from the program start date. However, the student email ID will remain with you even after the program."
           }
         ]
       }

@@ -156,8 +156,93 @@ const CampusSlider = () => {
     setIsDragging(false);
   };
 
+  // Function to render pagination dots with ellipsis
+  const renderPaginationDots = () => {
+    const maxVisibleDots = 5; // Maximum number of dots to show
+    const totalDots = slides.length;
+    
+    if (totalDots <= maxVisibleDots) {
+      // If we have fewer dots than the maximum, show all of them
+      return (
+        <div className="flex justify-center mt-3 space-x-1">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                currentSlide === index ? 'bg-[#704ee7] w-3' : 'bg-gray-300'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      );
+    } else {
+      // Calculate which dots to show
+      let dotsToShow = [];
+      const sideDotsCount = Math.floor(maxVisibleDots / 2);
+      
+      // Always show first dot
+      dotsToShow.push(0);
+      
+      // Calculate middle dots
+      if (currentSlide <= sideDotsCount) {
+        // We're near the beginning
+        for (let i = 1; i <= sideDotsCount * 2 - 1; i++) {
+          dotsToShow.push(i);
+        }
+        dotsToShow.push(-1); // Ellipsis placeholder for end
+      } else if (currentSlide >= totalDots - sideDotsCount - 1) {
+        // We're near the end
+        dotsToShow.push(-1); // Ellipsis placeholder for beginning
+        for (let i = totalDots - sideDotsCount * 2; i < totalDots - 1; i++) {
+          dotsToShow.push(i);
+        }
+      } else {
+        // We're in the middle
+        dotsToShow.push(-1); // Ellipsis placeholder for beginning
+        for (let i = currentSlide - 1; i <= currentSlide + 1; i++) {
+          dotsToShow.push(i);
+        }
+        dotsToShow.push(-2); // Ellipsis placeholder for end
+      }
+      
+      // Always show last dot
+      dotsToShow.push(totalDots - 1);
+      
+      return (
+        <div className="flex justify-center mt-3 space-x-1">
+          {dotsToShow.map((dotIndex, index) => {
+            if (dotIndex < 0) {
+              // This is an ellipsis
+              return (
+                <span 
+                  key={`ellipsis-${index}`} 
+                  className="text-gray-400 text-xs flex items-center px-0.5"
+                >
+                  ...
+                </span>
+              );
+            }
+            
+            return (
+              <button
+                key={dotIndex}
+                onClick={() => setCurrentSlide(dotIndex)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  currentSlide === dotIndex ? 'bg-[#704ee7] w-3' : 'bg-gray-300'
+                }`}
+                aria-label={`Go to slide ${dotIndex + 1}`}
+              />
+            );
+          })}
+        </div>
+      );
+    }
+  };
+
   return (
-    <div className="relative overflow-hidden rounded-xl mx-auto" style={{ width: '325px', height: '200px' }}>
+    <div className="relative overflow-hidden rounded-xl mx-auto" style={{ width: '325px' }}>
       <div 
         ref={slideContainerRef}
         className="flex transition-transform duration-500 ease-in-out" 
@@ -184,6 +269,31 @@ const CampusSlider = () => {
           </div>
         ))}
       </div>
+      
+      {/* Navigation arrows - commented out as gesture-based navigation is preferred
+      <button 
+        onClick={handlePrevSlide}
+        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-1 hover:bg-opacity-75 transition-all"
+        aria-label="Previous slide"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+      </button>
+      
+      <button 
+        onClick={handleNextSlide}
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-1 hover:bg-opacity-75 transition-all"
+        aria-label="Next slide"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
+      </button>
+      */}
+      
+      {/* Pagination dots */}
+      {renderPaginationDots()}
     </div>
   );
 };
@@ -191,10 +301,13 @@ const CampusSlider = () => {
 // Faculty content for point 3
 const FacultyContent = () => {
   const faculty = [
-    { name: "Dr. Tushar JAIN", role: "Head CCE, IIT Mandi", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/96ea7635-f86d-4314-a878-635f02678a11/DMao2csPnQRdUE0G.jpg` },
-    { name: "Dr. Sneha Singh", role: "Associate Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/7e1bf450-21d5-4b20-bb8e-337125f6403e/VCRFTyaLfVypom0E.jpeg` },
+    { name: "Dr.Abhinava Tripati", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/bcee9c75-9520-4472-b96b-3a755d924020/0az1FSVstjFXSHT0.png` },
+    { name: "Dr. Sneha Singh", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/7e1bf450-21d5-4b20-bb8e-337125f6403e/VCRFTyaLfVypom0E.jpeg` },
     { name: "Dr. Adarsh Patel", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/082dec54-2aae-400d-91f7-eae85b1f29bc/RfpSqCRu2ygjuABy.jpg` },
     { name: "Dr. Jyoti Nigam", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/b75b532e-5525-4ccd-9acf-d40864e56ca0/IQCa1KCiiylDPpfQ.jpg` },
+    { name: "Dr. Aditya Nigam", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/a0796d9b-f275-4972-ac4e-ced4ac254f2c/QFbrkXcIrCTP1tH0.png` },
+    { name: "Dr. Manoj Thakur", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/82faf43a-ab76-4010-813a-c8c998eac79e/RXtSQYD3pKKCY2l3.png` },
+    { name: "Dr. Varun Kumar", role: "Assistant Professor", institution: "IIT Mandi", img: `https://coding-platform.s3.amazonaws.com/dev/lms/tickets/0306b6f5-afb0-4b31-8cfc-4f9ae8261ead/BbPbaxvLZTGdGbw0.png` },
   ];
 
   return (

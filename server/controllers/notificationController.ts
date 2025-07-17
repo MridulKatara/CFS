@@ -157,7 +157,7 @@ export const sendNotification = async ({ body }: any) => {
         
         for (let i = 0; i < response.responses.length; i++) {
           const result = response.responses[i];
-          if (!result.success && tokens[i]) {
+          if (!result?.success && tokens[i]) {
             // Find the user with this token
             const user = users.find(u => u.fcmToken === tokens[i]);
             if (user) {
@@ -166,7 +166,7 @@ export const sendNotification = async ({ body }: any) => {
                   { userId: user._id, notificationId: notification._id },
                   { 
                     deliveryStatus: 'failed',
-                    deliveryError: result.error?.message || 'Unknown error'
+                    deliveryError: result?.error?.message || 'Unknown error'
                   }
                 )
               );

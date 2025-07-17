@@ -110,19 +110,19 @@ const CreateAccountSave = ({ form, onChange, onNext }) => {
               {/* Name Field */}
               <div className="self-stretch flex flex-col items-start justify-start gap-1.5">
                 <div className="relative leading-[120%]">Name</div>
-                <div className="self-stretch flex flex-col items-start justify-start text-[#b3b3b3]">
-                  <input
-                    type="text"
+                  <div className="self-stretch flex flex-col items-start justify-start text-[#b3b3b3]">
+                    <input
+                      type="text"
                     value={form.name}
                     onChange={e => handleInputChange('name', e.target.value)}
                     placeholder="Enter your name"
                     className={`self-stretch rounded-lg bg-[#fff] border-[#d9d9d9] border-solid border-[1px] box-border py-3 px-4 min-w-[240px] leading-[140%] outline-none ${errors.name ? 'border-red-500' : ''}`}
-                    required
-                  />
+                      required
+                    />
                   {errors.name && (
                     <div className="text-red-500 text-xs mt-1">{errors.name}</div>
-                  )}
-                </div>
+                    )}
+                  </div>
               </div>
 
               {/* University Dropdown */}

@@ -11,27 +11,27 @@ const videoTestimonials = [
   },
   {
     id: 2,
-    url: "https://cdn.masaischool.com/coding-platform/dev/lms/tickets/eed94c1a-8ca4-4f23-b88f-6d433e899c01/lPW3vABeVCzpReze.mp4",
-    name: "Dr. DEEPAK N R.",
-    title: "Professor & Head, Dept. of ISE, Atria"
-  },
-  {
-    id: 3,
-    url: "https://cdn.masaischool.com/coding-platform/dev/lms/tickets/b311007c-c77b-4d9d-93dc-4fe9455f0f14/qTPlXJLm21XPoPhX.mp4",
-    name: "Dr. RAVIVHANDRA K R",
-    title: "Professor and Dean Academics, Atria"
-  },
-  {
-    id: 4,
     url: "https://cdn.masaischool.com/coding-platform/dev/lms/tickets/9f06551d-3ad8-4541-bd62-23eca726d37a/LecPXYG1gAHtxCNW.mp4",
     name: "Dr. ARGHA SARKAR",
     title: "Associate Professor, REVA University"
   },
   {
-    id: 5,
+    id: 3,
+    url: "https://cdn.masaischool.com/coding-platform/dev/lms/tickets/eed94c1a-8ca4-4f23-b88f-6d433e899c01/lPW3vABeVCzpReze.mp4",
+    name: "Dr. DEEPAK N R.",
+    title: "Professor & Head, Dept. of ISE, Atria"
+  },
+  {
+    id: 4,
     url: "https://cdn.masaischool.com/coding-platform/dev/lms/tickets/f328858d-70e9-4adc-9149-98a3492b23f0/AXBFDC1dS1DW3UEr.mp4",
     name: "Dr. ASHWINKUMAR U M",
     title: "Director & Professor, REVA University"
+  },
+  {
+    id: 5,
+    url: "https://cdn.masaischool.com/coding-platform/dev/lms/tickets/b311007c-c77b-4d9d-93dc-4fe9455f0f14/qTPlXJLm21XPoPhX.mp4",
+    name: "Dr. RAVIVHANDRA K R",
+    title: "Professor and Dean Academics, Atria"
   },
   {
     id: 6,
@@ -245,6 +245,176 @@ export default function Testimonials() {
     setIsDragging(false);
   };
 
+  // Function to render pagination dots with ellipsis for text testimonials
+  const renderTextTestimonialDots = () => {
+    const maxVisibleDots = 5; // Maximum number of dots to show
+    const totalDots = testimonials.length;
+    
+    if (totalDots <= maxVisibleDots) {
+      // If we have fewer dots than the maximum, show all of them
+      return (
+        <div className="flex justify-center mt-3 space-x-1">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setIdx(index)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                idx === index ? 'bg-[#704ee7] w-3' : 'bg-gray-300'
+              }`}
+              aria-label={`Go to testimonial ${index + 1}`}
+            />
+          ))}
+        </div>
+      );
+    } else {
+      // Calculate which dots to show
+      let dotsToShow = [];
+      const sideDotsCount = Math.floor(maxVisibleDots / 2);
+      
+      // Always show first dot
+      dotsToShow.push(0);
+      
+      // Calculate middle dots
+      if (idx <= sideDotsCount) {
+        // We're near the beginning
+        for (let i = 1; i <= sideDotsCount * 2 - 1; i++) {
+          dotsToShow.push(i);
+        }
+        dotsToShow.push(-1); // Ellipsis placeholder for end
+      } else if (idx >= totalDots - sideDotsCount - 1) {
+        // We're near the end
+        dotsToShow.push(-1); // Ellipsis placeholder for beginning
+        for (let i = totalDots - sideDotsCount * 2; i < totalDots - 1; i++) {
+          dotsToShow.push(i);
+        }
+      } else {
+        // We're in the middle
+        dotsToShow.push(-1); // Ellipsis placeholder for beginning
+        for (let i = idx - 1; i <= idx + 1; i++) {
+          dotsToShow.push(i);
+        }
+        dotsToShow.push(-2); // Ellipsis placeholder for end
+      }
+      
+      // Always show last dot
+      dotsToShow.push(totalDots - 1);
+      
+      return (
+        <div className="flex justify-center mt-3 space-x-1">
+          {dotsToShow.map((dotIndex, index) => {
+            if (dotIndex < 0) {
+              // This is an ellipsis
+              return (
+                <span 
+                  key={`ellipsis-${index}`} 
+                  className="text-gray-400 text-xs flex items-center px-0.5"
+                >
+                  ...
+                </span>
+              );
+            }
+            
+            return (
+              <button
+                key={dotIndex}
+                onClick={() => setIdx(dotIndex)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  idx === dotIndex ? 'bg-[#704ee7] w-3' : 'bg-gray-300'
+                }`}
+                aria-label={`Go to testimonial ${dotIndex + 1}`}
+              />
+            );
+          })}
+        </div>
+      );
+    }
+  };
+
+  // Function to render pagination dots with ellipsis for video testimonials
+  const renderVideoTestimonialDots = () => {
+    const maxVisibleDots = 5; // Maximum number of dots to show
+    const totalDots = videoTestimonials.length;
+    
+    if (totalDots <= maxVisibleDots) {
+      // If we have fewer dots than the maximum, show all of them
+      return (
+        <div className="flex justify-center gap-2 mt-4">
+          {videoTestimonials.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentVideoIndex(index)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                currentVideoIndex === index ? 'bg-[#704ee7] w-3' : 'bg-gray-300'
+              }`}
+              aria-label={`Go to video ${index + 1}`}
+            />
+          ))}
+        </div>
+      );
+    } else {
+      // Calculate which dots to show
+      let dotsToShow = [];
+      const sideDotsCount = Math.floor(maxVisibleDots / 2);
+      
+      // Always show first dot
+      dotsToShow.push(0);
+      
+      // Calculate middle dots
+      if (currentVideoIndex <= sideDotsCount) {
+        // We're near the beginning
+        for (let i = 1; i <= sideDotsCount * 2 - 1; i++) {
+          dotsToShow.push(i);
+        }
+        dotsToShow.push(-1); // Ellipsis placeholder for end
+      } else if (currentVideoIndex >= totalDots - sideDotsCount - 1) {
+        // We're near the end
+        dotsToShow.push(-1); // Ellipsis placeholder for beginning
+        for (let i = totalDots - sideDotsCount * 2; i < totalDots - 1; i++) {
+          dotsToShow.push(i);
+        }
+      } else {
+        // We're in the middle
+        dotsToShow.push(-1); // Ellipsis placeholder for beginning
+        for (let i = currentVideoIndex - 1; i <= currentVideoIndex + 1; i++) {
+          dotsToShow.push(i);
+        }
+        dotsToShow.push(-2); // Ellipsis placeholder for end
+      }
+      
+      // Always show last dot
+      dotsToShow.push(totalDots - 1);
+      
+      return (
+        <div className="flex justify-center gap-2 mt-4">
+          {dotsToShow.map((dotIndex, index) => {
+            if (dotIndex < 0) {
+              // This is an ellipsis
+              return (
+                <span 
+                  key={`ellipsis-${index}`} 
+                  className="text-gray-400 text-xs flex items-center px-0.5"
+                >
+                  ...
+                </span>
+              );
+            }
+            
+            return (
+              <button
+                key={dotIndex}
+                onClick={() => setCurrentVideoIndex(dotIndex)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  currentVideoIndex === dotIndex ? 'bg-[#704ee7] w-3' : 'bg-gray-300'
+                }`}
+                aria-label={`Go to video ${dotIndex + 1}`}
+              />
+            );
+          })}
+        </div>
+      );
+    }
+  };
+
   return (
     <section className="pt-10">
       <h2 className="text-center font-bold text-lg mb-6 text-[#202124]">
@@ -277,6 +447,9 @@ export default function Testimonials() {
             <p className="text-xs text-[#454545]">{testimonials[idx].content}</p>
           </div>
         </div>
+        
+        {/* Pagination dots for text testimonials */}
+        {renderTextTestimonialDots()}
       </div>
       <div className="mt-10">
         <h2 className="text-center font-bold text-lg mb-6 text-[#202124]">
@@ -312,17 +485,9 @@ export default function Testimonials() {
                 </p>
               </div>
             </div>
-            <div className="flex justify-center gap-2 mt-4">
-              {videoTestimonials.map((_, idx) => (
-                <button
-                  key={idx}
-                  className={`w-2 h-2 rounded-full ${
-                    idx === currentVideoIndex ? 'bg-[#704ee7]' : 'bg-gray-300'
-                  }`}
-                  onClick={() => setCurrentVideoIndex(idx)}
-                />
-              ))}
-            </div>
+            
+            {/* Pagination dots for video testimonials */}
+            {renderVideoTestimonialDots()}
           </div>
         </div>
       </div>

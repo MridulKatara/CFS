@@ -94,7 +94,7 @@ export default function MinorPrograms() {
         Our Minor Programs
       </h2>
       <p className="text-xs sm:text-sm text-center mt-1 mb-6 leading-snug text-[#6d6d6d] max-w-3xl mx-auto">
-        Join the innovative Minor Certificate program, proudly backed by IIT Mandi, NSDC
+      Join the innovative Minor Certificate program, powered by IIT Mandi and NSDC.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
